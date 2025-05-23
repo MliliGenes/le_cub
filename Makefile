@@ -1,5 +1,5 @@
 CC = cc 
-CFILES = main.c parssing/file_check.c
+CFILES = main.c parssing/file_check.c parssing/gnl.c parssing/gnl_utils.c
 NAME = cub3d
 FLAGS = -Wall -Wextra -Werror
 OFILES = $(CFILES:.c=.o)
