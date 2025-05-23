@@ -6,7 +6,9 @@ int main (int ac, char **av)
         return 0;
     char *path = av[1];
     if(!ft_check_dot(path))
-        printf("badddd\n");
+        return 0;
     else
-        printf("good\n");
+    {
+        parse_map_file(path);
+    }
 }
