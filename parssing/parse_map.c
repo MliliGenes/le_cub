@@ -55,27 +55,34 @@ int ft_cheking_fc(char **arr)
     return 1;
 }
 
+int ft_checking_the_four(char **arr)
+{
+    if(ft_strncmp(arr[0], "NO", 2) == -1)
+        return -1;
+    if(ft_strncmp(arr[1], "SO", 2) == -1)
+        return -1;
+    if(ft_strncmp(arr[2], "WE", 2) == -1)
+        return -1;
+    if(ft_strncmp(arr[3], "EA", 2) == -1)
+        return -1;
+    if(arr[4][0] != 'F')
+        return -1;
+    if(arr[5][0] != 'C')
+        return -1;
+    if(ft_cheking_nsew(arr) == -1)
+        return -1;
+    if(ft_cheking_fc(arr) == -1)
+        return -1;
+    return 1;
+}
+
 parse   *go_parse_lines(char **arr, char *ptr)
 {
     parse *parse;
     char    **map;
     int i;
 
-    if(ft_strncmp(arr[0], "NO", 2) == -1)
-        return NULL;
-    if(ft_strncmp(arr[1], "SO", 2) == -1)
-        return NULL;
-    if(ft_strncmp(arr[2], "WE", 2) == -1)
-        return NULL;
-    if(ft_strncmp(arr[3], "EA", 2) == -1)
-        return NULL;
-    if(arr[4][0] != 'F')
-        return NULL;
-    if(arr[5][0] != 'C')
-        return NULL;
-    if(ft_cheking_nsew(arr) == -1)
-        return NULL;
-    if(ft_cheking_fc(arr) == -1)
+    if(ft_checking_the_four(arr) == -1)
         return NULL;
     i = ft_checking_nwl(ptr);
     int b = ft_valide_lines(ptr + i);
