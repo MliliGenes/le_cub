@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/24 13:29:56 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/24 13:33:12 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ typedef struct s_game
 	mlx_t			*mlx;
 	mlx_image_t		*img_scene;
 	mlx_image_t		*img_minimap;
-	t_map			map_data;
-	t_player		player_data;
+	t_map			*map_data;
+	t_player		*player_data;
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;
