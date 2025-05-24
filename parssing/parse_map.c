@@ -63,47 +63,52 @@ int ft_valide_lines(char *ptr)
     {
         if(ptr[i] == '\n')
         {
-            i++;
-            if(ft_check_emptyline(ptr, &i ) == -1)
-                return -1;
+            if(ptr[i + 1])
+            {
+                i++;
+                if(ft_check_emptyline(ptr, &i ) == -1)
+                    return -1;
+            }
         }
         i++;
     }
     return 1;
 }
 
-int    go_parse_lines(char **arr, char *ptr)
+parse   *go_parse_lines(char **arr, char *ptr)
 {
     parse *parse;
+    char    **map;
     int i;
 
     if(ft_strncmp(arr[0], "NO", 2) == -1)
-        return 0;
+        return NULL;
     if(ft_strncmp(arr[1], "SO", 2) == -1)
-        return 0;
+        return NULL;
     if(ft_strncmp(arr[2], "WE", 2) == -1)
-        return 0;
+        return NULL;
     if(ft_strncmp(arr[3], "EA", 2) == -1)
-        return 0;
+        return NULL;
     if(arr[4][0] != 'F')
-        return 0;
+        return NULL;
     if(arr[5][0] != 'C')
-        return 0;
-
+        return NULL;
     i = ft_checking_nwl(ptr);
+
     int b = ft_valide_lines(ptr + i);
     if(b == -1)
-        return 0;
+        return NULL;
     parse = malloc(sizeof(*parse));
+    map = ft_split(ptr + i, '\n');
     parse->NO = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
     parse->SO = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
     parse->WE = malloc( ft_strlen(ft_strchr(arr[2],'.') + 2) + 1);
     parse->EA = malloc( ft_strlen(ft_strchr(arr[3],'.') + 2) + 1);
-    ft_memcpy(parse->NO, ft_strchr(arr[0],'.') + 2, ft_strlen(ft_strchr(arr[0],'.') + 2) );
+    ft_memcpy(parse->NO, ft_strchr(arr[0],'.') + 2, ft_strlen(ft_strchr(arr[0],'.') + 2));
     ft_memcpy(parse->SO, ft_strchr(arr[1],'.') + 2, ft_strlen(ft_strchr(arr[1],'.') + 2));
     ft_memcpy(parse->WE, ft_strchr(arr[2],'.') + 2, ft_strlen(ft_strchr(arr[2],'.') + 2));
     ft_memcpy(parse->EA, ft_strchr(arr[3],'.') + 2, ft_strlen(ft_strchr(arr[3],'.') + 2));
-    return 1;
+    return parse;
 }
 
 void parse_map_file(char *path)
@@ -112,6 +117,7 @@ void parse_map_file(char *path)
     char    **arr;
     char    *tet;
     char    *ptr;
+    parse   *parse;
     int     fd;
 
     fd = open(path, O_RDWR, 0777);
@@ -131,9 +137,12 @@ void parse_map_file(char *path)
 	}
 	arr = ft_split(ptr, '\n');
 	close(fd);
-    if( go_parse_lines(arr,ptr) == 0)
+    parse = go_parse_lines(arr,ptr);
+    if(!parse)
     {
+        free(ptr);
         printf("baaaaaaaaaaaaaaaaad =(\n");
         return ;
     }
+    free(ptr);
 }

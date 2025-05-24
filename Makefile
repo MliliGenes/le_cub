@@ -2,7 +2,7 @@ CC = cc
 CFILES = main.c parssing/file_check.c parssing/gnl.c parssing/gnl_utils.c \
 parssing/parse_map.c parssing/split.c parssing/utils.c
 NAME = cub3d
-#FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 OFILES = $(CFILES:.c=.o)
 
 all : $(NAME)
