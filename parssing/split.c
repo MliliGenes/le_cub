@@ -1,6 +1,6 @@
 #include "../includes/func.h"
 
-static int	ft_count(char const *str, char c)
+ int	ft_count(char const *str, char c)
 {
 	int	count;
 	int	i;

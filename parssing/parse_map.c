@@ -75,6 +75,64 @@ int ft_valide_lines(char *ptr)
     return 1;
 }
 
+int ft_cheking_nsew(char **arr)
+{
+    int i;
+
+    i = 0;
+    while(i < 4)
+    {
+        if(ft_count(arr[i], ' ') != 2)
+            return -1;
+        i++;
+    }
+    return 1;
+}
+
+int ft_cheking_fc(char **arr)
+{
+    int i;
+    int n_s;
+    char **vv;
+    char **bb;
+
+    if(ft_count(arr[4], ' ') != 2 || ft_count(arr[5], ' ') != 2)
+        return -1;
+    vv = ft_split(arr[4], ' ');
+    bb = ft_split(arr[5], ' ');
+    i = 0;
+    n_s = 0;
+    while (vv[1][i])
+    {
+        if(vv[1][i] == ',')
+            n_s++;
+        i++;
+    }
+    if(n_s != 2)
+    {
+        free(vv);
+        free(bb);
+        return -1;
+    }
+     i = 0;
+     n_s = 0;
+    while (bb[1][i])
+    {
+        if(bb[1][i] == ',')
+            n_s++;
+        i++;
+    }
+    if(n_s != 2)
+    {
+        free(vv);
+        free(bb);
+        return -1;
+    }
+    free(vv);
+    free(bb);
+    return 1;
+}
+
 parse   *go_parse_lines(char **arr, char *ptr)
 {
     parse *parse;
@@ -93,8 +151,11 @@ parse   *go_parse_lines(char **arr, char *ptr)
         return NULL;
     if(arr[5][0] != 'C')
         return NULL;
+    if(ft_cheking_nsew(arr) == -1)
+        return NULL;
+    if(ft_cheking_fc(arr) == -1)
+        return NULL;
     i = ft_checking_nwl(ptr);
-
     int b = ft_valide_lines(ptr + i);
     if(b == -1)
         return NULL;
