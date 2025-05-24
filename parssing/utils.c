@@ -22,7 +22,7 @@ char	*ft_strdup(const char *s1)
 
 int ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while(n < i)
@@ -59,5 +59,31 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (*s == (unsigned char)c)
 		return ((char *)s);
+	return (NULL);
+}
+
+char	*ft_strnstr(const char *hay, const char *need, size_t len)
+{
+	unsigned int	i;
+	unsigned int	j;
+
+	i = 0;
+	if (!need && !hay)
+		return (NULL);
+	if (need[0] == '\0')
+		return ((char *)hay);
+	if (!len)
+		return (NULL);
+	while (hay[i] != '\0' && i <= len)
+	{
+		j = 0;
+		while (hay[i + j] == need[j] && hay[i + j] && need[j] && j + i < len)
+		{
+			if (need[j + 1] == '\0')
+				return ((char *)&hay[i]);
+			j++;
+		}
+		i++;
+	}
 	return (NULL);
 }
