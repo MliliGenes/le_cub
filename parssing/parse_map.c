@@ -72,27 +72,28 @@ int ft_valide_lines(char *ptr)
     return 1;
 }
 
-void    go_parse_lines(char **arr, char *ptr)
+int    go_parse_lines(char **arr, char *ptr)
 {
     parse *parse;
-    char *str;
     int i;
 
     if(ft_strncmp(arr[0], "NO", 2) == -1)
-        return ;
+        return 0;
     if(ft_strncmp(arr[1], "SO", 2) == -1)
-        return ;
+        return 0;
     if(ft_strncmp(arr[2], "WE", 2) == -1)
-        return ;
+        return 0;
     if(ft_strncmp(arr[3], "EA", 2) == -1)
-        return ;
+        return 0;
+    if(arr[4][0] != 'F')
+        return 0;
+    if(arr[5][0] != 'C')
+        return 0;
+
     i = ft_checking_nwl(ptr);
     int b = ft_valide_lines(ptr + i);
     if(b == -1)
-    {
-        printf("kazabubu\n");
-        return ;
-    }
+        return 0;
     parse = malloc(sizeof(*parse));
     parse->NO = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
     parse->SO = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
@@ -102,6 +103,7 @@ void    go_parse_lines(char **arr, char *ptr)
     ft_memcpy(parse->SO, ft_strchr(arr[1],'.') + 2, ft_strlen(ft_strchr(arr[1],'.') + 2));
     ft_memcpy(parse->WE, ft_strchr(arr[2],'.') + 2, ft_strlen(ft_strchr(arr[2],'.') + 2));
     ft_memcpy(parse->EA, ft_strchr(arr[3],'.') + 2, ft_strlen(ft_strchr(arr[3],'.') + 2));
+    return 1;
 }
 
 void parse_map_file(char *path)
@@ -129,5 +131,9 @@ void parse_map_file(char *path)
 	}
 	arr = ft_split(ptr, '\n');
 	close(fd);
-    go_parse_lines(arr,ptr);
+    if( go_parse_lines(arr,ptr) == 0)
+    {
+        printf("baaaaaaaaaaaaaaaaad =(\n");
+        return ;
+    }
 }
