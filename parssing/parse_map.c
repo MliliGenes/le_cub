@@ -89,17 +89,22 @@ int ft_cheking_nsew(char **arr)
     return 1;
 }
 
-int ft_cheking_fc(char **arr)
+int ft_cheking_ns(int n_s, char **vv , char **bb)
+{
+    if(n_s != 2)
+    {
+        free(vv);
+        free(bb);
+        return -1;
+    }
+    return 1;
+}
+
+int ft_cheking_fc_utils(char **vv, char **bb)
 {
     int i;
     int n_s;
-    char **vv;
-    char **bb;
-
-    if(ft_count(arr[4], ' ') != 2 || ft_count(arr[5], ' ') != 2)
-        return -1;
-    vv = ft_split(arr[4], ' ');
-    bb = ft_split(arr[5], ' ');
+    
     i = 0;
     n_s = 0;
     while (vv[1][i])
@@ -108,26 +113,32 @@ int ft_cheking_fc(char **arr)
             n_s++;
         i++;
     }
-    if(n_s != 2)
-    {
-        free(vv);
-        free(bb);
+    if(ft_cheking_ns(n_s,vv,bb) == -1)
         return -1;
-    }
-     i = 0;
-     n_s = 0;
+    i = 0;
+    n_s = 0;
     while (bb[1][i])
     {
         if(bb[1][i] == ',')
             n_s++;
         i++;
     }
-    if(n_s != 2)
-    {
-        free(vv);
-        free(bb);
+    if(ft_cheking_ns(n_s,vv,bb) == -1)
         return -1;
-    }
+    return 1;
+}
+
+int ft_cheking_fc(char **arr)
+{
+    char **vv;
+    char **bb;
+
+    if(ft_count(arr[4], ' ') != 2 || ft_count(arr[5], ' ') != 2)
+        return -1;
+    vv = ft_split(arr[4], ' ');
+    bb = ft_split(arr[5], ' ');
+    if(ft_cheking_fc_utils(vv,bb) == -1)
+        return -1;
     free(vv);
     free(bb);
     return 1;
