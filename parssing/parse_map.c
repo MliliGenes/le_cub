@@ -76,6 +76,64 @@ int ft_checking_the_four(char **arr)
     return 1;
 }
 
+int first_line(char *map)
+{
+    int i;
+    int size;
+
+    size = 0;
+    i = 0;
+    while (map[size])
+        size++;
+    while(map[i] == 32 ||(map[i] >= 9 && map[i] <= 13))
+        i++;
+    size--;
+    while(map[size] == 32 ||(map[size] >= 9 && map[size] <= 13))
+        size--;
+    while(i < size)
+    {
+        if(map[i] != '1' && map[i] != ' ')
+            return -1;
+        i++;
+    }
+    return 1;
+}
+
+int ft_checking_close_map(char **map)
+{
+    int i;
+    int j;
+    int size;
+
+    if(first_line(map[0]) == -1)
+        return -1;
+    i = 1;
+    while (map[i])
+    {
+        j = 0;
+        while(map[i][j] == 32 ||(map[i][j] >= 9 && map[i][j] <= 13))
+            j++;
+        if(map[i][j] != '1')
+            return -1;
+        size = ft_strlen(map[i]) - 1;
+        while(map[i][size] == 32 ||(map[i][size] >= 9 && map[i][size] <= 13))
+            size--;
+        if(map[i][size] != '1')
+            return -1;
+        while (j < size)
+        {
+            if(map[i][j] == '0')
+            {
+                if(map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i - 1][j] == ' ')
+                    return -1;
+            }
+            j++;
+        }
+        i++;
+    }
+    return 1;
+}
+
 parse   *go_parse_lines(char **arr, char *ptr)
 {
     parse *parse;
@@ -90,6 +148,8 @@ parse   *go_parse_lines(char **arr, char *ptr)
         return NULL;
     parse = malloc(sizeof(*parse));
     map = ft_split(ptr + i, '\n');
+    if(ft_checking_close_map(map) == -1)
+        return NULL;
     parse->NO = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
     parse->SO = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
     parse->WE = malloc( ft_strlen(ft_strchr(arr[2],'.') + 2) + 1);
