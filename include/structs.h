@@ -6,15 +6,14 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/25 15:34:48 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:04:24 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "MLX42.h"
-# include <stdbool.h>
+# include "dependencies.h"
 
 # define SCREEN_WIDTH_DEFAULT 1024
 # define SCREEN_HEIGHT_DEFAULT 768
