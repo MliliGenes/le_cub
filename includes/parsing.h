@@ -57,6 +57,10 @@ int	    ft_sstrlen(char *string);
 char	*get_next_line(int fd);
 t_map   *parse_map_file(char *path);
 char	**ft_split(char const *s, char c);
+int ft_checking_the_four(char **arr);
+int ft_cheking_fc(char **arr);
+int ft_cheking_fc_utils(char **vv, char **bb);
+int ft_cheking_ns(int n_s, char **vv , char **bb);
 char	*ft_strdup(const char *s1);
 
 #endif
