@@ -120,11 +120,11 @@ int ft_checking_close_map(char **map)
             size--;
         if(map[i][size] != '1')
             return -1;
-        while (j < size)
+        while (j < size - 1)
         {
             if(map[i][j] == '0')
             {
-                if(map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i - 1][j] == ' ')
+                if(map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || j >= ft_strlen(map[i + 1]))
                     return -1;
             }
             j++;
