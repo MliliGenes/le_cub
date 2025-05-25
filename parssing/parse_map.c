@@ -44,7 +44,7 @@ int ft_checking_close_map(char **map)
             size--;
         if(map[i][size] != '1')
             return -1;
-        while (j < size - 1)
+        while (j < size)
         {
             if(map[i][j] == '0')
             {
