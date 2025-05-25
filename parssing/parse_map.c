@@ -4,8 +4,8 @@ int ft_cheking_ns(int n_s, char **vv , char **bb)
 {
     if(n_s != 2)
     {
-        free(vv);
-        free(bb);
+        ft_freeing(vv);
+        ft_freeing(bb);
         return -1;
     }
     return 1;
@@ -50,8 +50,8 @@ int ft_cheking_fc(char **arr)
     bb = ft_split(arr[5], ' ');
     if(ft_cheking_fc_utils(vv,bb) == -1)
         return -1;
-    free(vv);
-    free(bb);
+    ft_freeing(vv);
+    ft_freeing(bb);
     return 1;
 }
 
@@ -134,7 +134,7 @@ int ft_checking_close_map(char **map)
     return 1;
 }
 
-t_map   *full_members(char **arr)
+t_map   *full_members(char **arr, char **map)
 {
     t_map   *parse;
     t_utils *utils;
@@ -152,6 +152,7 @@ t_map   *full_members(char **arr)
     parse->south_texture_path = ft_strdup(utils->SO[1]);
     parse->west_texture_path = ft_strdup(utils->WE[1]);
     parse->east_texture_path = ft_strdup(utils->EA[1]);
+    parse->map = map;
     ft_freeing(utils->NO);
     ft_freeing(utils->SO);
     ft_freeing(utils->EA);
@@ -176,12 +177,11 @@ t_map   *go_parse_lines(char **arr, char *ptr)
     map = ft_split(ptr + i, '\n');
     if(ft_checking_close_map(map) == -1)
         return NULL;
-    parse = full_members(arr);
-    printf("%s\n",parse->north_texture_path );
+    parse = full_members(arr, map);
     return parse;
 }
 
-void parse_map_file(char *path)
+t_map   *parse_map_file(char *path)
 {
     char    *tet1;
     char    **arr;
@@ -192,11 +192,11 @@ void parse_map_file(char *path)
 
     fd = open(path, O_RDWR, 0777);
     if(fd < 0)
-        return ;
+        return NULL;
     ptr = NULL;
     tet1 = get_next_line(fd);
 	if (tet1 == NULL)
-		return ;
+		return NULL;
     while (tet1 != NULL)
 	{
 		tet = ft_strdup(tet1);
@@ -211,8 +211,11 @@ void parse_map_file(char *path)
     if(!parse)
     {
         free(ptr);
+        ft_freeing(arr);
         printf("baaaaaaaaaaaaaaaaad =(\n");
-        return ;
+        return NULL;
     }
+    ft_freeing(arr);
     free(ptr);
+    return parse;
 }

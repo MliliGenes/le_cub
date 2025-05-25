@@ -55,7 +55,7 @@ void ft_freeing(char **arr);
 char	*ft_strcat(char *string1, char *string2);
 int	    ft_sstrlen(char *string);
 char	*get_next_line(int fd);
-void    parse_map_file(char *path);
+t_map   *parse_map_file(char *path);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s1);
 
