@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/24 13:33:12 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:34:48 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define SCREEN_HEIGHT_DEFAULT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+
+# define GAME_TITLE "GAMI"
 
 typedef struct s_vec2d
 {
@@ -51,25 +53,22 @@ typedef struct s_player
 {
 	t_vec2d			pos;
 	t_vec2d			dir;
-	t_vec2d			plane;
+	t_vec2d			reminder;
+	// t_vec2d			plane;
 	double			angle;
 	double			move_speed;
 	double			rot_speed;
 	int				size_minimap;
-	t_vec2d			reminder;
 }					t_player;
 
 typedef struct s_ray
 {
 	t_vec2d			dir;
-	double			camera_x;
 	t_vec2i			map_pos;
-	t_vec2d			side_dist;
+	t_vec2i			side_dist;
 	t_vec2d			delta_dist;
 	double			perp_wall_dist;
-	int				step_x;
-	int				step_y;
-	bool			hit;
+	t_vec2i			steps;
 	int				side_hit;
 	double			wall_x_tex;
 	int				tex_num;
