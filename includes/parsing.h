@@ -1,5 +1,5 @@
-#ifndef FUNC_H
-#define FUNC_H
+#ifndef PARSING_H
+#define PARSING_H
 
 
 # ifndef BUFFER_SIZE
@@ -13,14 +13,19 @@
 #include <stdbool.h>
 #include <fcntl.h>
 
-typedef struct  parse_elements
+typedef struct s_map
 {
-    char **map;
-    char *NO;
-    char *SO;
-    char *WE;
-    char *EA;
-} parse;
+	char			**map;
+	int				width;
+	int				height;
+	int				tile_size;
+	char			*north_texture_path;
+	char			*south_texture_path;
+	char			*east_texture_path;
+	char			*west_texture_path;
+	uint32_t		floor_color[3];
+	uint32_t		ceiling_color[3];
+}					t_map;
 
 size_t	ft_strlen(const char *s);
 char	*ft_strnstr(const char *hay, const char *need, size_t len);

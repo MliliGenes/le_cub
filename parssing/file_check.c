@@ -1,4 +1,4 @@
-#include "../includes/func.h"
+#include "../includes/parsing.h"
 
 size_t	ft_strlen(const char *s)
 {

@@ -1,4 +1,4 @@
-#include "../includes/func.h"
+#include "../includes/parsing.h"
 
 char	*ft_strdup(const char *s1)
 {

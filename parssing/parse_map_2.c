@@ -1,4 +1,4 @@
-#include "../includes/func.h"
+#include "../includes/parsing.h"
 
 int find_map(char *ptr, int i)
 {

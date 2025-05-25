@@ -1,4 +1,4 @@
-#include "../includes/func.h"
+#include "../includes/parsing.h"
 
 int ft_cheking_ns(int n_s, char **vv , char **bb)
 {
@@ -134,9 +134,9 @@ int ft_checking_close_map(char **map)
     return 1;
 }
 
-parse   *go_parse_lines(char **arr, char *ptr)
+t_map   *go_parse_lines(char **arr, char *ptr)
 {
-    parse *parse;
+    t_map   *parse;
     char    **map;
     int i;
 
@@ -146,18 +146,18 @@ parse   *go_parse_lines(char **arr, char *ptr)
     int b = ft_valide_lines(ptr + i);
     if(b == -1)
         return NULL;
-    parse = malloc(sizeof(*parse));
+    parse = malloc(sizeof(t_map));
     map = ft_split(ptr + i, '\n');
     if(ft_checking_close_map(map) == -1)
         return NULL;
-    parse->NO = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
-    parse->SO = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
-    parse->WE = malloc( ft_strlen(ft_strchr(arr[2],'.') + 2) + 1);
-    parse->EA = malloc( ft_strlen(ft_strchr(arr[3],'.') + 2) + 1);
-    ft_memcpy(parse->NO, ft_strchr(arr[0],'.') + 2, ft_strlen(ft_strchr(arr[0],'.') + 2));
-    ft_memcpy(parse->SO, ft_strchr(arr[1],'.') + 2, ft_strlen(ft_strchr(arr[1],'.') + 2));
-    ft_memcpy(parse->WE, ft_strchr(arr[2],'.') + 2, ft_strlen(ft_strchr(arr[2],'.') + 2));
-    ft_memcpy(parse->EA, ft_strchr(arr[3],'.') + 2, ft_strlen(ft_strchr(arr[3],'.') + 2));
+    parse->north_texture_path = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
+    parse->south_texture_path = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
+    parse->west_texture_path = malloc( ft_strlen(ft_strchr(arr[2],'.') + 2) + 1);
+    parse->east_texture_path = malloc( ft_strlen(ft_strchr(arr[3],'.') + 2) + 1);
+    ft_memcpy(parse->north_texture_path, ft_strchr(arr[0],'.') + 2, ft_strlen(ft_strchr(arr[0],'.') + 2));
+    ft_memcpy(parse->south_texture_path, ft_strchr(arr[1],'.') + 2, ft_strlen(ft_strchr(arr[1],'.') + 2));
+    ft_memcpy(parse->west_texture_path, ft_strchr(arr[2],'.') + 2, ft_strlen(ft_strchr(arr[2],'.') + 2));
+    ft_memcpy(parse->east_texture_path, ft_strchr(arr[3],'.') + 2, ft_strlen(ft_strchr(arr[3],'.') + 2));
     return parse;
 }
 
@@ -167,7 +167,7 @@ void parse_map_file(char *path)
     char    **arr;
     char    *tet;
     char    *ptr;
-    parse   *parse;
+    t_map   *parse;
     int     fd;
 
     fd = open(path, O_RDWR, 0777);

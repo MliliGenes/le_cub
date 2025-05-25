@@ -1,4 +1,4 @@
-#include "../includes/func.h"
+#include "../includes/parsing.h"
 
 void	allocation_manager(int fd, char **save)
 {
