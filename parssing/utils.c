@@ -39,7 +39,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned int	i;
 
 	i = 0;
-	if (!dst && !src)
+	if ( !src)
 		return (0);
 	while (i < n)
 	{

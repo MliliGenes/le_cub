@@ -27,6 +27,14 @@ typedef struct s_map
 	uint32_t		ceiling_color[3];
 }					t_map;
 
+typedef	struct	s_utils
+{
+	char	**NO;
+	char	**SO;
+	char	**EA;
+	char	**WE;
+} t_utils;
+
 size_t	ft_strlen(const char *s);
 char	*ft_strnstr(const char *hay, const char *need, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -43,6 +51,7 @@ int     ft_check_dot(char *path);
 void	allocation_manager(int fd, char **save);
 int	    ft_newline_check(char *string);
 void	*ft_cpy(char *string, char *string1, int n);
+void ft_freeing(char **arr);
 char	*ft_strcat(char *string1, char *string2);
 int	    ft_sstrlen(char *string);
 char	*get_next_line(int fd);

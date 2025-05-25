@@ -134,30 +134,50 @@ int ft_checking_close_map(char **map)
     return 1;
 }
 
+t_map   *full_members(char **arr)
+{
+    t_map   *parse;
+    t_utils *utils;
+
+
+    parse = malloc(sizeof(t_map));
+    utils = malloc(sizeof(t_utils));
+    if(!parse)
+        return NULL;
+    utils->NO = ft_split(arr[0], ' ');
+    utils->SO = ft_split(arr[1], ' ');
+    utils->WE = ft_split(arr[2], ' ');
+    utils->EA = ft_split(arr[3], ' ');
+    parse->north_texture_path = ft_strdup(utils->NO[1]);
+    parse->south_texture_path = ft_strdup(utils->SO[1]);
+    parse->west_texture_path = ft_strdup(utils->WE[1]);
+    parse->east_texture_path = ft_strdup(utils->EA[1]);
+    ft_freeing(utils->NO);
+    ft_freeing(utils->SO);
+    ft_freeing(utils->EA);
+    ft_freeing(utils->WE);
+    free(utils);
+    return parse;
+}
+
 t_map   *go_parse_lines(char **arr, char *ptr)
 {
     t_map   *parse;
     char    **map;
-    int i;
+    int     i;
+    int     b;
 
     if(ft_checking_the_four(arr) == -1)
         return NULL;
     i = ft_checking_nwl(ptr);
-    int b = ft_valide_lines(ptr + i);
+    b = ft_valide_lines(ptr + i);
     if(b == -1)
         return NULL;
-    parse = malloc(sizeof(t_map));
     map = ft_split(ptr + i, '\n');
     if(ft_checking_close_map(map) == -1)
         return NULL;
-    parse->north_texture_path = malloc( ft_strlen(ft_strchr(arr[0],'.') + 2) + 1);
-    parse->south_texture_path = malloc( ft_strlen(ft_strchr(arr[1],'.') + 2) + 1);
-    parse->west_texture_path = malloc( ft_strlen(ft_strchr(arr[2],'.') + 2) + 1);
-    parse->east_texture_path = malloc( ft_strlen(ft_strchr(arr[3],'.') + 2) + 1);
-    ft_memcpy(parse->north_texture_path, ft_strchr(arr[0],'.') + 2, ft_strlen(ft_strchr(arr[0],'.') + 2));
-    ft_memcpy(parse->south_texture_path, ft_strchr(arr[1],'.') + 2, ft_strlen(ft_strchr(arr[1],'.') + 2));
-    ft_memcpy(parse->west_texture_path, ft_strchr(arr[2],'.') + 2, ft_strlen(ft_strchr(arr[2],'.') + 2));
-    ft_memcpy(parse->east_texture_path, ft_strchr(arr[3],'.') + 2, ft_strlen(ft_strchr(arr[3],'.') + 2));
+    parse = full_members(arr);
+    printf("%s\n",parse->north_texture_path );
     return parse;
 }
 
