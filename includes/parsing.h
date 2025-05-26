@@ -15,9 +15,6 @@
 typedef struct s_map
 {
 	char		**map;
-	int			width;
-	int			height;
-	int			tile_size;
 	int			x_player;
 	int			y_player;
 	char		pos_player;
