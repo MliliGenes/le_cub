@@ -48,7 +48,7 @@ int ft_checking_close_map(char **map)
         {
             if(map[i][j] == '0')
             {
-                if(map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || j >= ft_strlen(map[i + 1]))
+                if(map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i - 1][j] == ' ' || j > ft_strlen(map[i + 1]))
                     return -1;
             }
             j++;
@@ -85,6 +85,42 @@ t_map   *full_members(char **arr, char **map)
     return parse;
 }
 
+t_map   *parse_colors(char **arr, t_map *parse)
+{
+    char    **floor;
+    char    **ceiling;
+    char    **f;
+    char    **c;
+    int     i;
+    int     codex;
+    int     codexo;
+
+    floor = ft_split(arr[4], ' ');
+    ceiling = ft_split(arr[5], ' ');
+    f = ft_split(floor[1], ',');
+    c = ft_split(ceiling[1], ',');
+    ft_freeing(floor);
+    ft_freeing(ceiling);
+    i = 0;
+    while (i < 3)
+    {
+        codex = ft_atoi(f[i]);
+        codexo = ft_atoi(c[i]);
+        if(codexo == -1 || codex == -1)
+        {
+            ft_freeing(f);
+            ft_freeing(c);
+            return NULL;
+        }
+        parse->floor_color[i] = codex;
+        parse->ceiling_color[i] = codexo;
+        i++;
+    }
+    ft_freeing(f);
+    ft_freeing(c);
+    return parse;
+}
+
 t_map   *go_parse_lines(char **arr, char *ptr)
 {
     t_map   *parse;
@@ -102,6 +138,7 @@ t_map   *go_parse_lines(char **arr, char *ptr)
     if(ft_checking_close_map(map) == -1)
         return NULL;
     parse = full_members(arr, map);
+    parse = parse_colors(arr, parse);
     return parse;
 }
 
