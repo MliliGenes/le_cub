@@ -18,6 +18,9 @@ typedef struct s_map
 	int			width;
 	int			height;
 	int			tile_size;
+	int			x_player;
+	int			y_player;
+	char		pos_player;
 	char		*north_texture_path;
 	char		*south_texture_path;
 	char		*east_texture_path;

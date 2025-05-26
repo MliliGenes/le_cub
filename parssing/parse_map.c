@@ -145,6 +145,32 @@ t_map	*parse_colors(char **arr, t_map *parse)
 	return (parse);
 }
 
+t_map	*find_player(char **arr, t_map	*parse)
+{
+	int	i;
+	int	j;
+	if(!parse)
+		return NULL;
+	i = 0;
+	while(arr[i])
+	{
+		j = 0;
+		while(arr[i][j])
+		{
+			if(arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'E' || arr[i][j] == 'W')
+			{
+				parse->x_player = j;
+				parse->y_player = i;
+				parse->pos_player = arr[i][j];
+				return parse;
+			}
+			j++;
+		}
+		i++;
+	}
+	return NULL;
+}
+
 t_map	*go_parse_lines(char **arr, char *ptr)
 {
 	t_map	*parse;
@@ -165,6 +191,7 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 	if (!parse)
 		return (NULL);
 	parse = parse_colors(arr, parse);
+	parse = find_player(map,parse);
 	return (parse);
 }
 
