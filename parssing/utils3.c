@@ -9,13 +9,13 @@ int	is__space(char c)
 
 int	ft_atoi(const char *str)
 {
-	size_t	res;
-	int		i;
+	size_t res;
+	int i;
 
 	res = 0;
 	i = 0;
-    if(!str)
-        return -1;
+	if (!str)
+		return (-1);
 	while (is__space(str[i]))
 		i++;
 	if (str[i] == '-')

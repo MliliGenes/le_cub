@@ -20,18 +20,18 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-int ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	while(n < i)
+	while (n < i)
 	{
-		if(s1[i] != s2[i])
-			return -1;
+		if (s1[i] != s2[i])
+			return (-1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
@@ -39,7 +39,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned int	i;
 
 	i = 0;
-	if ( !src)
+	if (!src)
 		return (0);
 	while (i < n)
 	{
@@ -64,8 +64,8 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strnstr(const char *hay, const char *need, size_t len)
 {
-	unsigned int	i;
-	unsigned int	j;
+	unsigned int i;
+	unsigned int j;
 
 	i = 0;
 	if (!need && !hay)

@@ -91,7 +91,7 @@ char	*ft_strcat(char *string1, char *string2)
 
 int	ft_sstrlen(char *string)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	if (!string)
