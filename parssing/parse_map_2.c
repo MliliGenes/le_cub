@@ -55,7 +55,10 @@ int	ft_checking_nwl(char *ptr)
 		}
 		start[k] = '\0';
 		if (start[0] == 'C' && start[1] == ' ')
+		{
+			free(start);
 			return (find_map(ptr, j + 1));
+		}
 		free(start);
 		i = j + 1;
 	}

@@ -17,12 +17,12 @@ int main (int ac, char **av)
     else
     {
         parse = parse_map_file(path);
-        ft_freeing(parse->map);
-        free(parse->north_texture_path);
-        free(parse->south_texture_path);
-        free(parse->east_texture_path);
-        free(parse->west_texture_path);
-        free(parse);
+        // ft_freeing(parse->map);
+        // free(parse->north_texture_path);
+        // free(parse->south_texture_path);
+        // free(parse->east_texture_path);
+        // free(parse->west_texture_path);
+        // free(parse);
     }
     while(1);
 }

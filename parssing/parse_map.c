@@ -194,12 +194,28 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 		return (NULL);
 	map = ft_split(ptr + i, '\n');
 	if (ft_checking_close_map(map) == -1)
+	{
+		ft_freeing(map);
 		return (NULL);
+	}
 	parse = full_members(arr, map);
 	if (!parse)
+	{
+		ft_freeing(map);
 		return (NULL);
+	}
 	parse = parse_colors(arr, parse);
+	if(!parse)
+	{
+		ft_freeing(map);
+		return NULL;
+	}
 	parse = find_player(map,parse);
+	if(!parse)
+	{
+		ft_freeing(map);
+		return NULL;
+	}
 	return (parse);
 }
 
