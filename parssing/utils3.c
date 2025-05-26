@@ -14,6 +14,8 @@ int	ft_atoi(const char *str)
 
 	res = 0;
 	i = 0;
+    if(!str)
+        return -1;
 	while (is__space(str[i]))
 		i++;
 	if (str[i] == '-')

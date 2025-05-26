@@ -151,9 +151,12 @@ t_map   *parse_map_file(char *path)
     t_map   *parse;
     int     fd;
 
-    fd = open(path, O_RDWR, 0777);
+    fd = open(path, O_RDONLY, 0444);
     if(fd < 0)
+    {
+        printf("invalid file\n");
         return NULL;
+    }
     ptr = NULL;
     tet1 = get_next_line(fd);
 	if (tet1 == NULL)
