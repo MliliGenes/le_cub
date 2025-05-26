@@ -221,7 +221,10 @@ t_map	*parse_map_file(char *path)
 	ptr = NULL;
 	tet1 = get_next_line(fd);
 	if (tet1 == NULL)
+	{
+		close(fd);
 		return (NULL);
+	}
 	while (tet1 != NULL)
 	{
 		tet = ft_strdup(tet1);
@@ -237,7 +240,7 @@ t_map	*parse_map_file(char *path)
 	{
 		free(ptr);
 		ft_freeing(arr);
-		printf("baaaaaaaaaaaaaaaaad =(\n");
+		printf("ERROR : invalid map =(\n");
 		return (NULL);
 	}
 	ft_freeing(arr);
