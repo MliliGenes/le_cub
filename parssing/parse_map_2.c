@@ -74,8 +74,9 @@ int	ft_check_emptyline(char *ptr, int *i)
 
 int	ft_valide_lines(char *ptr)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (ptr[i])
 	{
 		if (ptr[i] == '\n')
