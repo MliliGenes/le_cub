@@ -58,6 +58,25 @@ int ft_checking_close_map(char **map)
     return 1;
 }
 
+int ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
+{
+    int fd;
+
+    fd = open(ptr, O_RDONLY, 0444);
+    if(fd < 0)
+        return -1;
+    fd = open(str, O_RDONLY, 0444);
+    if(fd < 0)
+        return -1;
+    fd = open(clr, O_RDONLY, 0444);
+    if(fd < 0)
+        return -1;
+    fd = open(codex, O_RDONLY, 0444);
+    if(fd < 0)
+        return -1;
+    return 1; 
+}
+
 t_map   *full_members(char **arr, char **map)
 {
     t_map   *parse;
@@ -76,6 +95,8 @@ t_map   *full_members(char **arr, char **map)
     parse->south_texture_path = ft_strdup(utils->SO[1]);
     parse->west_texture_path = ft_strdup(utils->WE[1]);
     parse->east_texture_path = ft_strdup(utils->EA[1]);
+    if(ft_check_valid_path(parse->north_texture_path,parse->south_texture_path,parse->west_texture_path, parse->east_texture_path ) == -1)
+        return NULL;
     parse->map = map;
     ft_freeing(utils->NO);
     ft_freeing(utils->SO);
@@ -138,6 +159,8 @@ t_map   *go_parse_lines(char **arr, char *ptr)
     if(ft_checking_close_map(map) == -1)
         return NULL;
     parse = full_members(arr, map);
+    if(!parse)
+        return NULL;
     parse = parse_colors(arr, parse);
     return parse;
 }
