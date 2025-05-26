@@ -79,6 +79,15 @@ int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
 	return (1);
 }
 
+void	free_help(t_utils	*utils)
+{
+	ft_freeing(utils->no);
+	ft_freeing(utils->so);
+	ft_freeing(utils->ea);
+	ft_freeing(utils->we);
+	free(utils);
+}
+
 t_map	*full_members(char **arr, char **map)
 {
 	t_map	*parse;
@@ -99,13 +108,12 @@ t_map	*full_members(char **arr, char **map)
 	if (ft_check_valid_path(parse->north_texture_path,
 			parse->south_texture_path, parse->west_texture_path,
 			parse->east_texture_path) == -1)
-		return (NULL);
+			{
+				free_help(utils);
+				return (NULL);
+			}
 	parse->map = map;
-	ft_freeing(utils->no);
-	ft_freeing(utils->so);
-	ft_freeing(utils->ea);
-	ft_freeing(utils->we);
-	free(utils);
+	free_help(utils);
 	return (parse);
 }
 
