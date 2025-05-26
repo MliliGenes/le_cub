@@ -28,14 +28,18 @@ char	*ft_strrchr(const char *s, int c)
 
 int	ft_check_dot(char *path)
 {
-	char *ber = "cub";
-	char *dot = ft_strrchr(path, '.');
+	char	*ber;
+	char	*dot;
+	int		i;
+
+	ber = "cub";
+	dot = ft_strrchr(path, '.');
 	if (!dot)
 		return (0);
 	dot = dot + 1;
 	if (ft_strlen(dot) != 3)
 		return (0);
-	int i = 0;
+	i = 0;
 	while (i < 3)
 	{
 		if (dot[i] != ber[i])

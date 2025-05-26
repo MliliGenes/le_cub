@@ -56,8 +56,8 @@ static char	*new_l(char *string)
 
 char	*get_next_line(int fd)
 {
-	static char *string;
-	char *line;
+	static char	*string;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
 		return (NULL);

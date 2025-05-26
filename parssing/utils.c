@@ -64,8 +64,8 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strnstr(const char *hay, const char *need, size_t len)
 {
-	unsigned int i;
-	unsigned int j;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
 	if (!need && !hay)

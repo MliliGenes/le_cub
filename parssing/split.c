@@ -79,8 +79,8 @@ static char	**ft_cho9(char const *str, char **arr, char c, int word)
 
 char	**ft_split(char const *s, char c)
 {
-	char **arr;
-	int word_count;
+	char	**arr;
+	int		word_count;
 
 	if (!s)
 		return (NULL);
