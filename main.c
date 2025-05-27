@@ -24,5 +24,5 @@ int main (int ac, char **av)
         // free(parse->west_texture_path);
         // free(parse);
     }
-    while(1);
+    // while(1);
 }

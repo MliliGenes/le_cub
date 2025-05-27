@@ -7,7 +7,7 @@ int	is__space(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long 	ft_atoi(const char *str)
 {
 	size_t	res;
 	int		i;

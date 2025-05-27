@@ -124,8 +124,8 @@ t_map	*parse_colors(char **arr, t_map *parse)
 	char	**f;
 	char	**c;
 	int		i;
-	int		codex;
-	int		codexo;
+	long long codex;
+	long long codexo;
 
 	floor = ft_split(arr[4], ' ');
 	ceiling = ft_split(arr[5], ' ');
@@ -138,7 +138,7 @@ t_map	*parse_colors(char **arr, t_map *parse)
 	{
 		codex = ft_atoi(f[i]);
 		codexo = ft_atoi(c[i]);
-		if (codexo == -1 || codex == -1)
+		if (codexo == -1 || codex == -1 || codex > 255 || codexo > 255)
 		{
 			ft_freeing(f);
 			ft_freeing(c);
