@@ -2,12 +2,16 @@
 
 void	event_listner(void *params)
 {
-	t_game	*game;
+	t_game		*game;
 
 	game = (t_game *)params;
+
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	update_player(game);
+    // DEGUB
+    game->player_data->img->instances->x = game->player_data->pos.x;
+    game->player_data->img->instances->y = game->player_data->pos.y;
 	// cast_rays(game);
 	// set_walls();
 }

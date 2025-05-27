@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/27 21:28:51 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/27 23:46:05 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "dependencies.h"
 
-# define SCREEN_WIDTH_DEFAULT 1024
-# define SCREEN_HEIGHT_DEFAULT 768
+# define SCREEN_WIDTH_DEFAULT 21 * 64
+# define SCREEN_HEIGHT_DEFAULT 9 * 64
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define TILE_SIZE 64
@@ -72,6 +72,7 @@ typedef struct s_player
 	double			move_speed;
 	double			rot_speed;
 	int				size_minimap;
+	mlx_image_t		*img;
 }					t_player;
 
 typedef struct s_ray
