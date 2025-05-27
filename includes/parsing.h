@@ -15,8 +15,8 @@
 typedef struct s_map
 {
 	char		**map;
-	int			x_player;
-	int			y_player;
+	unsigned int			x_player;
+	unsigned int			y_player;
 	char		pos_player;
 	char		*north_texture_path;
 	char		*south_texture_path;

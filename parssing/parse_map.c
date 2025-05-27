@@ -144,8 +144,8 @@ t_map	*parse_colors(char **arr, t_map *parse)
 			ft_freeing(c);
 			return (NULL);
 		}
-		parse->floor_color[i] = codex;
-		parse->ceiling_color[i] = codexo;
+		parse->floor_color[i] = (unsigned int)codex;
+		parse->ceiling_color[i] = (unsigned int)codexo;
 		i++;
 	}
 	ft_freeing(f);
