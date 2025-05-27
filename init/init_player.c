@@ -13,6 +13,8 @@ t_player	*init_player(t_map *map_data)
 	player->size_minimap = 4;
 	player->pos = (t_vec2d){5, 3};
 	player->reminder = (t_vec2d){0, 0};
+	player->forward_backward = 0;
+	player->left_right = 0;
 	player->angle = deg_to_radian(0);
 	return (player);
 }

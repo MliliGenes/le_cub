@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "limits.h": "c",
+        "game.h": "c",
+        "structs.h": "c",
+        "dependencies.h": "c"
+    }
+}

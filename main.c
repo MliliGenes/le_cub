@@ -1,4 +1,5 @@
 #include "include/cub3d.h"
+#include "include/game.h"
 
 int	main(void)
 {
@@ -6,7 +7,6 @@ int	main(void)
 
 	if (init_game(&game))
 		return (EXIT_FAILURE);
-
-	mlx_loop(game.mlx);
+	game_loop(&game);
 	return (EXIT_SUCCESS);
 }

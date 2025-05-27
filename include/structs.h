@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/25 19:04:24 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/27 02:40:17 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,36 @@ typedef struct s_vec2i
 
 typedef struct s_map
 {
-	char			**grid;
+	char			**map;
+	int				x_player;
+	int				y_player;
 	int				width;
 	int				height;
-	int				tile_size;
+	char			pos_player;
 	char			*north_texture_path;
 	char			*south_texture_path;
 	char			*east_texture_path;
 	char			*west_texture_path;
-	uint32_t		floor_color;
-	uint32_t		ceiling_color;
+	uint32_t		floor_color[3];
+	uint32_t		ceiling_color[3];
 }					t_map;
+
+typedef struct s_utils
+{
+	char			**no;
+	char			**so;
+	char			**ea;
+	char			**we;
+}					t_utils;
 
 typedef struct s_player
 {
 	t_vec2d			pos;
-	t_vec2d			dir;
+	int				forward_backward;
+	int				left_right;
+	t_vec2d			forward;
+	t_vec2d			strafe;
 	t_vec2d			reminder;
-	// t_vec2d			plane;
 	double			angle;
 	double			move_speed;
 	double			rot_speed;

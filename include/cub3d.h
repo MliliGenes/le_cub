@@ -3,7 +3,6 @@
 
 # include "init.h"
 # include "lib.h"
-# include "movement.h"
 # include "structs.h"
 
 int	main(void);
