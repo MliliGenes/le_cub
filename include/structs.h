@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/27 21:09:17 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:28:51 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_map
 	int				y_player;
 	int				width;
 	int				height;
-	char			pos_player;
+	char			player_dir;
 	char			*north_texture_path;
 	char			*south_texture_path;
 	char			*east_texture_path;
@@ -62,7 +62,7 @@ typedef struct s_utils
 
 typedef struct s_player
 {
-	t_vec2d			pos;
+	t_vec2i			pos;
 	int				forward_backward;
 	int				left_right;
 	t_vec2d			forward;

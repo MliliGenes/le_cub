@@ -3,6 +3,8 @@
         "limits.h": "c",
         "game.h": "c",
         "structs.h": "c",
-        "dependencies.h": "c"
+        "dependencies.h": "c",
+        "init.h": "c",
+        "cub3d.h": "c"
     }
 }

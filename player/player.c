@@ -41,9 +41,9 @@ static void	set_target_pos(mlx_t *mlx, t_map *map, t_player *player)
 		player->forward.y + player->strafe.y + player->reminder.y};
 	move = (t_vec2i){round(total.x), round(total.y)};
 	target = (t_vec2i){player->pos.x + move.x, player->pos.y + move.y};
-	if (check_collision(map, (t_vec2i){target.x, player->pos.y}))
+	if (!check_collision(map, (t_vec2i){target.x, player->pos.y}))
 		player->pos.x = target.x;
-	if (check_collision(map, (t_vec2i){player->pos.y, target.y}))
+	if (!check_collision(map, (t_vec2i){player->pos.y, target.y}))
 		player->pos.y = target.y;
 }
 

@@ -4,6 +4,7 @@
 # include "init.h"
 # include "lib.h"
 # include "structs.h"
+# include "game.h"
 
 int	main(void);
 
