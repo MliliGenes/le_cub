@@ -44,7 +44,7 @@ int				ft_checking_nwl(char *ptr);
 int				ft_check_emptyline(char *ptr, int *i);
 int				ft_valide_lines(char *ptr);
 int				ft_count(char const *str, char c);
-long long				ft_atoi(const char *str);
+long long		ft_atoi(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strrchr(const char *s, int c);
 int				ft_check_dot(char *path);
