@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/27 23:46:05 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:52:43 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include "dependencies.h"
 
+# define FOV 65
 # define SCREEN_WIDTH_DEFAULT 21 * 64
 # define SCREEN_HEIGHT_DEFAULT 9 * 64
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define TILE_SIZE 64
-# define PLAYER_SIZE 4
+# define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
 
@@ -77,15 +78,15 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	double			angle;
 	t_vec2d			dir;
+	t_vec2d			hit_point;
+	double			distance;
 	t_vec2i			map_pos;
-	t_vec2i			side_dist;
 	t_vec2d			delta_dist;
-	double			perp_wall_dist;
+	t_vec2d			side_dist;
 	t_vec2i			steps;
 	int				side_hit;
-	double			wall_x_tex;
-	int				tex_num;
 }					t_ray;
 
 typedef struct s_wall_hit
@@ -105,6 +106,8 @@ typedef struct s_game
 	mlx_image_t		*img_minimap;
 	t_map			*map_data;
 	t_player		*player_data;
+	t_ray			*rays;
+	t_wall_hit		*walls;
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;

@@ -7,6 +7,8 @@
 
 t_map		*init_map(void);
 t_player	*init_player(t_map *map_data);
+t_ray		*init_rays(void);
+t_wall_hit	*init_walls(void);
 bool		init_game(t_game *game);
 
 #endif
