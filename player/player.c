@@ -47,44 +47,28 @@ static t_vec2d	calc_target_pos(t_map *map, t_player *player)
 
 void	update_player(t_game *game)
 {
-	static t_vec2i	last_pos = {0, 0};
-	t_player		*player;
-	t_vec2d			total;
-	t_vec2i			move;
-	t_vec2i			target;
-	bool			position_changed;
+	t_player	*player;
+	t_vec2d		total;
+	t_vec2i		move;
+	t_vec2i		target;
 
-	position_changed = false;
 	player = game->player_data;
 	update_player_data(game->mlx, game->player_data);
 	total = calc_target_pos(game->map_data, game->player_data);
 	move = (t_vec2i){round(total.x), round(total.y)};
 	target = (t_vec2i){player->pos.x + move.x, player->pos.y + move.y};
-	// Check and update X position
 	if (!check_collision(game->map_data, (t_vec2i){target.x, player->pos.y}))
 	{
-		if (player->pos.x != target.x)
-			position_changed = true;
 		player->pos.x = target.x;
 		player->reminder.x = total.x - move.x;
 	}
 	else
 		player->reminder.x = 0;
-	// Check and update Y position
 	if (!check_collision(game->map_data, (t_vec2i){player->pos.x, target.y}))
 	{
-		if (player->pos.y != target.y)
-			position_changed = true;
 		player->pos.y = target.y;
 		player->reminder.y = total.y - move.y;
 	}
 	else
 		player->reminder.y = 0;
-	// Print position if changed
-	if (position_changed || player->pos.x != last_pos.x
-		|| player->pos.y != last_pos.y)
-	{
-		printf("Player position: (%d, %d)\n", player->pos.x, player->pos.y);
-		last_pos = player->pos;
-	}
 }

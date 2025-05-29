@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/28 18:52:43 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/29 19:23:34 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ typedef struct s_ray
 	t_vec2d			dir;
 	t_vec2d			hit_point;
 	double			distance;
-	t_vec2i			map_pos;
+	t_vec2d			map_pixel_pos;
+	t_vec2i			map_grid_pos;
 	t_vec2d			delta_dist;
 	t_vec2d			side_dist;
 	t_vec2i			steps;
