@@ -62,5 +62,10 @@ int				ft_cheking_fc(char **arr);
 int				ft_cheking_fc_utils(char **vv, char **bb);
 int				ft_cheking_ns(int n_s, char **vv, char **bb);
 char			*ft_strdup(const char *s1);
-
+void	free_help(t_utils *utils);
+int	first_line(char *map);
+int	norminette_help_close(char **map, int i, int j, int size);
+int	ft_closing(char **map);
+int	ft_checking_close_map(char **map);
+int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex);
 #endif

@@ -1,93 +1,5 @@
 #include "../includes/parsing.h"
 
-int	first_line(char *map)
-{
-	int	i;
-	int	size;
-
-	size = 0;
-	i = 0;
-	while (map[size])
-		size++;
-	while (map[i] == 32 || (map[i] >= 9 && map[i] <= 13))
-		i++;
-	size--;
-	while (map[size] == 32 || (map[size] >= 9 && map[size] <= 13))
-		size--;
-	while (i < size)
-	{
-		if (map[i] != '1' && map[i] != ' ')
-			return (-1);
-		i++;
-	}
-	return (1);
-}
-
-int	ft_checking_close_map(char **map)
-{
-	int	i;
-	int	j;
-	int	size;
-
-	if (first_line(map[0]) == -1)
-		return (-1);
-	i = 1;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j] == 32 || (map[i][j] >= 9 && map[i][j] <= 13))
-			j++;
-		if (map[i][j] != '1')
-			return (-1);
-		size = ft_strlen(map[i]) - 1;
-		while (map[i][size] == 32 || (map[i][size] >= 9 && map[i][size] <= 13))
-			size--;
-		if (map[i][size] != '1')
-			return (-1);
-		while (j < size)
-		{
-			if (map[i][j] == '0')
-			{
-				if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i
-					+ 1][j] == ' ' || map[i - 1][j] == ' '
-					|| j > ft_strlen(map[i + 1]))
-					return (-1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
-{
-	int	fd;
-
-	fd = open(ptr, O_RDONLY, 0444);
-	if (fd < 0)
-		return (-1);
-	fd = open(str, O_RDONLY, 0444);
-	if (fd < 0)
-		return (-1);
-	fd = open(clr, O_RDONLY, 0444);
-	if (fd < 0)
-		return (-1);
-	fd = open(codex, O_RDONLY, 0444);
-	if (fd < 0)
-		return (-1);
-	return (1);
-}
-
-void	free_help(t_utils	*utils)
-{
-	ft_freeing(utils->no);
-	ft_freeing(utils->so);
-	ft_freeing(utils->ea);
-	ft_freeing(utils->we);
-	free(utils);
-}
-
 t_map	*full_members(char **arr, char **map)
 {
 	t_map	*parse;
@@ -108,10 +20,10 @@ t_map	*full_members(char **arr, char **map)
 	if (ft_check_valid_path(parse->north_texture_path,
 			parse->south_texture_path, parse->west_texture_path,
 			parse->east_texture_path) == -1)
-			{
-				free_help(utils);
-				return (NULL);
-			}
+	{
+		free_help(utils);
+		return (NULL);
+	}
 	parse->map = map;
 	free_help(utils);
 	return (parse);
@@ -119,13 +31,13 @@ t_map	*full_members(char **arr, char **map)
 
 t_map	*parse_colors(char **arr, t_map *parse)
 {
-	char	**floor;
-	char	**ceiling;
-	char	**f;
-	char	**c;
-	int		i;
-	long long codex;
-	long long codexo;
+	char		**floor;
+	char		**ceiling;
+	char		**f;
+	char		**c;
+	int			i;
+	long long	codex;
+	long long	codexo;
 
 	floor = ft_split(arr[4], ' ');
 	ceiling = ft_split(arr[5], ' ');
@@ -153,30 +65,32 @@ t_map	*parse_colors(char **arr, t_map *parse)
 	return (parse);
 }
 
-t_map	*find_player(char **arr, t_map	*parse)
+t_map	*find_player(char **arr, t_map *parse)
 {
 	int	i;
 	int	j;
-	if(!parse)
-		return NULL;
+
+	if (!parse)
+		return (NULL);
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
 		j = 0;
-		while(arr[i][j])
+		while (arr[i][j])
 		{
-			if(arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'E' || arr[i][j] == 'W')
+			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'E'
+				|| arr[i][j] == 'W')
 			{
 				parse->x_player = j;
 				parse->y_player = i;
 				parse->pos_player = arr[i][j];
-				return parse;
+				return (parse);
 			}
 			j++;
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 t_map	*go_parse_lines(char **arr, char *ptr)
@@ -205,16 +119,16 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 		return (NULL);
 	}
 	parse = parse_colors(arr, parse);
-	if(!parse)
+	if (!parse)
 	{
 		ft_freeing(map);
-		return NULL;
+		return (NULL);
 	}
-	parse = find_player(map,parse);
-	if(!parse)
+	parse = find_player(map, parse);
+	if (!parse)
 	{
 		ft_freeing(map);
-		return NULL;
+		return (NULL);
 	}
 	return (parse);
 }

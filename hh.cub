@@ -1,12 +1,12 @@
-NO /Users/sahamzao/gg/README.md
-SO /Users/sahamzao/gg/README.md
+NO main.c
+SO main.c
 
 
-EA /Users/sahamzao/gg/README.md
+EA main.c
 
 
 
-WE /Users/sahamzao/gg/README.md
+WE main.c
 F 77,100,0
 C 225,30,255
 

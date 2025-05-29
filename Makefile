@@ -1,6 +1,6 @@
 CC = cc 
 CFILES = main.c parssing/file_check.c parssing/gnl.c parssing/gnl_utils.c parssing/parse_map.c parssing/split.c \
-parssing/utils.c parssing/parse_map_2.c parssing/utils2.c parssing/utils3.c 
+parssing/utils.c parssing/parse_map_2.c parssing/utils2.c parssing/utils3.c  parssing/parse_map_utils.c 
 NAME = cub3d 
 FLAGS = -Wall -Wextra -Werror -fsanitize=address
 OFILES = $(CFILES:.c=.o)

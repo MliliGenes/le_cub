@@ -31,3 +31,12 @@ long long 	ft_atoi(const char *str)
 		return (-1);
 	return (res);
 }
+
+void	free_help(t_utils *utils)
+{
+	ft_freeing(utils->no);
+	ft_freeing(utils->so);
+	ft_freeing(utils->ea);
+	ft_freeing(utils->we);
+	free(utils);
+}
