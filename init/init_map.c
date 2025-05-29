@@ -39,8 +39,8 @@ t_map	*init_map(void)
 	if (!map)
 		return (NULL);
 	map->map = create_dynamic_map();
-    map->x_player = 5;
-    map->y_player = 3;
-    map->player_dir = 'E';
+	map->x_player = 5;
+	map->y_player = 3;
+	map->player_dir = 'E';
 	return (map);
 }

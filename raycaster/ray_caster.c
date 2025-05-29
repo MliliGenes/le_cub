@@ -15,6 +15,7 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 		rays[i].dir = (t_vec2d){cos(rays[i].angle), sin(rays[i].angle)};
 		rays[i].delta_dist.x = fabs(1 / rays[i].dir.x);
 		rays[i].delta_dist.y = fabs(1 / rays[i].dir.y);
+		rays[i].distance = 0.0;
 		start_angle += angle_step;
 		i++;
 	}
@@ -22,12 +23,9 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 
 static void	dda_loop(t_game *game, t_ray *ray)
 {
-	int	hit;
 	int	side;
 
-	hit = 0;
-	ray->distance = 0.0;
-	while (hit == 0)
+	while (true)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
@@ -43,8 +41,9 @@ static void	dda_loop(t_game *game, t_ray *ray)
 			ray->map_grid_pos.y += ray->steps.y;
 			side = 1;
 		}
-		if (game->map_data->map[ray->map_grid_pos.y][ray->map_grid_pos.x] != '0')
-			hit = 1;
+		if (game->map_data->map[ray->map_grid_pos.y]
+			[ray->map_grid_pos.x] != '0')
+			break ;
 	}
 	ray->side_hit = side;
 }
@@ -92,6 +91,7 @@ void	cast_rays(t_game *game)
 			/ TILE_SIZE, (double)game->player_data->pos.y / TILE_SIZE};
 		rays[i].map_grid_pos = (t_vec2i){(int)rays[i].map_pixel_pos.x,
 			(int)rays[i].map_pixel_pos.y};
+		cast_single_ray(game, &rays[i]);
 		i++;
 	}
 }
