@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_caster.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/05/29 21:28:36 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/game.h"
 
 static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
@@ -41,11 +53,13 @@ static void	dda_loop(t_game *game, t_ray *ray)
 			ray->map_grid_pos.y += ray->steps.y;
 			side = 1;
 		}
-		if (game->map_data->map[ray->map_grid_pos.y]
-			[ray->map_grid_pos.x] != '0')
+		if (game->map_data->map[ray->map_grid_pos.y][ray->map_grid_pos.x] != '0')
 			break ;
 	}
 	ray->side_hit = side;
+	ray->hit_point = (t_vec2d){(ray->map_pixel_pos.x + ray->dir.x
+			* ray->distance) * TILE_SIZE, (ray->map_pixel_pos.y + ray->dir.y
+			* ray->distance) * TILE_SIZE};
 }
 
 static void	cast_single_ray(t_game *game, t_ray *ray)
