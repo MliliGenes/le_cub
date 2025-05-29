@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/29 21:30:41 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/29 22:55:31 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@
 # include "dependencies.h"
 
 # define FOV 65
-# define SCREEN_WIDTH_DEFAULT 21 * 64
-# define SCREEN_HEIGHT_DEFAULT 9 * 64
+# define SCREEN_WIDTH_DEFAULT 1024
+# define SCREEN_HEIGHT_DEFAULT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define TILE_SIZE 64
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
+
+# define NORTH_WALL_COLOR 0xFF0000FF
+# define SOUTH_WALL_COLOR 0xFF00FF00
+# define EAST_WALL_COLOR 0xFFFF0000
+# define WEST_WALL_COLOR 0xFFFFFF00
+# define ERROR_WALL_COLOR 0xFF808080
 
 typedef struct s_vec2d
 {

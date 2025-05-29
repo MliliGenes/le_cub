@@ -42,5 +42,11 @@ t_map	*init_map(void)
 	map->x_player = 5;
 	map->y_player = 3;
 	map->player_dir = 'E';
+	map->ceiling_color[0] = 135; // Red component
+	map->ceiling_color[1] = 206; // Green component
+	map->ceiling_color[2] = 235; // Blue component
+	map->floor_color[0] = 255; // Red component
+	map->floor_color[1] = 255; // Green component
+	map->floor_color[2] = 255; // Blue component
 	return (map);
 }
