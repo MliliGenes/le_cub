@@ -36,7 +36,7 @@ int	norminette_help_close(char **map, int i, int j, int size)
 		}
 		j++;
 	}
-	return 1;
+	return (1);
 }
 
 int	ft_closing(char **map)
@@ -58,8 +58,8 @@ int	ft_closing(char **map)
 			size--;
 		if (map[i][size] != '1')
 			return (-1);
-		if(norminette_help_close(map,i,j,size) == -1)
-			return -1;
+		if (norminette_help_close(map, i, j, size) == -1)
+			return (-1);
 		i++;
 	}
 	return (1);
@@ -76,7 +76,7 @@ int	ft_checking_close_map(char **map)
 
 int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
 {
-	int	fd;
+	int fd;
 
 	fd = open(ptr, O_RDONLY, 0444);
 	if (fd < 0)

@@ -1,5 +1,11 @@
 #include "../includes/parsing.h"
 
+int	ft_ft_ret_newl(char *start, char *ptr, int j)
+{
+	free(start);
+	return (find_map(ptr, j + 1));
+}
+
 static char	*here(char *string)
 {
 	char	*ptr;

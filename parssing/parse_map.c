@@ -31,13 +31,10 @@ t_map	*full_members(char **arr, char **map)
 
 t_map	*parse_colors(char **arr, t_map *parse)
 {
-	char		**floor;
-	char		**ceiling;
-	char		**f;
-	char		**c;
-	int			i;
-	long long	codex;
-	long long	codexo;
+	char	**floor;
+	char	**ceiling;
+	char	**f;
+	char	**c;
 
 	floor = ft_split(arr[4], ' ');
 	ceiling = ft_split(arr[5], ' ');
@@ -45,21 +42,7 @@ t_map	*parse_colors(char **arr, t_map *parse)
 	c = ft_split(ceiling[1], ',');
 	ft_freeing(floor);
 	ft_freeing(ceiling);
-	i = 0;
-	while (i < 3)
-	{
-		codex = ft_atoi(f[i]);
-		codexo = ft_atoi(c[i]);
-		if (codexo == -1 || codex == -1 || codex > 255 || codexo > 255)
-		{
-			ft_freeing(f);
-			ft_freeing(c);
-			return (NULL);
-		}
-		parse->floor_color[i] = (unsigned int)codex;
-		parse->ceiling_color[i] = (unsigned int)codexo;
-		i++;
-	}
+	parse = parse_colors_utils_norm(parse, f, c);
 	ft_freeing(f);
 	ft_freeing(c);
 	return (parse);
@@ -108,38 +91,24 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 		return (NULL);
 	map = ft_split(ptr + i, '\n');
 	if (ft_checking_close_map(map) == -1)
-	{
-		ft_freeing(map);
-		return (NULL);
-	}
+		return (ret_help(map));
 	parse = full_members(arr, map);
 	if (!parse)
-	{
-		ft_freeing(map);
-		return (NULL);
-	}
+		return (ret_help(map));
 	parse = parse_colors(arr, parse);
 	if (!parse)
-	{
-		ft_freeing(map);
-		return (NULL);
-	}
+		return (ret_help(map));
 	parse = find_player(map, parse);
 	if (!parse)
-	{
-		ft_freeing(map);
-		return (NULL);
-	}
+		return (ret_help(map));
 	return (parse);
 }
 
 t_map	*parse_map_file(char *path)
 {
-	char	*tet1;
 	char	**arr;
-	char	*tet;
-	char	*ptr;
 	t_map	*parse;
+	char	*ptr;
 	int		fd;
 
 	fd = open(path, O_RDONLY, 0444);
@@ -148,31 +117,13 @@ t_map	*parse_map_file(char *path)
 		printf("invalid file\n");
 		return (NULL);
 	}
-	ptr = NULL;
-	tet1 = get_next_line(fd);
-	if (tet1 == NULL)
-	{
-		close(fd);
+	ptr = read_line_hh(fd);
+	if (!ptr)
 		return (NULL);
-	}
-	while (tet1 != NULL)
-	{
-		tet = ft_strdup(tet1);
-		free(tet1);
-		ptr = ft_strcat(ptr, tet);
-		free(tet);
-		tet1 = get_next_line(fd);
-	}
 	arr = ft_split(ptr, '\n');
-	close(fd);
 	parse = go_parse_lines(arr, ptr);
 	if (!parse)
-	{
-		free(ptr);
-		ft_freeing(arr);
-		printf("ERROR : invalid map =(\n");
-		return (NULL);
-	}
+		return (ret_first_help(ptr, arr));
 	ft_freeing(arr);
 	free(ptr);
 	return (parse);
