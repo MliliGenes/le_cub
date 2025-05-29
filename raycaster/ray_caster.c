@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/29 21:28:36 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/29 21:29:00 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 	start_angle = pov_angle - (fov_rad / 2);
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
+		rays[i].distance = 0.0;
 		rays[i].angle = normalize_angle(start_angle);
 		rays[i].dir = (t_vec2d){cos(rays[i].angle), sin(rays[i].angle)};
 		rays[i].delta_dist.x = fabs(1 / rays[i].dir.x);
 		rays[i].delta_dist.y = fabs(1 / rays[i].dir.y);
-		rays[i].distance = 0.0;
 		start_angle += angle_step;
 		i++;
 	}
