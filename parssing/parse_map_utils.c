@@ -76,7 +76,7 @@ int	ft_checking_close_map(char **map)
 
 int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
 {
-	int fd;
+	int	fd;
 
 	fd = open(ptr, O_RDONLY, 0444);
 	if (fd < 0)

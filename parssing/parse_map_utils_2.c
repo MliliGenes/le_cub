@@ -65,7 +65,7 @@ char	*read_line_hh(int fd)
 
 char	*ft_copy_st(char *start, int len, int j, char *ptr)
 {
-	int k;
+	int	k;
 
 	k = 0;
 	while (len)
