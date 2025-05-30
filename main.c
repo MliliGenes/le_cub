@@ -4,9 +4,8 @@ int	main(void)
 {
 	t_game	game;
 
-	if (init_game(&game))
+	if (!init_game(&game))
 		return (EXIT_FAILURE);
-
-	mlx_loop(game.mlx);
+	game_loop(&game);
 	return (EXIT_SUCCESS);
 }

@@ -1,7 +1,11 @@
 #include "../include/game.h"
 
-void game_loop(t_game *game)
+void	game_loop(t_game *game)
 {
-    mlx_loop_hook(game->mlx, event_listner, game);
-    mlx_loop(game->mlx);
+	int	start_x;
+	int	start_y;
+
+	mlx_image_to_window(game->mlx, game->img_scene, 0, 0);
+	mlx_loop_hook(game->mlx, event_listner, game);
+	mlx_loop(game->mlx);
 }

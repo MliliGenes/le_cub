@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/25 19:04:24 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:27:50 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 # include "dependencies.h"
 
+# define FOV 65
 # define SCREEN_WIDTH_DEFAULT 1024
 # define SCREEN_HEIGHT_DEFAULT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+# define TILE_SIZE 64
+# define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
+
+# define NORTH_WALL_COLOR 0xFF0000FF
+# define SOUTH_WALL_COLOR 0xFF00FF00
+# define EAST_WALL_COLOR 0xFFFF0000
+# define WEST_WALL_COLOR 0xFFFFFF00
+# define ERROR_WALL_COLOR 0xFF808080
 
 typedef struct s_vec2d
 {
@@ -36,43 +45,58 @@ typedef struct s_vec2i
 
 typedef struct s_map
 {
-	char			**grid;
+	char			**map;
+	int				x_player;
+	int				y_player;
 	int				width;
 	int				height;
-	int				tile_size;
+	char			player_dir;
 	char			*north_texture_path;
 	char			*south_texture_path;
 	char			*east_texture_path;
 	char			*west_texture_path;
-	uint32_t		floor_color;
-	uint32_t		ceiling_color;
+	uint32_t		floor_color[3];
+	uint32_t		ceiling_color[3];
 }					t_map;
+
+typedef struct s_utils
+{
+	char			**no;
+	char			**so;
+	char			**ea;
+	char			**we;
+}					t_utils;
 
 typedef struct s_player
 {
-	t_vec2d			pos;
-	t_vec2d			dir;
+	t_vec2i			pos;
+	int				forward_backward;
+	int				left_right;
+	t_vec2d			forward;
+	t_vec2d			strafe;
 	t_vec2d			reminder;
-	// t_vec2d			plane;
 	double			angle;
 	double			move_speed;
 	double			rot_speed;
 	int				size_minimap;
+	mlx_image_t		*img;
 }					t_player;
 
 typedef struct s_ray
 {
+	double			angle;
 	t_vec2d			dir;
-	t_vec2i			map_pos;
-	t_vec2i			side_dist;
+	t_vec2d			hit_point;
+	double			distance;
+	t_vec2d			map_pixel_pos;
+	t_vec2i			map_grid_pos;
 	t_vec2d			delta_dist;
-	double			perp_wall_dist;
+	t_vec2d			side_dist;
 	t_vec2i			steps;
 	int				side_hit;
-	double			wall_x_tex;
-	int				tex_num;
 }					t_ray;
 
+// N = 0; E = 1; S = 2; W = 3
 typedef struct s_wall_hit
 {
 	double			distance;
@@ -90,6 +114,8 @@ typedef struct s_game
 	mlx_image_t		*img_minimap;
 	t_map			*map_data;
 	t_player		*player_data;
+	t_ray			*rays;
+	t_wall_hit		*walls;
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;

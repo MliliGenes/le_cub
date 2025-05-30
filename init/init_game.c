@@ -11,10 +11,15 @@ bool	init_game(t_game *game)
 		return (false);
 	game->img_scene = mlx_new_image(game->mlx, game->mlx->width,
 			game->mlx->height);
-	// TODO: game->textures add fucntiont to load the textures
-	game->map_data = NULL; // TODO: parse the map
+	game->map_data = init_map();
 	game->player_data = init_player(game->map_data);
 	if (!game->player_data)
+		return (false);
+	game->rays = init_rays();
+	if (!game->rays)
+		return (false);
+	game->walls = init_walls();
+	if (!game->rays)
 		return (false);
 	return (true);
 }
