@@ -1,5 +1,10 @@
 #include "../include/game.h"
 
+void render_floor_cell(t_game *game)
+{
+
+}
+
 void	render_walls(t_game *game)
 {
 	
