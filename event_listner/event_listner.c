@@ -1,5 +1,10 @@
 #include "../include/game.h"
 
+void	render_walls(t_game *game)
+{
+	
+}
+
 void	event_listner(void *params)
 {
 	t_game	*game;
@@ -10,4 +15,5 @@ void	event_listner(void *params)
 	update_player(game);
 	cast_rays(game);
 	rays_to_walls(game);
+	render_walls(game);
 }
