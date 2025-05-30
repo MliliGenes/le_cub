@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/29 21:29:00 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:20:25 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,29 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 
 static void	dda_loop(t_game *game, t_ray *ray)
 {
-	int	side;
-
 	while (true)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
-			ray->distance += ray->delta_dist.x;
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->map_grid_pos.x += ray->steps.x;
-			side = 0;
+			ray->side_hit = 0;
 		}
 		else
 		{
-			ray->distance += ray->delta_dist.y;
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map_grid_pos.y += ray->steps.y;
-			side = 1;
+			ray->side_hit = 1;
 		}
 		if (game->map_data->map[ray->map_grid_pos.y][ray->map_grid_pos.x] != '0')
+		{
+			if (ray->side_hit == 0)
+				ray->distance = ray->side_dist.x - ray->delta_dist.x;
+			else
+				ray->distance = ray->side_dist.y - ray->delta_dist.y;
 			break ;
+		}
 	}
-	ray->side_hit = side;
-	ray->hit_point = (t_vec2d){(ray->map_pixel_pos.x + ray->dir.x
-			* ray->distance) * TILE_SIZE, (ray->map_pixel_pos.y + ray->dir.y
-			* ray->distance) * TILE_SIZE};
 }
 
 static void	cast_single_ray(t_game *game, t_ray *ray)
@@ -106,6 +104,9 @@ void	cast_rays(t_game *game)
 		rays[i].map_grid_pos = (t_vec2i){(int)rays[i].map_pixel_pos.x,
 			(int)rays[i].map_pixel_pos.y};
 		cast_single_ray(game, &rays[i]);
+		rays[i].hit_point = (t_vec2d){(rays[i].map_pixel_pos.x + rays[i].dir.x
+			* rays[i].distance) * TILE_SIZE, (rays[i].map_pixel_pos.y + rays[i].dir.y
+			* rays[i].distance) * TILE_SIZE};
 		i++;
 	}
 }

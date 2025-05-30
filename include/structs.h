@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/29 22:55:31 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/30 17:27:50 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_ray
 	int				side_hit;
 }					t_ray;
 
+// N = 0; E = 1; S = 2; W = 3
 typedef struct s_wall_hit
 {
 	double			distance;

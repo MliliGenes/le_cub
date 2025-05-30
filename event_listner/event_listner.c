@@ -9,4 +9,5 @@ void	event_listner(void *params)
 		mlx_close_window(game->mlx);
 	update_player(game);
 	cast_rays(game);
+	rays_to_walls(game);
 }
