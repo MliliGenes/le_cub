@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays_to_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:47:30 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/30 17:39:53 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/31 04:57:39 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rays_to_walls(t_game *game)
 	i = 0;
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
-		walls[i].distance = rays[i].distance;
+		walls[i].distance = rays[i].distance * TILE_SIZE;
 		walls[i].side = rays[i].side_hit;
 		walls[i].hit_point = rays[i].hit_point;
 		if (rays[i].dir.x < 0 && rays[i].side_hit == 0)

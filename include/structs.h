@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/30 17:27:50 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/05/31 15:55:40 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "dependencies.h"
 
 # define FOV 65
-# define SCREEN_WIDTH_DEFAULT 1024
+# define SCREEN_WIDTH_DEFAULT 1320
 # define SCREEN_HEIGHT_DEFAULT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define TILE_SIZE 64
+# define TILE_SIZE 128
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
