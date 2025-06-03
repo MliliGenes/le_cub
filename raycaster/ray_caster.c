@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/31 15:54:43 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/06/02 03:23:58 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static void	dda_loop(t_game *game, t_ray *ray)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
+			ray->distance = ray->side_dist.x;
 			ray->side_dist.x += ray->delta_dist.x;
 			ray->map_grid_pos.x += ray->steps.x;
 			ray->side_hit = 0;
 		}
 		else
 		{
+			ray->distance = ray->side_dist.y;
 			ray->side_dist.y += ray->delta_dist.y;
 			ray->map_grid_pos.y += ray->steps.y;
 			ray->side_hit = 1;
@@ -51,11 +53,9 @@ static void	dda_loop(t_game *game, t_ray *ray)
 		if (game->map_data->map[ray->map_grid_pos.y][ray->map_grid_pos.x] != '0')
 		{
 			if (ray->side_hit == 0)
-				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x + 
-								(1 - ray->steps.x) / 2) / ray->dir.x;
+				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x + (1 - ray->steps.x) / 2) / ray->dir.x;
 			else
-				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y + 
-								(1 - ray->steps.y) / 2) / ray->dir.y;
+				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y + (1 - ray->steps.y) / 2) / ray->dir.y;
 			ray->distance = fabs(ray->distance);
 			break;
 		}
@@ -124,17 +124,14 @@ void	cast_rays(t_game *game)
 {
 	t_ray	*rays;
 	int		i;
-	
 
-	memset(game->img_scene->pixels, 0, 
-          game->img_scene->width * game->img_scene->height * sizeof(int32_t));
 	i = 0;
 	rays = game->rays;
 	set_angles(rays, game->fov_rad, game->player_data->angle);
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
 		rays[i].map_pixel_pos = (t_vec2d){(double)game->player_data->pos.x
-			/ TILE_SIZE, (double)game->player_data->pos.y / TILE_SIZE};
+			/ (double)TILE_SIZE, (double)game->player_data->pos.y / (double)TILE_SIZE};
 		rays[i].map_grid_pos = (t_vec2i){(int)rays[i].map_pixel_pos.x,
 			(int)rays[i].map_pixel_pos.y};
 		cast_single_ray(game, &rays[i]);
@@ -142,6 +139,13 @@ void	cast_rays(t_game *game)
    			game->player_data->pos.x + rays[i].dir.x * rays[i].distance * TILE_SIZE,
   		 	game->player_data->pos.y + rays[i].dir.y * rays[i].distance * TILE_SIZE
 		};
+		double wallX;
+		if (rays[i].side_hit == 0)
+			wallX = rays[i].map_pixel_pos.y + rays[i].distance * rays[i].dir.y;
+		else
+			wallX = rays[i].map_pixel_pos.x + rays[i].distance * rays[i].dir.x;
+		wallX -= floor(wallX);
+		rays[i].wallX = wallX;
 		// int end_x = (int)(game->player_data->pos.x + rays[i].dir.x * rays[i].distance * TILE_SIZE);
 		// int end_y = (int)(game->player_data->pos.y + rays[i].dir.y * rays[i].distance * TILE_SIZE);
 		// draw_line(game->img_scene, 

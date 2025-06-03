@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/31 15:55:40 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/06/02 19:43:58 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "dependencies.h"
 
-# define FOV 65
-# define SCREEN_WIDTH_DEFAULT 1320
-# define SCREEN_HEIGHT_DEFAULT 768
+# define FOV 60
+# define SCREEN_WIDTH_DEFAULT 1680
+# define SCREEN_HEIGHT_DEFAULT 1050
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define TILE_SIZE 128
+# define TILE_SIZE 64
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
@@ -74,7 +74,7 @@ typedef struct s_player
 	int				left_right;
 	t_vec2d			forward;
 	t_vec2d			strafe;
-	t_vec2d			reminder;
+	// t_vec2d			reminder;
 	double			angle;
 	double			move_speed;
 	double			rot_speed;
@@ -94,6 +94,7 @@ typedef struct s_ray
 	t_vec2d			side_dist;
 	t_vec2i			steps;
 	int				side_hit;
+	double wallX;
 }					t_ray;
 
 // N = 0; E = 1; S = 2; W = 3

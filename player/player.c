@@ -31,7 +31,7 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
 	player->angle = normalize_angle(player->angle);
 }
 
-static t_vec2d	calc_target_pos(t_map *map, t_player *player)
+static t_vec2d	calc_target_pos(t_player *player)
 {
 	t_vec2d	total;
 
@@ -40,8 +40,8 @@ static t_vec2d	calc_target_pos(t_map *map, t_player *player)
 	player->strafe = (t_vec2d){cos(player->angle + M_PI / 2)
 		* player->left_right, sin(player->angle + M_PI / 2)
 		* player->left_right};
-	total = (t_vec2d){player->forward.x + player->strafe.x + player->reminder.x,
-		player->forward.y + player->strafe.y + player->reminder.y};
+	total = (t_vec2d){player->forward.x + player->strafe.x,
+		player->forward.y + player->strafe.y};
 	return (total);
 }
 
@@ -51,24 +51,20 @@ void	update_player(t_game *game)
 	t_vec2d		total;
 	t_vec2i		move;
 	t_vec2i		target;
-
+	
 	player = game->player_data;
 	update_player_data(game->mlx, game->player_data);
-	total = calc_target_pos(game->map_data, game->player_data);
-	move = (t_vec2i){round(total.x), round(total.y)};
-	target = (t_vec2i){player->pos.x + move.x, player->pos.y + move.y};
-	if (!check_collision(game->map_data, (t_vec2i){target.x, player->pos.y}))
-	{
-		player->pos.x = target.x;
-		player->reminder.x = total.x - move.x;
-	}
-	else
-		player->reminder.x = 0;
-	if (!check_collision(game->map_data, (t_vec2i){player->pos.x, target.y}))
-	{
-		player->pos.y = target.y;
-		player->reminder.y = total.y - move.y;
-	}
-	else
-		player->reminder.y = 0;
+	total = calc_target_pos(game->player_data);
+	
+	// Multiply by 10 for fixed-point precision
+	move = (t_vec2i){round(total.x * 10), round(total.y * 10)};
+	target = (t_vec2i){player->pos.x * 10 + move.x, player->pos.y * 10 + move.y};
+	
+	// Check X movement (divide by 10 for actual position)
+	if (!check_collision(game->map_data, (t_vec2i){target.x / 10, player->pos.y}))
+		player->pos.x = target.x / 10;
+	
+	// Check Y movement (divide by 10 for actual position)
+	if (!check_collision(game->map_data, (t_vec2i){player->pos.x, target.y / 10}))
+		player->pos.y = target.y / 10;
 }
