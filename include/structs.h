@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/02 19:43:58 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/06/05 00:57:21 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SCREEN_HEIGHT_DEFAULT 1050
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define TILE_SIZE 64
+# define TILE_SIZE 640
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
@@ -74,7 +74,7 @@ typedef struct s_player
 	int				left_right;
 	t_vec2d			forward;
 	t_vec2d			strafe;
-	// t_vec2d			reminder;
+	t_vec2d			reminder;
 	double			angle;
 	double			move_speed;
 	double			rot_speed;
