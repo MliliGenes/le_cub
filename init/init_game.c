@@ -2,7 +2,7 @@
 
 bool	init_game(t_game *game)
 {
-	game->fov_rad = 70;
+	game->fov_rad = deg_to_radian(FOV);
 	game->screen_width = SCREEN_WIDTH_DEFAULT;
 	game->screen_height = SCREEN_HEIGHT_DEFAULT;
 	game->mlx = mlx_init(game->screen_width, game->screen_height, GAME_TITLE,

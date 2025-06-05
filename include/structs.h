@@ -1,26 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/24 13:29:07 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/05/30 21:47:20 by sel-mlil         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
 # include "dependencies.h"
 
-# define FOV 65
-# define SCREEN_WIDTH_DEFAULT 1024
-# define SCREEN_HEIGHT_DEFAULT 768
+# define FOV 60
+# define SCREEN_WIDTH_DEFAULT 1680
+# define SCREEN_HEIGHT_DEFAULT 1050
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define TILE_SIZE 64
+# define TILE_SIZE 640
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
@@ -94,6 +82,7 @@ typedef struct s_ray
 	t_vec2d			side_dist;
 	t_vec2i			steps;
 	int				side_hit;
+	double wallX;
 }					t_ray;
 
 // N = 0; E = 1; S = 2; W = 3
