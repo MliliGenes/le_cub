@@ -5,14 +5,12 @@ void render_floor_cell(t_game *game)
     int y;
     int x;
     
-    // Draw ceiling (upper half of the screen)
     for (y = 0; y < SCREEN_HEIGHT_DEFAULT / 2; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
         mlx_put_pixel(game->img_scene, x, y, 0x000000FF);
     }
     
-    // Draw floor (lower half of the screen)
     for (y = SCREEN_HEIGHT_DEFAULT / 2; y < SCREEN_HEIGHT_DEFAULT; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
@@ -36,27 +34,22 @@ void render_walls(t_game *game)
 		int start_y = (SCREEN_HEIGHT_DEFAULT - (int)line_h) / 2;
 		int end_y = start_y + (int)line_h;
 		
-		// Clamp start_y and end_y to screen bounds
 		if (start_y < 0)
 			start_y = 0;
 		if (end_y >= SCREEN_HEIGHT_DEFAULT)
 			end_y = SCREEN_HEIGHT_DEFAULT - 1;
 		
-		// Draw vertical line from start_y to end_y
-		uint32_t wall_color; // White walls
-		if (walls[i].texture_id == 0)
-			wall_color = 0xFF0000FF;
-		if (walls[i].texture_id == 1)
-			wall_color = 0xFFFF00FF;
-		if (walls[i].texture_id == 2)
-			wall_color = 0x00FF00FF;
+		uint32_t wall_color;
 		if (walls[i].texture_id == 3)
-			wall_color = 0x0000FFFF;
+			wall_color = 0xFF4444FF; // Soft red
+		if (walls[i].texture_id == 1)
+			wall_color = 0xFFD700FF; // Golden yellow
+		if (walls[i].texture_id == 2)
+			wall_color = 0x32CD32FF; // Lime green
+		if (walls[i].texture_id == 0)
+			wall_color = 0x1E90FFFF; // Dodger blue
 		for (int y = start_y; y <= end_y; y++)
-		{
 			mlx_put_pixel(game->img_scene, i, y, wall_color);
-		}
-		
 		i++;
 	}
 }

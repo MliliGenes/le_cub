@@ -8,10 +8,12 @@ void	rays_to_walls(t_game *game)
 
 	rays = game->rays;
 	walls = game->walls;
+	double p_angle = game->player_data->angle;
 	i = 0;
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
-		walls[i].distance = rays[i].distance * TILE_SIZE;
+		double corrected = rays[i].distance * cos(rays[i].angle - p_angle);
+		walls[i].distance = corrected * TILE_SIZE;
 		walls[i].side = rays[i].side_hit;
 		walls[i].hit_point = rays[i].hit_point;
 		

@@ -7,8 +7,8 @@ t_player	*init_player(t_map *map_data)
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (NULL);
-	player->move_speed = 10;
-	player->rot_speed = 0.05;
+	player->move_speed = 15;
+	player->rot_speed = 0.04;
 	player->size_minimap = 4;
 	player->pos = (t_vec2i){map_data->x_player * TILE_SIZE + PLAYER_SIZE / 2,
 		map_data->y_player * TILE_SIZE + PLAYER_SIZE / 2};

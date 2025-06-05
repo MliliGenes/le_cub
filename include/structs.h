@@ -3,12 +3,12 @@
 
 # include "dependencies.h"
 
-# define FOV 60
-# define SCREEN_WIDTH_DEFAULT 1680
-# define SCREEN_HEIGHT_DEFAULT 1050
+# define FOV 75
+# define SCREEN_WIDTH_DEFAULT 1920
+# define SCREEN_HEIGHT_DEFAULT 1080
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define TILE_SIZE 640
+# define TILE_SIZE 600
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
