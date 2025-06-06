@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/02 03:23:58 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/06/06 18:48:40 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	cast_single_ray(t_game *game, t_ray *ray)
 	dda_loop(game, ray);
 }
 
-//DEBUG
+// DEBUG // 
 void draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
 {
     int dx = abs(x1 - x0);
@@ -103,7 +103,7 @@ void draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1, int color)
 
     while (1)
     {
-        x0 < img->width && y0 < img->height ? mlx_put_pixel(img, x0, y0, color) : NULL;
+        x0 < (int)img->width && y0 < (int)img->height ? mlx_put_pixel(img, x0, y0, color) : NULL;
         if (x0 == x1 && y0 == y1)
             break;
         e2 = 2 * err;
@@ -146,12 +146,6 @@ void	cast_rays(t_game *game)
 			wallX = rays[i].map_pixel_pos.x + rays[i].distance * rays[i].dir.x;
 		wallX -= floor(wallX);
 		rays[i].wallX = wallX;
-		// int end_x = (int)(game->player_data->pos.x + rays[i].dir.x * rays[i].distance * TILE_SIZE);
-		// int end_y = (int)(game->player_data->pos.y + rays[i].dir.y * rays[i].distance * TILE_SIZE);
-		// draw_line(game->img_scene, 
-        //          (int)game->player_data->pos.x, (int)game->player_data->pos.y, 
-        //          end_x, end_y, 0xFF00FFFF);
-		// mlx_put_pixel(game->img_scene, end_x, end_y, 0xFF0000FF);
 		i++;
 	}
 }

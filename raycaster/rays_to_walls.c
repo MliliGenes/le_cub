@@ -27,9 +27,8 @@ void	rays_to_walls(t_game *game)
 			walls[i].texture_id = 0;
 		walls[i].texture_x_coord = rays[i].wallX;
         if ((rays[i].side_hit == 0 && rays[i].dir.x > 0) || 
-            (rays[i].side_hit == 1 && rays[i].dir.y < 0)) {
+            (rays[i].side_hit == 1 && rays[i].dir.y < 0))
             walls[i].texture_x_coord = 1.0 - walls[i].texture_x_coord;
-        }
 		i++;
 	}
 }

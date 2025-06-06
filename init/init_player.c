@@ -14,6 +14,6 @@ t_player	*init_player(t_map *map_data)
 		map_data->y_player * TILE_SIZE + PLAYER_SIZE / 2};
 	player->forward_backward = 0;
 	player->left_right = 0;
-	player->angle = deg_to_radian(0);
+	player->angle = deg_to_radian(90);
 	return (player);
 }

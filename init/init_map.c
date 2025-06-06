@@ -3,18 +3,18 @@
 char	**create_dynamic_map(void)
 {
 	char *static_map[] =
-{
-    "1111111111",
-    "1000000001",
-    "1000000001",
-    "10000011111111",
-    "10000000000001",
-    "10000100011111",
-    "10110110001",
-    "1000010001",
-    "1111111111",
-    NULL
-};
+	{
+		"1111111111",
+		"1000000001",
+		"1000000001",
+		"10000011111111",
+		"10000000000001",
+		"10000100011111",
+		"10110110001",
+		"1000010001",
+		"1111111111",
+		NULL
+	};
 	int		rows;
 	char	**dynamic_map;
 
@@ -47,7 +47,7 @@ t_map	*init_map(void)
 	if (!map)
 		return (NULL);
 	map->map = create_dynamic_map();
-	map->x_player = 5;
+	map->x_player = 4;
 	map->y_player = 3;
 	map->player_dir = 'E';
 	map->ceiling_color[0] = 135; // Red component

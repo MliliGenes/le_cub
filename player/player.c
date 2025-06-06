@@ -31,7 +31,7 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
 	player->angle = normalize_angle(player->angle);
 }
 
-static t_vec2d	calc_target_pos(t_map *map, t_player *player)
+static t_vec2d	calc_target_pos(t_player *player)
 {
 	t_vec2d	total;
 
@@ -54,7 +54,7 @@ void	update_player(t_game *game)
 
 	player = game->player_data;
 	update_player_data(game->mlx, game->player_data);
-	total = calc_target_pos(game->map_data, game->player_data);
+	total = calc_target_pos(game->player_data);
 	move = (t_vec2i){round(total.x), round(total.y)};
 	target = (t_vec2i){player->pos.x + move.x, player->pos.y + move.y};
 	if (!check_collision(game->map_data, (t_vec2i){target.x, player->pos.y}))

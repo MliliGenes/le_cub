@@ -3,11 +3,11 @@
 
 # include "dependencies.h"
 
-# define FOV 75
+# define FOV 80
 # define SCREEN_WIDTH_DEFAULT 1920
 # define SCREEN_HEIGHT_DEFAULT 1080
 # define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+# define TEXTURE_HEIGHT 600
 # define TILE_SIZE 600
 # define PLAYER_SIZE 2
 
@@ -17,7 +17,6 @@
 # define SOUTH_WALL_COLOR 0xFF00FF00
 # define EAST_WALL_COLOR 0xFFFF0000
 # define WEST_WALL_COLOR 0xFFFFFF00
-# define ERROR_WALL_COLOR 0xFF808080
 
 typedef struct s_vec2d
 {
