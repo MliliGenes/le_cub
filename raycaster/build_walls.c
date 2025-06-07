@@ -24,8 +24,6 @@ void render_walls(t_game *game)
 {
 	int i = 0;
 	t_wall_hit *walls = game->walls;
-	memset(game->img_scene->pixels, 0, 
-          game->img_scene->width * game->img_scene->height * sizeof(int32_t));
 	render_floor_cell(game);
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
@@ -36,7 +34,7 @@ void render_walls(t_game *game)
 			start_y = 0;
 		if (end_y >= SCREEN_HEIGHT_DEFAULT)
 			end_y = SCREEN_HEIGHT_DEFAULT - 1;	
-		uint32_t wall_color;	 
+		uint32_t wall_color;
 		if (walls[i].texture_id == 3)
 			wall_color = 0xFF0000FF;
 		if (walls[i].texture_id == 1)

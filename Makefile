@@ -1,11 +1,11 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -fsanitize=address -g3
+CFLAGS = #-Wall -Wextra -Werror -O3
 INCLUDES = -I./include
 
-MLX_LIB = libmlx42.a
-MLX_FLAGS = -lglfw -L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib -fsanitize=address
+MLX_LIB = libmlx42_linux.a
+MLX_FLAGS = -lglfw  -ldl -lm #-L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
 
 SRCDIR = .
 EVENT_DIR = event_listner
@@ -52,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
-	@$(CC) $(OBJ)  $(MLX_FLAGS) $(MLX_LIB) -o $(NAME)
+	@$(CC) $(OBJ)  $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
 
 %.o: %.c

@@ -4,8 +4,8 @@
 # include "dependencies.h"
 
 # define FOV 80
-# define SCREEN_WIDTH_DEFAULT 1920
-# define SCREEN_HEIGHT_DEFAULT 1080
+# define SCREEN_WIDTH_DEFAULT 1200
+# define SCREEN_HEIGHT_DEFAULT 600
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 600
 # define TILE_SIZE 600
