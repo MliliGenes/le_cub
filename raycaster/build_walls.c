@@ -5,14 +5,12 @@ void render_floor_cell(t_game *game)
     int y;
     int x;
     
-    // Sky - Bright Mario blue
     for (y = 0; y < SCREEN_HEIGHT_DEFAULT / 2; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
-        mlx_put_pixel(game->img_scene, x, y, 0x5C94FCFF);
+        	mlx_put_pixel(game->img_scene, x, y, 0x5C94FCFF);
     }
     
-    // Ground - Mario green grass
     for (y = SCREEN_HEIGHT_DEFAULT / 2; y < SCREEN_HEIGHT_DEFAULT; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
@@ -33,7 +31,8 @@ void render_walls(t_game *game)
 		if (start_y < 0)
 			start_y = 0;
 		if (end_y >= SCREEN_HEIGHT_DEFAULT)
-			end_y = SCREEN_HEIGHT_DEFAULT - 1;	
+			end_y = SCREEN_HEIGHT_DEFAULT - 1;
+		// TODO add the texturing logic
 		uint32_t wall_color;
 		if (walls[i].texture_id == 3)
 			wall_color = 0xFF0000FF;

@@ -5,7 +5,7 @@ CFLAGS = #-Wall -Wextra -Werror -O3
 INCLUDES = -I./include
 
 MLX_LIB = libmlx42_linux.a
-MLX_FLAGS = -lglfw  -ldl -lm #-L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
+MLX_FLAGS = -lglfw -ldl -lm #-L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
 
 SRCDIR = .
 EVENT_DIR = event_listner

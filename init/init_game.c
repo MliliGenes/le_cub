@@ -11,6 +11,7 @@ bool	init_game(t_game *game)
 		return (false);
 	game->img_scene = mlx_new_image(game->mlx, game->mlx->width,
 			game->mlx->height);
+	game->img_minimap = mlx_new_image(game->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	game->map_data = init_map();
 	game->player_data = init_player(game->map_data);
 	if (!game->player_data)

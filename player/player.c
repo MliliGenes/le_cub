@@ -14,8 +14,14 @@ static bool	check_collision(t_map *map, t_vec2i pos)
 
 static void	update_player_data(mlx_t *mlx, t_player *player)
 {
+	double	mouse_x;
+	double	mouse_y;
+
 	player->forward_backward = 0;
 	player->left_right = 0;
+	mlx_get_mouse_pos(mlx, &mouse_x, &mouse_y);
+	player->angle += (mouse_x - (mlx->width / 2)) * player->rot_speed * 0.1;
+	mlx_set_mouse_pos(mlx, mlx->width / 2, mlx->height / 2);
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 		player->forward_backward = player->move_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))

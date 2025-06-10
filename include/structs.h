@@ -18,6 +18,12 @@
 # define EAST_WALL_COLOR 0xFFFF0000
 # define WEST_WALL_COLOR 0xFFFFFF00
 
+#define MINIMAP_WIDTH 200
+#define MINIMAP_HEIGHT 200
+#define MINIMAP_SCALE 10.0
+#define MINIMAP_RADIUS 10
+#define MINIMAP_PADDING 20
+
 typedef struct s_vec2d
 {
 	double			x;
