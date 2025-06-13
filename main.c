@@ -7,5 +7,6 @@ int	main(void)
 	if (!init_game(&game))
 		return (EXIT_FAILURE);
 	game_loop(&game);
+	//TODO clean_up(&game);
 	return (EXIT_SUCCESS);
 }

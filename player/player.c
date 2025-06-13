@@ -21,12 +21,10 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
     player->left_right = 0;
     center.x = mlx->width / 2;
     center.y = mlx->height / 2;
-    
     mlx_get_mouse_pos(mlx, &(mouse.x), &(mouse.y));
-   float mouse_sensitivity = 0.008f;
+   float mouse_sensitivity = 0.02f;
 	player->angle += (mouse.x - center.x) * player->rot_speed * mouse_sensitivity;
     mlx_set_mouse_pos(mlx, center.x, center.y);
-
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 		player->forward_backward = player->move_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))

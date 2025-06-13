@@ -4,8 +4,8 @@ CC = cc
 CFLAGS = #-Wall -Wextra -Werror -O3
 INCLUDES = -I./include
 
-MLX_LIB = libmlx42_linux.a
-MLX_FLAGS = -lglfw -ldl -lm #-L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
+MLX_LIB = libmlx42.a
+MLX_FLAGS = -lglfw -ldl -lm -L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
 
 SRCDIR = .
 EVENT_DIR = event_listner
@@ -13,6 +13,15 @@ INIT_DIR = init
 LIB_DIR = lib
 PLAYER_DIR = player
 RAYCAST_DIR = raycaster
+
+INCLUDE_SRC = include/cub3d.h \
+			include/dependencies.h \
+			include/init.h \
+			include/lib.h \
+			include/parsing.h \
+			include/structs.h \
+			include/game.h
+
 
 MAIN_SRC = main.c
 
@@ -55,7 +64,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ)  $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
 
-%.o: %.c
+%.o: %.c $(INCLUDE_SRC)
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
