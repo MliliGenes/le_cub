@@ -11,4 +11,7 @@ void	update_player(t_game *game);
 void	cast_rays(t_game *game);
 void	rays_to_walls(t_game *game);
 
+void	render_floor_cell(t_game *game);
+void	render_walls(t_game *game);
+
 #endif
