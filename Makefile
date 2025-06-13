@@ -1,13 +1,13 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 INCLUDES = -I./include
 
 MLX_LIB = libmlx42.a
 MLX_FLAGS = -lglfw -ldl -lm -L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
 
-SRCDIR = .
+SRCDIR = 
 EVENT_DIR = event_listner
 INIT_DIR = init
 LIB_DIR = lib
@@ -44,7 +44,19 @@ RAYCAST_SRC = raycaster/build_walls.c \
              raycaster/ray_caster.c \
              raycaster/rays_to_walls.c
 
-SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC)
+PARSING_SRC = parsing/file_check.c \
+		parsing/gnl.c \
+		parsing/gnl_utils.c \
+		parsing/parse_map.c \
+		parsing/split.c \
+		parsing/utils.c \
+		parsing/parse_map_2.c \
+		parsing/utils2.c \
+		parsing/utils3.c  \
+		parsing/parse_map_utils.c \
+		parsing/parse_map_utils_2.c
+
+SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC)
 
 OBJ = $(SRC:.c=.o)
 

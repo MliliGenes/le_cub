@@ -1,4 +1,4 @@
-#include "../includes/parsing.h"
+#include "../include/parsing.h"
 
 int	find_map(char *ptr, int i)
 {
@@ -32,7 +32,6 @@ int	ft_checking_nwl(char *ptr)
 	char	*start;
 	int		i;
 	int		j;
-	int		k;
 	int		len;
 
 	i = 0;
@@ -46,19 +45,9 @@ int	ft_checking_nwl(char *ptr)
 			len = j - i;
 			start = malloc(len + 1);
 		}
-		k = 0;
-		while (len)
-		{
-			start[k] = ptr[j - len];
-			len--;
-			k++;
-		}
-		start[k] = '\0';
+		start = ft_copy_st(start, len, j, ptr);
 		if (start[0] == 'C' && start[1] == ' ')
-		{
-			free(start);
-			return (find_map(ptr, j + 1));
-		}
+			return (ft_ft_ret_newl(start, ptr, j));
 		free(start);
 		i = j + 1;
 	}

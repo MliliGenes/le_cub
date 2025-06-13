@@ -1,4 +1,4 @@
-#include "../includes/parsing.h"
+#include "../include/parsing.h"
 
 int	is__space(char c)
 {
@@ -7,7 +7,7 @@ int	is__space(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
 	size_t	res;
 	int		i;
@@ -30,4 +30,13 @@ int	ft_atoi(const char *str)
 	if (str[i] != '\0')
 		return (-1);
 	return (res);
+}
+
+void	free_help(t_utils *utils)
+{
+	ft_freeing(utils->no);
+	ft_freeing(utils->so);
+	ft_freeing(utils->ea);
+	ft_freeing(utils->we);
+	free(utils);
 }
