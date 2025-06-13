@@ -18,8 +18,8 @@ void	render_minimap(t_game *game)
 
 	draw_minimap_walls(game);
 	p = game->player_data;
-	// pos.x = p->pos.x / (double)MINIMAP_SCALE;
-	// pos.y = p->pos.y / (double)MINIMAP_SCALE;
+	pos.x = p->pos.x / (double)MINIMAP_SCALE;
+	pos.y = p->pos.y / (double)MINIMAP_SCALE;
 	
 }
 

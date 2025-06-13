@@ -66,7 +66,7 @@ t_map	*find_player(char **arr, t_map *parse)
 			{
 				parse->x_player = j;
 				parse->y_player = i;
-				parse->pos_player = arr[i][j];
+				parse->player_dir = arr[i][j];
 				return (parse);
 			}
 			j++;

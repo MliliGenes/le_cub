@@ -5,7 +5,8 @@
 # include "lib.h"
 # include "structs.h"
 # include "game.h"
+# include "parsing.h"
 
-int	main(void);
+int	main(int ac, char **av);
 
 #endif

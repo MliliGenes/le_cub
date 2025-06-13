@@ -2,9 +2,6 @@
 
 void	game_loop(t_game *game)
 {
-	int	start_x;
-	int	start_y;
-
 	mlx_image_to_window(game->mlx, game->img_scene, 0, 0);
 	mlx_image_to_window(game->mlx, game->img_minimap, MINIMAP_PADDING, MINIMAP_PADDING);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
