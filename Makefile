@@ -1,11 +1,11 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = -fsanitize=address -g3
+CFLAGS = #-fsanitize=address -g3
 INCLUDES = -I./include
 
 MLX_LIB = libmlx42.a
-MLX_FLAGS =  -lglfw -ldl -lm -L/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib
+MLX_FLAGS =  -Iinclude -lglfw -L"/Users/sahamzao/.brew/opt/glfw/lib/"
 
 SRCDIR = 
 EVENT_DIR = event_listner
