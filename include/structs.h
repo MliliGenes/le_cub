@@ -12,8 +12,8 @@
 
 # define GAME_TITLE "GAMI"
 
-# define MINIMAP_WIDTH 350
-# define MINIMAP_HEIGHT 250
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
 # define MINIMAP_SCALE 60
 # define MINIMAP_PADDING 10
 

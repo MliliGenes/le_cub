@@ -23,7 +23,7 @@ void render_world_on_minimap(t_game *game)
     t_player *p = game->player_data;
     const int center_x = MINIMAP_WIDTH / 2;
     const int center_y = MINIMAP_HEIGHT / 2;
-	double scale = 0.08;
+	double scale = 0.05;
     
     for (int screen_y = 0; screen_y < MINIMAP_HEIGHT; screen_y++)
     {
