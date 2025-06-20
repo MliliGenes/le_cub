@@ -7,6 +7,6 @@
 # include "game.h"
 # include "parsing.h"
 
-int	main(int ac, char **av);
+int	main();
 
 #endif

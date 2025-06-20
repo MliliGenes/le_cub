@@ -6,17 +6,15 @@
 # define FOV 80
 # define SCREEN_WIDTH_DEFAULT 1600
 # define SCREEN_HEIGHT_DEFAULT 800
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 600
 # define TILE_SIZE 600
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 2
 
 # define GAME_TITLE "GAMI"
 
-# define MINIMAP_WIDTH 250
+# define MINIMAP_WIDTH 350
 # define MINIMAP_HEIGHT 250
-# define MINIMAP_SCALE 10
+# define MINIMAP_SCALE 60
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d

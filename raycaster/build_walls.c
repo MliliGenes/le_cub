@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_walls.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/06/20 11:40:39 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/game.h"
 
 void render_floor_cell(t_game *game)
@@ -25,7 +37,7 @@ void render_walls(t_game *game)
 	render_floor_cell(game);
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
-		float line_h = (TEXTURE_HEIGHT * SCREEN_HEIGHT_DEFAULT) / walls[i].distance;
+		float line_h = (TILE_SIZE * SCREEN_HEIGHT_DEFAULT) / walls[i].distance;
 		int start_y = (SCREEN_HEIGHT_DEFAULT - round(line_h)) / 2;
 		int end_y = start_y + round(line_h);
 		if (start_y < 0)

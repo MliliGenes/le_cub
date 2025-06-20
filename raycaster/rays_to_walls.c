@@ -8,15 +8,13 @@ void	rays_to_walls(t_game *game)
 
 	rays = game->rays;
 	walls = game->walls;
-	double p_angle = game->player_data->angle;
 	i = 0;
 	while (i < SCREEN_WIDTH_DEFAULT)
 	{
-		double corrected = rays[i].distance * cos(rays[i].angle - p_angle);
+		double corrected = rays[i].distance * cos(rays[i].angle - game->player_data->angle);
 		walls[i].distance = corrected * TILE_SIZE;
 		walls[i].side = rays[i].side_hit;
 		walls[i].hit_point = rays[i].hit_point;
-		
 		if (rays[i].dir.x < 0 && rays[i].side_hit == 0)
 			walls[i].texture_id = 1;
 		else if (rays[i].dir.x >= 0 && rays[i].side_hit == 0)

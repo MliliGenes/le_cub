@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/20 02:38:59 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/06/20 10:06:58 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/game.h"
 
 static bool	is_wall(t_map *map, int x, int y)
@@ -14,17 +26,25 @@ static bool	check_collision(t_map *map, t_vec2i pos)
 
 static void	update_player_data(mlx_t *mlx, t_player *player)
 {
-	t_vec2i mouse;
-    t_vec2i center;
+	t_vec2i	mouse;
+	t_vec2i	center;
+	float	mouse_sensitivity;
+	static int start = 2;
 
-    player->forward_backward = 0;
-    player->left_right = 0;
-    center.x = mlx->width / 2;
-    center.y = mlx->height / 2;
-    mlx_get_mouse_pos(mlx, &(mouse.x), &(mouse.y));
-   float mouse_sensitivity = 0.02f;
-	player->angle += (mouse.x - center.x) * player->rot_speed * mouse_sensitivity;
-    mlx_set_mouse_pos(mlx, center.x, center.y);
+	player->forward_backward = 0;
+	player->left_right = 0;
+	center.x = mlx->width / 2;
+	center.y = mlx->height / 2;
+	mouse.x = mlx->width / 2;
+	mouse.y = mlx->height / 2;
+	if (!start)
+		mlx_get_mouse_pos(mlx, &(mouse.x), &(mouse.y));
+	else 
+		start--;
+	mouse_sensitivity = 0.02f;
+	player->angle += (mouse.x - center.x) * player->rot_speed
+		* mouse_sensitivity;
+	mlx_set_mouse_pos(mlx, center.x, center.y);
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 		player->forward_backward = player->move_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
