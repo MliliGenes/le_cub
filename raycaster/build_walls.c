@@ -4,17 +4,20 @@ void render_floor_cell(t_game *game)
 {
     int y;
     int x;
-    
+	uint32_t colors[2];
+
+    colors[0] = ft_pixel(game->map_data->ceiling_color[0],game->map_data->ceiling_color[1],game->map_data->ceiling_color[2],255);
+    colors[1] = ft_pixel(game->map_data->floor_color[0],game->map_data->floor_color[1],game->map_data->floor_color[2],255);
     for (y = 0; y < SCREEN_HEIGHT_DEFAULT / 2; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
-        	mlx_put_pixel(game->img_scene, x, y, 0x5C94FCFF);
+        	mlx_put_pixel(game->img_scene, x, y, colors[0]);
     }
     
     for (y = SCREEN_HEIGHT_DEFAULT / 2; y < SCREEN_HEIGHT_DEFAULT; y++)
     {
         for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
-            mlx_put_pixel(game->img_scene, x, y, 0x00A000FF);
+            mlx_put_pixel(game->img_scene, x, y, colors[1]);
     }
 }
 

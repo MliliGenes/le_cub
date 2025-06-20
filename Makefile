@@ -5,7 +5,7 @@ CFLAGS = #-fsanitize=address -g3
 INCLUDES = -I./include
 
 MLX_LIB = libmlx42.a
-MLX_FLAGS =  -Iinclude -lglfw -L"/Users/sahamzao/.brew/opt/glfw/lib/"
+MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/Users/sahamzao/.brew/opt/glfw/lib/"
 
 SRCDIR = 
 EVENT_DIR = event_listner
@@ -39,7 +39,8 @@ LIB_SRC = lib/deg_to_rad.c \
          lib/normalize_angle.c \
          lib/pixel.c
 
-PLAYER_SRC = player/player.c
+PLAYER_SRC = player/player.c \
+			player/mouse_handle.c
 
 RAYCAST_SRC = raycaster/build_walls.c \
              raycaster/ray_caster.c \
@@ -95,7 +96,7 @@ re: fclean all
 
 run: $(NAME)
 	@echo "$(MAGENTA)Running $(NAME)...$(RESET)"
-	@./$(NAME)
+	@./$(NAME) map.cub
 
 debug: CFLAGS += -g3 -fsanitize=address
 debug: clean $(NAME)
