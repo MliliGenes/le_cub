@@ -10,7 +10,7 @@
 # define TEXTURE_HEIGHT 600
 # define TILE_SIZE 600
 # define MINIMAP_TILE_SIZE 32
-# define PLAYER_SIZE 2
+# define PLAYER_SIZE 5
 
 # define GAME_TITLE "GAMI"
 

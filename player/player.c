@@ -7,24 +7,17 @@ static bool	is_wall(t_map *map, int x, int y)
 
 static bool	check_collision(t_map *map, t_vec2i pos)
 {
-	return (is_wall(map, pos.x, pos.y) || is_wall(map, pos.x + PLAYER_SIZE - 1,
-			pos.y) || is_wall(map, pos.x, pos.y + PLAYER_SIZE - 1)
-		|| is_wall(map, pos.x + PLAYER_SIZE - 1, pos.y + PLAYER_SIZE - 1));
+    int half = PLAYER_SIZE;
+    return (
+        is_wall(map, pos.x - half, pos.y - half) ||
+        is_wall(map, pos.x + half, pos.y - half) ||
+        is_wall(map, pos.x - half, pos.y + half) ||
+        is_wall(map, pos.x + half, pos.y + half)    
+    );
 }
 
 static void	update_player_data(mlx_t *mlx, t_player *player)
 {
-	t_vec2i mouse;
-    t_vec2i center;
-
-    player->forward_backward = 0;
-    player->left_right = 0;
-    center.x = mlx->width / 2;
-    center.y = mlx->height / 2;
-    mlx_get_mouse_pos(mlx, &(mouse.x), &(mouse.y));
-   float mouse_sensitivity = 0.02f;
-	player->angle += (mouse.x - center.x) * player->rot_speed * mouse_sensitivity;
-    mlx_set_mouse_pos(mlx, center.x, center.y);
 	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 		player->forward_backward = player->move_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
@@ -62,6 +55,7 @@ void	update_player(t_game *game)
 	t_vec2i		target;
 
 	player = game->player_data;
+	mouse_eventlistner(game);
 	update_player_data(game->mlx, game->player_data);
 	total = calc_target_pos(game->player_data);
 	move = (t_vec2i){round(total.x), round(total.y)};

@@ -17,6 +17,7 @@
         "utility": "c",
         "vector": "c",
         "stdbool.h": "c",
-        "parsing.h": "c"
+        "parsing.h": "c",
+        "lib.h": "c"
     }
 }
