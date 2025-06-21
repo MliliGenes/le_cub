@@ -18,33 +18,45 @@ void	reset_minimap(t_game *game)
 	}
 }
 
-void render_world_on_minimap(t_game *game)
+static void	world_pixel(char **grid, mlx_image_t *img, t_vec2i w, t_vec2i i,
+		t_vec2i map)
 {
-    t_player *p = game->player_data;
-    const int center_x = MINIMAP_WIDTH / 2;
-    const int center_y = MINIMAP_HEIGHT / 2;
-	double scale = 0.05;
-    
-    for (int screen_y = 0; screen_y < MINIMAP_HEIGHT; screen_y++)
-    {
-        for (int screen_x = 0; screen_x < MINIMAP_WIDTH; screen_x++)
-        {
-            double world_x = p->pos.x + ((screen_x - center_x) / scale);
-            double world_y = p->pos.y + ((screen_y - center_y) / scale);
-            int map_x = (int)world_x / TILE_SIZE;
-            int map_y = (int)world_y / TILE_SIZE;    
-            uint32_t color = 0x000000FF;
-            if (map_x >= 0 && map_x < (game->map_data->width) && 
-                map_y >= 0 && map_y < (game->map_data->height))
-            {
-                if (game->map_data->map[map_y][map_x] == '1')
-                    color = 0x000000FF;
-                else if (game->map_data->map[map_y][map_x] == '0')
-                    color = 0xFFFFFFFF;
-            }
-            mlx_put_pixel(game->img_minimap, screen_x, screen_y, color);
-        }
-    }
+	uint32_t	color;
+
+	color = 0x0A0A0AFF;
+	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
+	{
+		if (grid[w.y][w.x] == '1')
+			color = 0x000000FF;
+		else if (grid[w.y][w.x] == '0')
+			color = 0xFFFFFFFF;
+	}
+	mlx_put_pixel(img, i.x, i.y, color);
+}
+
+void	render_world_on_minimap(t_game *game)
+{
+	t_player	*p;
+	t_vec2i		c;
+	t_vec2i		w;
+	t_vec2i		i;
+
+	p = game->player_data;
+	c = (t_vec2i){MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2};
+	i.y = 0;
+	while (i.y < MINIMAP_HEIGHT)
+	{
+		i.x = 0;
+		while (i.x < MINIMAP_WIDTH)
+		{
+			w.x = (p->pos.x + ((i.x - c.x) / SCALE)) / TILE_SIZE;
+			w.y = (p->pos.y + ((i.y - c.y) / SCALE)) / TILE_SIZE;
+			world_pixel(game->map_data->map, game->img_minimap, w, i,
+				(t_vec2i){game->map_data->width, game->map_data->height});
+			i.x++;
+		}
+		i.y++;
+	}
 }
 
 void	draw_player(mlx_image_t *minimap)
@@ -89,12 +101,6 @@ void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
 
 void	render_minimap(t_game *game)
 {
-	t_vec2d		pos;
-	t_player	*p;
-
-	p = game->player_data;
-	pos.x = p->pos.x / (double)MINIMAP_SCALE;
-	pos.y = p->pos.y / (double)MINIMAP_SCALE;
 	reset_minimap(game);
 	render_world_on_minimap(game);
 	draw_player(game->img_minimap);

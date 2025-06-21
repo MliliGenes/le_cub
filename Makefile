@@ -1,8 +1,8 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra
-LDFLAGS = -fsanitize=address 
+CFLAGS = -Wall -Wextra -O3
+LDFLAGS =
 INCLUDES = -I./include
 
 MLX42_LIB_DIR = .
@@ -98,7 +98,7 @@ run: $(NAME)
 	@echo "$(MAGENTA)Running $(NAME)...$(RESET)"
 	@./$(NAME)
 
-debug: CFLAGS += -g3 -fsanitize=address
+debug: LDFLAGS += -g3 -fsanitize=address
 debug: clean $(NAME)
 	@echo "$(BLUE)✓ Debug build created!$(RESET)"
 

@@ -14,7 +14,7 @@
 
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define MINIMAP_SCALE 60
+# define SCALE 0.05
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d
