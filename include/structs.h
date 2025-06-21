@@ -102,6 +102,11 @@ typedef struct s_wall_hit
 	int				texture_id;
 }					t_wall_hit;
 
+typedef struct s_texture
+{
+	uint32_t **arr;
+}	t_texture;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -115,7 +120,7 @@ typedef struct s_game
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;
-	mlx_texture_t	*textures[4];
+	t_texture		textures[4];
 }					t_game;
 
 #endif

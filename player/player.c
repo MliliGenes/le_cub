@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:38:59 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/20 10:06:58 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:42:50 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ static bool	is_wall(t_map *map, int x, int y)
 
 static bool	check_collision(t_map *map, t_vec2i pos)
 {
-	return (is_wall(map, pos.x, pos.y) || is_wall(map, pos.x + PLAYER_SIZE - 1,
-			pos.y) || is_wall(map, pos.x, pos.y + PLAYER_SIZE - 1)
-		|| is_wall(map, pos.x + PLAYER_SIZE - 1, pos.y + PLAYER_SIZE - 1));
+	int	half;
+
+	half = PLAYER_SIZE;
+	return (is_wall(map, pos.x - half, pos.y - half) || is_wall(map, pos.x
+			+ half, pos.y - half) || is_wall(map, pos.x - half, pos.y + half)
+		|| is_wall(map, pos.x + half, pos.y + half));
 }
 
 static void	update_player_data(mlx_t *mlx, t_player *player)
 {
-	t_vec2i	mouse;
-	t_vec2i	center;
-	float	mouse_sensitivity;
-	static int start = 2;
+	t_vec2i		mouse;
+	t_vec2i		center;
+	float		mouse_sensitivity;
+	static int	start = 2;
 
 	player->forward_backward = 0;
 	player->left_right = 0;
@@ -39,7 +42,7 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
 	mouse.y = mlx->height / 2;
 	if (!start)
 		mlx_get_mouse_pos(mlx, &(mouse.x), &(mouse.y));
-	else 
+	else
 		start--;
 	mouse_sensitivity = 0.02f;
 	player->angle += (mouse.x - center.x) * player->rot_speed
