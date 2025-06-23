@@ -7,6 +7,7 @@
 # define SCREEN_WIDTH_DEFAULT 1600
 # define SCREEN_HEIGHT_DEFAULT 800
 # define TILE_SIZE 600
+# define TEXTURE_SIZE 64
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 5
 
@@ -14,7 +15,7 @@
 
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define SCALE 0.05
+# define SCALE 0.075
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d
@@ -122,7 +123,8 @@ typedef struct s_game
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;
-	t_texture		textures[4];
+	t_texture		walls_textures[4];
+	t_texture		door;
 }					t_game;
 
 #endif

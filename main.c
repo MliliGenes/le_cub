@@ -1,11 +1,30 @@
 #include "include/cub3d.h"
 
-int	main(int argc, char *argv[])
+static void set_dimensions(t_map *map)
 {
-	t_game	game;
+	char **arr;
+	int i;
+	int tmp;
+
+	i = 0;
+	arr = map->map;
+	map->width = ft_sstrlen(arr[i]);
+	while (arr[i])
+	{
+		tmp = ft_sstrlen(arr[i]);
+		if (tmp > map->width)
+			map->width = tmp;
+		i++;
+	}
+	map->height = i;
+}
+
+int main(int argc, char *argv[])
+{
+	t_game game;
 	t_map *parse;
-	
-	if(argc == 2)
+
+	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))
 		{
@@ -13,17 +32,17 @@ int	main(int argc, char *argv[])
 			return (EXIT_FAILURE);
 		}
 		parse = parse_map_file(argv[1]);
-		if(!parse)
+		if (!parse)
 			return (EXIT_FAILURE);
+		set_dimensions(parse);
 		if (!init_game(&game))
 			return (EXIT_FAILURE);
 		game.map_data = parse;
 		game.player_data = init_player(game.map_data);
-		printf("N:%s E:%s S:%s W:%s\n", game.map_data->north_texture_path, game.map_data->east_texture_path, game.map_data->south_texture_path, game.map_data->west_texture_path);
-		printf("R:%d, G:%d ,B:%d\n", parse->ceiling_color[0],parse->ceiling_color[1],parse->ceiling_color[2]);
-		printf("R:%d, G:%d ,B:%d\n", parse->floor_color[0],parse->floor_color[1],parse->floor_color[2]);
+		if (!init_textures(&game))
+			return false;
 		game_loop(&game);
-		//TODO clean_up(&game);
+		// TODO clean_up(&game);
 		return (EXIT_SUCCESS);
 	}
 }

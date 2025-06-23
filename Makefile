@@ -35,6 +35,7 @@ INIT_SRC = init/init_game.c \
           init/init_map.c \
           init/init_player.c \
           init/init_rays.c \
+          init/init_textures.c \
           init/init_walls.c
 
 LIB_SRC = lib/deg_to_rad.c \
