@@ -6,9 +6,10 @@ LDFLAGS =
 INCLUDES = -I./include
 
 MLX42_LIB_DIR = .
-MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
+# MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
+MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
                 libmlx42.a \
-                -framework Cocoa -framework OpenGL -framework IOKit -lm
+                -framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
 EVENT_DIR = event_listner
 INIT_DIR = init
@@ -58,7 +59,10 @@ PARSING_SRC = parsing/file_check.c \
         parsing/parse_map_utils.c \
         parsing/parse_map_utils_2.c
 
-SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC)
+MINIMAP_SRC = map/minimap_utils.c \
+        map/minimap.c
+
+SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC) $(MINIMAP_SRC)
 
 OBJ = $(SRC:.c=.o)
 
