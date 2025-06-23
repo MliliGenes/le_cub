@@ -1,13 +1,16 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -O3
+LDFLAGS =
 INCLUDES = -I./include
 
-MLX_LIB = libmlx42.a
-MLX_FLAGS = -framework Cocoa -framework OpenGL -framework IOKit -lglfw -L"/Users/sahamzao/.brew/opt/glfw/lib/"
+MLX42_LIB_DIR = .
+# MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
+MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
+                libmlx42.a \
+                -framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
-SRCDIR = 
 EVENT_DIR = event_listner
 INIT_DIR = init
 LIB_DIR = lib
@@ -15,14 +18,13 @@ PLAYER_DIR = player
 RAYCAST_DIR = raycaster
 
 INCLUDE_SRC = include/cub3d.h \
-			include/dependencies.h \
-			include/init.h \
-			include/lib.h \
-			include/parsing.h \
-			include/structs.h \
-			include/game.h \
-			include/MLX42.h
-
+            include/dependencies.h \
+            include/init.h \
+            include/lib.h \
+            include/parsing.h \
+            include/structs.h \
+            include/game.h \
+            include/MLX42.h
 
 MAIN_SRC = main.c
 
@@ -47,18 +49,21 @@ RAYCAST_SRC = raycaster/build_walls.c \
              raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \
-		parsing/gnl.c \
-		parsing/gnl_utils.c \
-		parsing/parse_map.c \
-		parsing/split.c \
-		parsing/utils.c \
-		parsing/parse_map_2.c \
-		parsing/utils2.c \
-		parsing/utils3.c  \
-		parsing/parse_map_utils.c \
-		parsing/parse_map_utils_2.c
+        parsing/gnl.c \
+        parsing/gnl_utils.c \
+        parsing/parse_map.c \
+        parsing/split.c \
+        parsing/utils.c \
+        parsing/parse_map_2.c \
+        parsing/utils2.c \
+        parsing/utils3.c  \
+        parsing/parse_map_utils.c \
+        parsing/parse_map_utils_2.c
 
-SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC)
+MINIMAP_SRC = map/minimap_utils.c \
+        map/minimap.c
+
+SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC) $(MINIMAP_SRC)
 
 OBJ = $(SRC:.c=.o)
 
@@ -75,7 +80,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
-	@$(CC) $(OBJ)  $(MLX_LIB) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJ) $(MLX_LIBRARIES) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
 
 %.o: %.c $(INCLUDE_SRC)
@@ -98,7 +103,7 @@ run: $(NAME)
 	@echo "$(MAGENTA)Running $(NAME)...$(RESET)"
 	@./$(NAME) map.cub
 
-debug: CFLAGS += -g3 -fsanitize=address
+debug: LDFLAGS += -g3 -fsanitize=address
 debug: clean $(NAME)
 	@echo "$(BLUE)✓ Debug build created!$(RESET)"
 

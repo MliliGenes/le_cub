@@ -6,17 +6,15 @@
 # define FOV 80
 # define SCREEN_WIDTH_DEFAULT 1600
 # define SCREEN_HEIGHT_DEFAULT 800
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 600
 # define TILE_SIZE 600
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 5
 
 # define GAME_TITLE "GAMI"
 
-# define MINIMAP_WIDTH 250
-# define MINIMAP_HEIGHT 250
-# define MINIMAP_SCALE 10
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
+# define SCALE 0.05
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d
@@ -57,11 +55,13 @@ typedef struct s_minimap
 
 typedef struct s_utils
 {
-	char			**no;
-	char			**so;
-	char			**ea;
-	char			**we;
-}					t_utils;
+	char		**no;
+	char		**so;
+	char		**we;
+	char		**ea;
+	char		**f;
+	char		**c;
+}				t_utils;
 
 typedef struct s_player
 {
@@ -104,6 +104,11 @@ typedef struct s_wall_hit
 	int				texture_id;
 }					t_wall_hit;
 
+typedef struct s_texture
+{
+	uint32_t **arr;
+}	t_texture;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -117,7 +122,7 @@ typedef struct s_game
 	int				screen_width;
 	int				screen_height;
 	double			fov_rad;
-	mlx_texture_t	*textures[4];
+	t_texture		textures[4];
 }					t_game;
 
 #endif
