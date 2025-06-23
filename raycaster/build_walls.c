@@ -6,7 +6,7 @@
 /*   By: sahamzao <sahamzao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/23 22:42:19 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/06/23 22:48:20 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -81,10 +81,9 @@ void render_walls(t_game *game)
         if (end_y >= game->screen_height) end_y = game->screen_height - 1;
 
         t_texture *tex = &game->walls_textures[hit.texture_id];
-        int tw = TEXTURE_SIZE;  // width of your textures
-        int th = TEXTURE_SIZE;  // height of your textures
+        int tw = TEXTURE_SIZE;
+        int th = TEXTURE_SIZE;
 
-        // Convert texture_x_coord (0.0–1.0) to an integer texel column
         int tex_x = (int)(hit.texture_x_coord * (double)tw);
         if (tex_x < 0) tex_x = 0;
         if (tex_x >= tw) tex_x = tw - 1;
