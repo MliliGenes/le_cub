@@ -7,13 +7,12 @@ static bool	is_wall(t_map *map, int x, int y)
 
 static bool	check_collision(t_map *map, t_vec2i pos)
 {
-    int half = PLAYER_SIZE;
-    return (
-        is_wall(map, pos.x - half, pos.y - half) ||
-        is_wall(map, pos.x + half, pos.y - half) ||
-        is_wall(map, pos.x - half, pos.y + half) ||
-        is_wall(map, pos.x + half, pos.y + half)    
-    );
+	int	half;
+
+	half = PLAYER_SIZE;
+	return (is_wall(map, pos.x - half, pos.y - half) || is_wall(map, pos.x
+			+ half, pos.y - half) || is_wall(map, pos.x - half, pos.y + half)
+		|| is_wall(map, pos.x + half, pos.y + half));
 }
 
 static void	update_player_data(mlx_t *mlx, t_player *player)

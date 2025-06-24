@@ -13,45 +13,49 @@ int	find_map(char *ptr, int i)
 	return (j + 1);
 }
 
-int	ft_cheking_nsew(char **arr)
+int	ft_cheking_nsew(char **arr, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < 4)
-	{
-		if (ft_count(arr[i], ' ') != 2)
-			return (-1);
-		i++;
-	}
+	if (ft_count(arr[i], ' ') != 2)
+		return (-1);
 	return (1);
 }
 
-int	ft_checking_nwl(char *ptr)
+char	**ft_checking_nwl(char *ptr, char **arr)
 {
-	char	*start;
+	char	**ret;
+	int		size;
 	int		i;
-	int		j;
-	int		len;
+	int		k;
 
+	size = 0;
+	(void)ptr;
+	while (arr[size])
+		size++;
 	i = 0;
-	while (ptr[i])
+	while (i < size)
 	{
-		j = i;
-		while (ptr[j] && ptr[j] != '\n')
-			j++;
-		if (ptr[j] == '\n')
-		{
-			len = j - i;
-			start = malloc(len + 1);
-		}
-		start = ft_copy_st(start, len, j, ptr);
-		if (start[0] == 'C' && start[1] == ' ')
-			return (ft_ft_ret_newl(start, ptr, j));
-		free(start);
-		i = j + 1;
+		k = 0;
+		while (arr[i][k] == 32 || (arr[i][k] >= 9 && arr[i][k] <= 13))
+			k++;
+		if (arr[i][k] == '1')
+			break ;
+		i++;
 	}
-	return (0);
+	size = i;
+	while (arr[size])
+		size++;
+	size -= i;
+	ret = malloc((size + 1) * sizeof(char *));
+	if (!ret)
+		return (NULL);
+	k = 0;
+	while (k < size)
+	{
+		ret[k] = ft_strdup(arr[i + k]);
+		k++;
+	}
+	ret[k] = NULL;
+	return (ret);
 }
 
 int	ft_check_emptyline(char *ptr, int *i)

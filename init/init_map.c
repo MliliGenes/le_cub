@@ -10,7 +10,7 @@ char	**create_dynamic_map(void)
 		"10000011111111",
 		"10000000000001",
 		"10000100011111",
-		"10110110001",
+		"10110010001",
 		"1000010001",
 		"1111111111",
 		NULL
@@ -50,6 +50,8 @@ t_map	*init_map(void)
 	map->x_player = 4;
 	map->y_player = 3;
 	map->player_dir = 'E';
+	map->width = 14;
+	map->height = 8;
 	map->ceiling_color[0] = 135; // Red component
 	map->ceiling_color[1] = 206; // Green component
 	map->ceiling_color[2] = 235; // Blue component
