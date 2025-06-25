@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sahamzao <sahamzao@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/23 18:59:07 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/06/25 00:29:01 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../include/game.h"
 
@@ -21,7 +21,7 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 	i = 0;
 	angle_step = fov_rad / (SCREEN_WIDTH_DEFAULT - 1);
 	start_angle = pov_angle - (fov_rad / 2);
-	while (i < SCREEN_WIDTH_DEFAULT)
+	while (rays && i < SCREEN_WIDTH_DEFAULT)
 	{
 		rays[i].distance = 0.0;
 		rays[i].angle = normalize_angle(start_angle + (i * angle_step));
@@ -32,9 +32,18 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 	}
 }
 
+static int	is_wall_hit(t_game *game, int x, int y)
+{
+	if (y < 0 || x < 0)
+		return (1);
+	if (y >= game->map_data->height || x >= game->map_data->width)
+		return (1);
+	return (game->map_data->map[y][x] == '1');
+}
+
 static void	dda_loop(t_game *game, t_ray *ray)
 {
-	while (true)
+	while (true && ray)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
@@ -50,14 +59,16 @@ static void	dda_loop(t_game *game, t_ray *ray)
 			ray->map_grid_pos.y += ray->steps.y;
 			ray->side_hit = 1;
 		}
-		if (game->map_data->map[ray->map_grid_pos.y][ray->map_grid_pos.x] == '1')
+		if (is_wall_hit(game, ray->map_grid_pos.x, ray->map_grid_pos.y))
 		{
 			if (ray->side_hit == 0)
-				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x + (1 - ray->steps.x) / 2) / ray->dir.x;
+				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x + (1
+							- ray->steps.x) / 2) / ray->dir.x;
 			else
-				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y + (1 - ray->steps.y) / 2) / ray->dir.y;
+				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y + (1
+							- ray->steps.y) / 2) / ray->dir.y;
 			ray->distance = fabs(ray->distance);
-			break;
+			break ;
 		}
 	}
 }
@@ -91,35 +102,32 @@ static void	cast_single_ray(t_game *game, t_ray *ray)
 	dda_loop(game, ray);
 }
 
-// DEBUG // 
-
+// DEBUG //
 
 void	cast_rays(t_game *game)
 {
-	t_ray	*rays;
+	t_ray	*r;
 	int		i;
 
 	i = 0;
-	rays = game->rays;
-	set_angles(rays, game->fov_rad, game->player_data->angle);
-	while (i < SCREEN_WIDTH_DEFAULT)
+	r = game->rays;
+	set_angles(r, game->fov_rad, game->player_data->angle);
+	while (r && i < SCREEN_WIDTH_DEFAULT)
 	{
-		rays[i].map_pixel_pos = (t_vec2d){(double)game->player_data->pos.x
-			/ (double)TILE_SIZE, (double)game->player_data->pos.y / (double)TILE_SIZE};
-		rays[i].map_grid_pos = (t_vec2i){(int)rays[i].map_pixel_pos.x,
-			(int)rays[i].map_pixel_pos.y};
-		cast_single_ray(game, &rays[i]);
-		rays[i].hit_point = (t_vec2d){
-   			game->player_data->pos.x + rays[i].dir.x * rays[i].distance * TILE_SIZE,
-  		 	game->player_data->pos.y + rays[i].dir.y * rays[i].distance * TILE_SIZE
-		};
-		double wallX;
-		if (rays[i].side_hit == 0)
-			wallX = rays[i].map_pixel_pos.y + rays[i].distance * rays[i].dir.y;
+		r[i].map_pixel_pos = (t_vec2d){(double)game->player_data->pos.x
+			/ (double)TILE_SIZE, (double)game->player_data->pos.y
+			/ (double)TILE_SIZE};
+		r[i].map_grid_pos = (t_vec2i){(int)r[i].map_pixel_pos.x,
+			(int)r[i].map_pixel_pos.y};
+		cast_single_ray(game, &r[i]);
+		r[i].hit_point = (t_vec2d){game->player_data->pos.x + r[i].dir.x
+			* r[i].distance * TILE_SIZE, game->player_data->pos.y + r[i].dir.y
+			* r[i].distance * TILE_SIZE};
+		if (r[i].side_hit == 0)
+			r[i].wallX = r[i].map_pixel_pos.y + r[i].distance * r[i].dir.y;
 		else
-			wallX = rays[i].map_pixel_pos.x + rays[i].distance * rays[i].dir.x;
-		wallX -= floor(wallX);
-		rays[i].wallX = wallX;
+			r[i].wallX = r[i].map_pixel_pos.x + r[i].distance * r[i].dir.x;
+		r[i].wallX -= floor(r[i].wallX);
 		i++;
 	}
 }

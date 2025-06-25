@@ -6,10 +6,12 @@ LDFLAGS =
 INCLUDES = -I./include
 
 MLX42_LIB_DIR = .
-# MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
-MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
-                libmlx42.a \
-                -framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
+
+# MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
+
+MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
+		libmlx42.a \
+		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
 EVENT_DIR = event_listner
 INIT_DIR = init
@@ -18,51 +20,52 @@ PLAYER_DIR = player
 RAYCAST_DIR = raycaster
 
 INCLUDE_SRC = include/cub3d.h \
-            include/dependencies.h \
-            include/init.h \
-            include/lib.h \
-            include/parsing.h \
-            include/structs.h \
-            include/game.h \
-            include/MLX42.h
+	    include/dependencies.h \
+	    include/init.h \
+	    include/lib.h \
+	    include/parsing.h \
+	    include/structs.h \
+	    include/game.h \
+	    include/MLX42.h
 
 MAIN_SRC = main.c
 
 EVENT_SRC = event_listner/event_listner.c \
-           event_listner/game_loop.c
+	   event_listner/game_loop.c
 
 INIT_SRC = init/init_game.c \
-          init/init_map.c \
-          init/init_player.c \
-          init/init_rays.c \
-          init/init_textures.c \
-          init/init_walls.c
+	  init/init_map.c \
+	  init/init_player.c \
+	  init/init_rays.c \
+	  init/init_textures.c \
+	  init/init_walls.c
 
 LIB_SRC = lib/deg_to_rad.c \
-         lib/normalize_angle.c \
-         lib/pixel.c
+	 lib/normalize_angle.c \
+	 lib/pixel.c \
+	 lib/ft_memset.c
 
 PLAYER_SRC = player/player.c \
 			player/mouse_handle.c
 
 RAYCAST_SRC = raycaster/build_walls.c \
-             raycaster/ray_caster.c \
-             raycaster/rays_to_walls.c
+	     raycaster/ray_caster.c \
+	     raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \
-        parsing/gnl.c \
-        parsing/gnl_utils.c \
-        parsing/parse_map.c \
-        parsing/split.c \
-        parsing/utils.c \
-        parsing/parse_map_2.c \
-        parsing/utils2.c \
-        parsing/utils3.c  \
-        parsing/parse_map_utils.c \
-        parsing/parse_map_utils_2.c
+	parsing/gnl.c \
+	parsing/gnl_utils.c \
+	parsing/parse_map.c \
+	parsing/split.c \
+	parsing/utils.c \
+	parsing/parse_map_2.c \
+	parsing/utils2.c \
+	parsing/utils3.c  \
+	parsing/parse_map_utils.c \
+	parsing/parse_map_utils_2.c
 
 MINIMAP_SRC = map/minimap_utils.c \
-        map/minimap.c
+	map/minimap.c
 
 SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC) $(MINIMAP_SRC)
 
@@ -124,5 +127,8 @@ show:
 	@for file in $(SRC); do echo "  - $$file"; done
 	@echo "$(YELLOW)Object files:$(RESET)"
 	@for file in $(OBJ); do echo "  - $$file"; done
+
+push:
+	git quick "lol"
 
 .PHONY: all clean fclean re run debug help show

@@ -3,19 +3,19 @@
 
 # include "dependencies.h"
 
-# define FOV 80
-# define SCREEN_WIDTH_DEFAULT 1600
-# define SCREEN_HEIGHT_DEFAULT 800
+# define FOV 85
+# define SCREEN_WIDTH_DEFAULT 1921
+# define SCREEN_HEIGHT_DEFAULT 1080
 # define TILE_SIZE 600
 # define TEXTURE_SIZE 64
 # define MINIMAP_TILE_SIZE 32
-# define PLAYER_SIZE 5
+# define PLAYER_SIZE 60
 
 # define GAME_TITLE "GAMI"
 
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define SCALE 0.075
+# define SCALE 0.025
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d
@@ -75,8 +75,6 @@ typedef struct s_player
 	double			angle;
 	double			move_speed;
 	double			rot_speed;
-	int				size_minimap;
-	mlx_image_t		*img;
 }					t_player;
 
 typedef struct s_ray
@@ -94,7 +92,7 @@ typedef struct s_ray
 	double			wallX;
 }					t_ray;
 
-// N = 0; E = 1; S = 2; W = 3
+// N = 0; S = 1; W = 2; E = 3
 typedef struct s_wall_hit
 {
 	double			distance;
@@ -107,6 +105,8 @@ typedef struct s_wall_hit
 
 typedef struct s_texture
 {
+	size_t width;
+	size_t height;
 	uint32_t **arr;
 }	t_texture;
 

@@ -19,11 +19,17 @@ static void set_dimensions(t_map *map)
 	map->height = i;
 }
 
+void ll()
+{
+	system ("leaks cub3d");
+}
+
 int main(int argc, char *argv[])
 {
 	t_game game;
 	t_map *parse;
 
+	atexit(ll);
 	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))

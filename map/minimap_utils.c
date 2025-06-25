@@ -26,12 +26,10 @@ static void world_pixel(char **grid, mlx_image_t *img, t_vec2i w, t_vec2i i,
 	color = 0x000000FF;
 	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
 	{
-		if (grid[w.y][w.x] == '1')
+		if (grid[w.y][w.x] == '1' || grid[w.y][w.x] == ' ')
 			color = 0x000000FF;
 		else if (grid[w.y][w.x] == '0')
 			color = 0xFFFFFFFF;
-		else if (grid[w.y][w.x] == ' ')
-			color = 0x808080FF;
 		else if (grid[w.y][w.x] == 'N' || grid[w.y][w.x] == 'E' || grid[w.y][w.x] == 'S' || grid[w.y][w.x] == 'W')
 			color = 0x00ff00FF;
 	}
