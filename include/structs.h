@@ -6,7 +6,7 @@
 # define FOV 85
 # define SCREEN_WIDTH_DEFAULT 1921
 # define SCREEN_HEIGHT_DEFAULT 1080
-# define TILE_SIZE 600
+# define TILE_SIZE 540
 # define TEXTURE_SIZE 64
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 60
@@ -15,7 +15,7 @@
 
 # define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
-# define SCALE 0.025
+# define SCALE 0.02
 # define MINIMAP_PADDING 10
 
 typedef struct s_vec2d

@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
 			return false;
 		game_loop(&game);
 		// TODO clean_up(&game);
+		free(game.rays);
+		free(game.walls);
 		return (EXIT_SUCCESS);
 	}
 }
