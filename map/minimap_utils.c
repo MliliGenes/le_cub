@@ -53,14 +53,12 @@ void render_world_on_minimap(t_game *game)
 		{
 			w.x = (p->pos.x + ((i.x - c.x) / SCALE)) / TILE_SIZE;
 			w.y = (p->pos.y + ((i.y - c.y) / SCALE)) / TILE_SIZE;
-			// printf("x: %d, y: %d\n");
 			world_pixel(game->map_data->map, game->img_minimap, w, i,
 						(t_vec2i){game->map_data->width, game->map_data->height});
 			i.x++;
 		}
 		i.y++;
 	}
-	// exit(0);
 }
 
 void draw_player(mlx_image_t *minimap)
