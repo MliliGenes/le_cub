@@ -1,13 +1,13 @@
-NO eagle.png
+NO wall_3.png
 
-SO job.png
+SO wall_2.png
 
-EA job.png
+EA eagle.png
 
-WE job.png
+WE sky_1.png
 
-C 35,19,73
-F 15,6,40
+C 42, 42, 42
+F 20, 20, 20
 
 
         1111111111111111111

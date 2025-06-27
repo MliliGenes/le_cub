@@ -1,3 +1,4 @@
+#include "include/MLX42.h"
 #include "include/cub3d.h"
 
 static void set_dimensions(t_map *map)
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
 		// TODO clean_up(&game);
 		free(game.rays);
 		free(game.walls);
+		mlx_terminate(game.mlx);
 		return (EXIT_SUCCESS);
 	}
 }

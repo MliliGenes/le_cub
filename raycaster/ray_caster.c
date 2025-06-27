@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/25 00:29:01 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:09:17 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ static void	dda_loop(t_game *game, t_ray *ray)
 		if (is_wall_hit(game, ray->map_grid_pos.x, ray->map_grid_pos.y))
 		{
 			if (ray->side_hit == 0)
-				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x + (1
-							- ray->steps.x) / 2) / ray->dir.x;
+				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x
+						+ (double)(1 - ray->steps.x) / 2) / ray->dir.x;
 			else
-				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y + (1
-							- ray->steps.y) / 2) / ray->dir.y;
+				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y
+						+ (double)(1 - ray->steps.y) / 2) / ray->dir.y;
 			ray->distance = fabs(ray->distance);
 			break ;
 		}
@@ -102,8 +102,6 @@ static void	cast_single_ray(t_game *game, t_ray *ray)
 	dda_loop(game, ray);
 }
 
-// DEBUG //
-
 void	cast_rays(t_game *game)
 {
 	t_ray	*r;
@@ -121,8 +119,8 @@ void	cast_rays(t_game *game)
 			(int)r[i].map_pixel_pos.y};
 		cast_single_ray(game, &r[i]);
 		r[i].hit_point = (t_vec2d){game->player_data->pos.x + r[i].dir.x
-			* r[i].distance * TILE_SIZE, game->player_data->pos.y + r[i].dir.y
-			* r[i].distance * TILE_SIZE};
+			* r[i].distance, game->player_data->pos.y + r[i].dir.y
+			* r[i].distance};
 		if (r[i].side_hit == 0)
 			r[i].wallX = r[i].map_pixel_pos.y + r[i].distance * r[i].dir.y;
 		else

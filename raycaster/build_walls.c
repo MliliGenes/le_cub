@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/25 08:07:44 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/06/26 15:25:44 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,6 @@ void render_floor_cell(t_game *game)
     }
 }
 
-// void render_walls(t_game *game)
-// {
-// 	int i = 0;
-// 	t_wall_hit *walls = game->walls;
-// 	render_floor_cell(game);
-// 	while (i < SCREEN_WIDTH_DEFAULT)
-// 	{
-// 		float line_h = (TILE_SIZE * SCREEN_HEIGHT_DEFAULT) / walls[i].distance;
-// 		int start_y = (SCREEN_HEIGHT_DEFAULT - round(line_h)) / 2;
-// 		int end_y = start_y + round(line_h);
-// 		if (start_y < 0)
-// 			start_y = 0;
-// 		if (end_y >= SCREEN_HEIGHT_DEFAULT)
-// 			end_y = SCREEN_HEIGHT_DEFAULT - 1;
-// 		// TODO add the texturing logic
-// 		uint32_t wall_color;
-// 		if (walls[i].texture_id == 0)
-// 			wall_color = 0xFF8C00FF;
-// 		if (walls[i].texture_id == 3)
-// 			wall_color = 0xFF0000FF;
-// 		if (walls[i].texture_id == 1)
-// 			wall_color = 0xFF8C50FF;
-// 		if (walls[i].texture_id == 2)
-// 			wall_color = 0xFFAF00FF;
-// 		for (int y = start_y; y <= end_y; y++)
-// 			mlx_put_pixel(game->img_scene, i, y, wall_color);
-// 		i++;
-// 	}	
-// }
-
 void render_walls(t_game *game)
 {
     int i = 0;
@@ -78,7 +48,7 @@ void render_walls(t_game *game)
         }
 
         double dist = hit.distance;
-        double line_h = TILE_SIZE * game->screen_height / dist;
+        double line_h = 1100 / dist;
 
         int start_y = (game->screen_height - (int)line_h) / 2;
         int end_y = start_y + (int)line_h;

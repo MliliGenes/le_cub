@@ -29,6 +29,10 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
 		player->angle -= player->rot_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		player->angle += player->rot_speed;
+	if (mlx_is_key_down(mlx, MLX_KEY_X))
+		player->move_speed = 64;
+	else
+		player->move_speed = 32;
 	player->angle = normalize_angle(player->angle);
 }
 

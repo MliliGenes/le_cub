@@ -20,8 +20,8 @@ t_player	*init_player(t_map *map_data)
 	if (!player)
 		return (NULL);
 	ft_memset(player, 0, sizeof(t_player));
-	player->move_speed = 17.5;
-	player->rot_speed = 0.04;
+	player->move_speed = 20;
+	player->rot_speed = 0.03;
 	player->pos = (t_vec2i){
 		map_data->x_player * TILE_SIZE + TILE_SIZE / 2,
 		map_data->y_player * TILE_SIZE + TILE_SIZE / 2,
