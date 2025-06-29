@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	t_game game;
 	t_map *parse;
 
-	atexit(ll);
+	// atexit(ll);
 	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))

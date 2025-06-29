@@ -24,7 +24,7 @@ int				ft_check_dot(char *path);
 void			allocation_manager(int fd, char **save);
 int				ft_newline_check(char *string);
 void			*ft_cpy(char *string, char *string1, int n);
-int	ft_invalid_map(char *map);
+int	ft_invalid_map(char *map,char **arr);
 void			ft_freeing(char **arr);
 char			*ft_copy_st(char *start, int len, int j, char *ptr);
 char			*ft_strcat(char *string1, char *string2);

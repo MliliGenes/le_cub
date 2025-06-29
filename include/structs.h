@@ -5,7 +5,7 @@
 
 # define GAME_TITLE "GAME D ZAB"
 
-# define FOV 80
+# define FOV 60
 
 # define SCREEN_WIDTH_DEFAULT 1921
 # define SCREEN_HEIGHT_DEFAULT 1080

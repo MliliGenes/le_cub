@@ -38,10 +38,47 @@ int	index_map_p(char *map)
 	return (-1);
 }
 
-int	ft_invalid_map(char *map)
+int is_valid_char(char c) {
+    const char *valid = "01ENWSD ";
+	if(!strchr(valid, c))
+		return 0;
+    // return (strchr(valid, c) != NULL);
+	return 1;
+}
+
+
+int ft_why(char **arr)
+{
+	int	i;
+	size_t	j;
+
+	i = 0;
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j])
+		{
+			if (!is_valid_char(arr[i][j]))
+				return -1;
+			if(arr[i][j] == 'E' || arr[i][j] == 'N' ||arr[i][j] == 'W' || arr[i][j] == 'S' || arr[i][j] == 'D')
+			{
+				if(!arr[i][j + 1] || arr[i][j + 1] == ' ' || arr[i][j - 1] == ' ' || j > ft_strlen(arr[i + 1]) || j > ft_strlen(arr[i - 1]) || arr[i + 1][j] == ' ' || arr[i - 1][j] == ' ')
+					return -1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
+
+
+int	ft_invalid_map(char *map,char **arr)
 {
 	int	i;
 	
+	if(ft_why(arr) == -1)
+		return -1;
 	i = index_map_p(map);
 	if (ft_nsea(&map[i]) == -1)
 		return (-1);

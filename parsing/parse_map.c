@@ -101,7 +101,7 @@ t_map	*parse_map_file(char *path)
 	parse = go_parse_lines(arr, ptr);
 	if (!parse)
 		return (ret_first_help(ptr, arr));
-	if (ft_invalid_map(ptr) == -1)
+	if (ft_invalid_map(ptr,parse->map) == -1)
 		return (ret_first_help(ptr, arr));
 	ft_freeing(arr);
 	free(ptr);
