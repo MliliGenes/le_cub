@@ -15,6 +15,11 @@ t_map	*full_members(char **map, t_utils *utils)
 			parse->south_texture_path, parse->west_texture_path,
 			parse->east_texture_path) == -1)
 	{
+		free(parse->north_texture_path);
+			free(parse->south_texture_path);
+			free(parse->west_texture_path);
+			free(parse->east_texture_path);
+			free(parse);
 		free_help(utils);
 		return (NULL);
 	}
@@ -65,11 +70,8 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 
 	utils = ft_checking_the_four(arr);
 	if (!utils)
-	{
-		printf("fsfdsfsfd\n");
-		// free(utils->no);
 		return (NULL);
-	}
+	printf("fsfdsf\n");
 	map = ft_checking_nwl(ptr, arr);
 	if (ft_checking_close_map(map) == -1)
 	{
