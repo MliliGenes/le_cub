@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/01 23:15:27 by le-saad           #+#    #+#             */
+/*   Updated: 2025/07/01 23:16:04 by le-saad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/game.h"
 
 static bool	is_wall(t_map *map, int x, int y)
@@ -42,8 +54,8 @@ static t_vec2d	calc_target_pos(t_player *player)
 
 	player->forward = (t_vec2d){cos(player->angle) * player->forward_backward,
 		sin(player->angle) * player->forward_backward};
-	player->strafe = (t_vec2d){cos(player->angle + M_PI / 2)
-		* player->left_right, sin(player->angle + M_PI / 2)
+	player->strafe = (t_vec2d){cos(player->angle + M_PI / 2.0)
+		* player->left_right, sin(player->angle + M_PI / 2.0)
 		* player->left_right};
 	total = (t_vec2d){player->forward.x + player->strafe.x + player->reminder.x,
 		player->forward.y + player->strafe.y + player->reminder.y};
