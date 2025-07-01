@@ -65,7 +65,11 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 
 	utils = ft_checking_the_four(arr);
 	if (!utils)
+	{
+		printf("fsfdsfsfd\n");
+		// free(utils->no);
 		return (NULL);
+	}
 	map = ft_checking_nwl(ptr, arr);
 	if (ft_checking_close_map(map) == -1)
 	{
@@ -75,7 +79,6 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 	parse = full_members(map, utils);
 	if (!parse)
 	{
-		// free_help(utils);
 		return (ret_help(map));
 	}
 	parse = parse_colors(utils, parse);
