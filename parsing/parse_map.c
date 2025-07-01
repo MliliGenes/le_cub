@@ -68,10 +68,16 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 		return (NULL);
 	map = ft_checking_nwl(ptr, arr);
 	if (ft_checking_close_map(map) == -1)
+	{
+		free_help(utils);
 		return (ret_help(map));
+	}
 	parse = full_members(map, utils);
 	if (!parse)
+	{
+		// free_help(utils);
 		return (ret_help(map));
+	}
 	parse = parse_colors(utils, parse);
 	if (!parse)
 		return (ret_help(map));

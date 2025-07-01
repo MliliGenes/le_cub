@@ -5,6 +5,7 @@
 
 size_t			ft_strlen(const char *s);
 char			*ft_strnstr(const char *hay, const char *need, size_t len);
+void	parse_free(t_map *parse);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
 char			*ft_strchr(const char *s, int c);
 t_map			*parse_colors_utils_norm(t_map *parse, t_utils *utils);
