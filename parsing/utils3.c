@@ -38,11 +38,13 @@ int	index_map_p(char *map)
 	return (-1);
 }
 
-int is_valid_char(char c) {
-    const char *valid = "01ENWSD ";
-	if(!strchr(valid, c))
+int is_valid_char(char c) 
+{
+    const char *valid;
+
+	valid = "01ENWSD ";
+	if(!ft_strchr(valid, c))
 		return 0;
-    // return (strchr(valid, c) != NULL);
 	return 1;
 }
 
@@ -72,12 +74,36 @@ int ft_why(char **arr)
 	return 1;
 }
 
+int ft_door_cl(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if(map[i][j] == 'D')
+			{
+				if( map[i][j + 1] != '1' || map[i][j - 1] != '1')
+					return -1;
+			}
+			j++;
+		}
+		i++;
+	}
+	return 1;
+}
 
 int	ft_invalid_map(char *map,char **arr)
 {
 	int	i;
 	
 	if(ft_why(arr) == -1)
+		return -1;
+	if(ft_door_cl(arr) == -1)
 		return -1;
 	i = index_map_p(map);
 	if (ft_nsea(&map[i]) == -1)
