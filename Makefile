@@ -9,9 +9,8 @@ MLX42_LIB_DIR = .
 
 # MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 
-MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
-		libmlx42.a \
-		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
+MLX_LIBRARIES = libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
+
 
 EVENT_DIR = event_listner
 INIT_DIR = init
