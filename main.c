@@ -25,12 +25,22 @@ void ll()
 	system ("leaks cub3d");
 }
 
+void ft_freeing_parse_map(t_map *parse)
+{
+	ft_freeing(parse->map);
+		free(parse->north_texture_path);
+		free(parse->south_texture_path);
+		free(parse->east_texture_path);
+		free(parse->west_texture_path);
+		free(parse);
+}
+
 int main(int argc, char *argv[])
 {
 	t_game game;
 	t_map *parse;
 
-	// atexit(ll);
+	atexit(ll);
 	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))
@@ -53,6 +63,7 @@ int main(int argc, char *argv[])
 		free(game.rays);
 		free(game.walls);
 		mlx_terminate(game.mlx);
+		ft_freeing_parse_map(parse);
 		return (EXIT_SUCCESS);
 	}
 }

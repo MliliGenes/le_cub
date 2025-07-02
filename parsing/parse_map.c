@@ -126,12 +126,7 @@ t_map	*parse_map_file(char *path)
 		return (ret_first_help(ptr, arr));
 	if (ft_invalid_map(ptr,parse->map) == -1)
 	{
-		ft_freeing(parse->map);
-		free(parse->north_texture_path);
-		free(parse->south_texture_path);
-		free(parse->east_texture_path);
-		free(parse->west_texture_path);
-		free(parse);
+		ft_freeing_parse_map(parse);
 		return (ret_first_help(ptr, arr));
 	}
 	ft_freeing(arr);

@@ -43,4 +43,5 @@ int				ft_closing(char **map);
 int				ft_checking_close_map(char **map);
 int				ft_check_valid_path(char *ptr, char *str, char *clr,
 					char *codex);
+					void ft_freeing_parse_map(t_map *parse);
 #endif
