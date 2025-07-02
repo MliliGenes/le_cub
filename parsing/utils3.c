@@ -38,11 +38,13 @@ int	index_map_p(char *map)
 	return (-1);
 }
 
-int is_valid_char(char c) {
-    const char *valid = "01ENWSD ";
-	if(!strchr(valid, c))
+int is_valid_char(char c) 
+{
+    const char *valid;
+
+	valid = "01ENWSD ";
+	if(!ft_strchr(valid, c))
 		return 0;
-    // return (strchr(valid, c) != NULL);
 	return 1;
 }
 
