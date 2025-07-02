@@ -1,17 +1,20 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = -Wall -Wextra -O3
+CFLAGS = -Wall -Wextra -Werror -O3
 LDFLAGS =
 INCLUDES = -I./include
 
 MLX42_LIB_DIR = .
 
-# MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
-# -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
-MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
+# ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
+# * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
+
+MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
 		libmlx42.a \
 		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
+
+# MLX_LIBRARIES = libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
 
 EVENT_DIR = event_listner
 INIT_DIR = init
@@ -46,10 +49,12 @@ LIB_SRC = lib/deg_to_rad.c \
 	 lib/ft_memset.c
 
 PLAYER_SRC = player/player.c \
+			player/open_door.c \
 			player/mouse_handle.c
 
 RAYCAST_SRC = raycaster/build_walls.c \
 	     raycaster/ray_caster.c \
+	     raycaster/dda_utils.c \
 	     raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \

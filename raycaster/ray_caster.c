@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/06/26 15:09:17 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:52:54 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,48 +32,7 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 	}
 }
 
-static int	is_wall_hit(t_game *game, int x, int y)
-{
-	if (y < 0 || x < 0)
-		return (1);
-	if (y >= game->map_data->height || x >= game->map_data->width)
-		return (1);
-	return (game->map_data->map[y][x] == '1');
-}
-
-static void	dda_loop(t_game *game, t_ray *ray)
-{
-	while (true && ray)
-	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->distance = ray->side_dist.x;
-			ray->side_dist.x += ray->delta_dist.x;
-			ray->map_grid_pos.x += ray->steps.x;
-			ray->side_hit = 0;
-		}
-		else
-		{
-			ray->distance = ray->side_dist.y;
-			ray->side_dist.y += ray->delta_dist.y;
-			ray->map_grid_pos.y += ray->steps.y;
-			ray->side_hit = 1;
-		}
-		if (is_wall_hit(game, ray->map_grid_pos.x, ray->map_grid_pos.y))
-		{
-			if (ray->side_hit == 0)
-				ray->distance = (ray->map_grid_pos.x - ray->map_pixel_pos.x
-						+ (double)(1 - ray->steps.x) / 2) / ray->dir.x;
-			else
-				ray->distance = (ray->map_grid_pos.y - ray->map_pixel_pos.y
-						+ (double)(1 - ray->steps.y) / 2) / ray->dir.y;
-			ray->distance = fabs(ray->distance);
-			break ;
-		}
-	}
-}
-
-static void	cast_single_ray(t_game *game, t_ray *ray)
+void	cast_single_ray(t_game *game, t_ray *ray, bool door)
 {
 	if (ray->dir.x < 0)
 	{
@@ -99,7 +58,7 @@ static void	cast_single_ray(t_game *game, t_ray *ray)
 		ray->side_dist.y = (ray->map_grid_pos.y + 1 - ray->map_pixel_pos.y)
 			* ray->delta_dist.y;
 	}
-	dda_loop(game, ray);
+	dda_loop(game, ray, door);
 }
 
 void	cast_rays(t_game *game)
@@ -117,7 +76,7 @@ void	cast_rays(t_game *game)
 			/ (double)TILE_SIZE};
 		r[i].map_grid_pos = (t_vec2i){(int)r[i].map_pixel_pos.x,
 			(int)r[i].map_pixel_pos.y};
-		cast_single_ray(game, &r[i]);
+		cast_single_ray(game, &r[i], false);
 		r[i].hit_point = (t_vec2d){game->player_data->pos.x + r[i].dir.x
 			* r[i].distance, game->player_data->pos.y + r[i].dir.y
 			* r[i].distance};
