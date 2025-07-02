@@ -37,7 +37,6 @@ EVENT_SRC = event_listner/event_listner.c \
 	   event_listner/game_loop.c
 
 INIT_SRC = init/init_game.c \
-	  init/init_map.c \
 	  init/init_player.c \
 	  init/init_rays.c \
 	  init/init_textures.c \

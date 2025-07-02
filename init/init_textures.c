@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 16:27:40 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/07/02 16:28:36 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/init.h"
-#include <sys/errno.h>
 
 // TODO: free old items
 void	free_texture_array(uint32_t **arr, size_t height)
@@ -66,6 +77,7 @@ void	mlx_text_to_arr(mlx_texture_t *texture, t_texture *texture_data)
 	}
 	arr[h] = NULL;
 	texture_data->arr = arr;
+	mlx_delete_texture(texture);
 }
 
 bool	init_textures(t_game *game)
@@ -90,10 +102,5 @@ bool	init_textures(t_game *game)
 	mlx_text_to_arr(west, &game->walls_textures[2]);
 	mlx_text_to_arr(east, &game->walls_textures[3]);
 	mlx_text_to_arr(door, &game->walls_textures[4]);
-	mlx_delete_texture(north);
-	mlx_delete_texture(south);
-	mlx_delete_texture(west);
-	mlx_delete_texture(east);
-	mlx_delete_texture(door);
 	return (true);
 }

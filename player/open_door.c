@@ -1,8 +1,17 @@
-#include "../include/game.h"
-#include <math.h> // Make sure you have this include for cos, sin, and fabs
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   open_door.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 16:38:12 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/07/02 16:38:13 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Assuming your t_game struct and other definitions are available.
-// Also assuming definitions for TILE_SIZE.
+#include "../include/game.h"
+#include <math.h>
 
 void	handle_door_interaction(t_game *game)
 {
@@ -20,7 +29,8 @@ void	handle_door_interaction(t_game *game)
 	door_ray.map_grid_pos.x = (int)door_ray.map_pixel_pos.x;
 	door_ray.map_grid_pos.y = (int)door_ray.map_pixel_pos.y;
 	cast_single_ray(game, &door_ray, true);
-	if ((door_ray.collision_type == 'D' || door_ray.collision_type == 'O') && door_ray.distance < 2)
+	if ((door_ray.collision_type == 'D' || door_ray.collision_type == 'O')
+		&& door_ray.distance < 2)
 	{
 		if (game->map_data->map[door_ray.map_grid_pos.y][door_ray.map_grid_pos.x] == 'D')
 			game->map_data->map[door_ray.map_grid_pos.y][door_ray.map_grid_pos.x] = 'O';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 23:17:39 by le-saad           #+#    #+#             */
-/*   Updated: 2025/07/02 00:22:20 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/02 16:33:22 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,3 @@ void	render_minimap(t_game *game)
 	draw_dir(game->img_minimap, game->player_data, (t_vec2i){MINIMAP_WIDTH / 2,
 		MINIMAP_HEIGHT / 2});
 }
-		

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/02 16:30:39 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/07/02 16:33:43 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/game.h"
 
 void	reset_minimap(t_game *game)
@@ -18,11 +30,14 @@ void	reset_minimap(t_game *game)
 	}
 }
 
-static void	world_pixel(char **grid, mlx_image_t *img, t_vec2i w, t_vec2i i,
-		t_vec2i map)
+static void	world_pixel(t_game *game, t_vec2i w, t_vec2i i, t_vec2i map)
 {
 	uint32_t	color;
+	char		**grid;
+	mlx_image_t	*img;
 
+	grid = game->map_data->map;
+	img = game->img_minimap;
 	color = 0x000000FF;
 	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
 	{
@@ -56,8 +71,8 @@ void	render_world_on_minimap(t_game *game)
 		{
 			w.x = (p->pos.x + ((i.x - c.x) / SCALE)) / TILE_SIZE;
 			w.y = (p->pos.y + ((i.y - c.y) / SCALE)) / TILE_SIZE;
-			world_pixel(game->map_data->map, game->img_minimap, w, i,
-				(t_vec2i){game->map_data->width, game->map_data->height});
+			world_pixel(game, w, i, (t_vec2i){game->map_data->width,
+				game->map_data->height});
 			i.x++;
 		}
 		i.y++;
