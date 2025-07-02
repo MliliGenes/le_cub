@@ -87,7 +87,7 @@ int ft_door_cl(char **map)
 		{
 			if(map[i][j] == 'D')
 			{
-				if( map[i][j + 1] != '1' || map[i][j - 1] != '1')
+				if( !((map[i][j + 1] != '1' && map[i][j - 1] != '1') || (map[i - 1][j] != '1' && map[i + 1][j] != '1')))
 					return -1;
 			}
 			j++;
