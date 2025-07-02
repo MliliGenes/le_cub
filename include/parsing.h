@@ -13,6 +13,7 @@ t_map			*ret_first_help(char *ptr, char **arr);
 char			*read_line_hh(int fd);
 int				find_map(char *ptr, int i);
 int				ft_cheking_nsew(char **arr, int i);
+void	ft_map_parse_free(t_map *parse);
 char			**ft_checking_nwl(char *ptr, char **arr);
 int				ft_check_emptyline(char *ptr, int *i);
 int				ft_valide_lines(char *ptr);

@@ -12,7 +12,10 @@ t_map	*parse_colors_utils_norm(t_map *parse, t_utils *utils)
 		codex = ft_atoi(utils->f[i]);
 		codexo = ft_atoi(utils->c[i]);
 		if (codexo == -1 || codex == -1 || codex > 255 || codexo > 255)
+		{
+			ft_map_parse_free(parse);
 			return (NULL);
+		}
 		parse->floor_color[i] = (unsigned int)codex;
 		parse->ceiling_color[i] = (unsigned int)codexo;
 		i++;
