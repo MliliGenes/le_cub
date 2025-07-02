@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/01 23:02:56 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/02 13:34:24 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void render_walls(t_game *game)
     while (i < game->screen_width)
     {
         t_wall_hit hit = walls[i];
-        if (hit.texture_id < 0 || hit.texture_id >= 4) {
+        if (hit.texture_id < 0 || hit.texture_id >= 5) {
             i++;
             continue;
         }

@@ -93,6 +93,7 @@ typedef struct s_ray
 	t_vec2d		side_dist;
 	t_vec2i		steps;
 	int			side_hit;
+	char		collision_type;
 	double		wallX;
 }				t_ray;
 
@@ -127,8 +128,8 @@ typedef struct s_game
 	int			screen_width;
 	int			screen_height;
 	double		fov_rad;
-	t_texture	walls_textures[4];
-	t_texture	door;
+	t_texture	walls_textures[5];
+	bool		e_key_was_up;
 }				t_game;
 
 #endif

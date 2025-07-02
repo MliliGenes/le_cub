@@ -1,9 +1,9 @@
 #include "../include/game.h"
 
-void reset_minimap(t_game *game)
+void	reset_minimap(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < MINIMAP_HEIGHT)
@@ -18,30 +18,33 @@ void reset_minimap(t_game *game)
 	}
 }
 
-static void world_pixel(char **grid, mlx_image_t *img, t_vec2i w, t_vec2i i,
-						t_vec2i map)
+static void	world_pixel(char **grid, mlx_image_t *img, t_vec2i w, t_vec2i i,
+		t_vec2i map)
 {
-	uint32_t color;
+	uint32_t	color;
 
 	color = 0x000000FF;
 	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
 	{
 		if (grid[w.y][w.x] == '1' || grid[w.y][w.x] == ' ')
 			color = 0x000000FF;
-		else if (grid[w.y][w.x] == '0')
+		else if (grid[w.y][w.x] == 'D')
+			color = 0xFF0000FF;
+		else if (grid[w.y][w.x] == '0' || grid[w.y][w.x] == 'O')
 			color = 0xFFFFFFFF;
-		else if (grid[w.y][w.x] == 'N' || grid[w.y][w.x] == 'E' || grid[w.y][w.x] == 'S' || grid[w.y][w.x] == 'W')
+		else if (grid[w.y][w.x] == 'N' || grid[w.y][w.x] == 'E'
+			|| grid[w.y][w.x] == 'S' || grid[w.y][w.x] == 'W')
 			color = 0x00ff00FF;
 	}
 	mlx_put_pixel(img, i.x, i.y, color);
 }
 
-void render_world_on_minimap(t_game *game)
+void	render_world_on_minimap(t_game *game)
 {
-	t_player *p;
-	t_vec2i c;
-	t_vec2i w;
-	t_vec2i i;
+	t_player	*p;
+	t_vec2i		c;
+	t_vec2i		w;
+	t_vec2i		i;
 
 	p = game->player_data;
 	c = (t_vec2i){MINIMAP_WIDTH / 2, MINIMAP_HEIGHT / 2};
@@ -54,18 +57,18 @@ void render_world_on_minimap(t_game *game)
 			w.x = (p->pos.x + ((i.x - c.x) / SCALE)) / TILE_SIZE;
 			w.y = (p->pos.y + ((i.y - c.y) / SCALE)) / TILE_SIZE;
 			world_pixel(game->map_data->map, game->img_minimap, w, i,
-						(t_vec2i){game->map_data->width, game->map_data->height});
+				(t_vec2i){game->map_data->width, game->map_data->height});
 			i.x++;
 		}
 		i.y++;
 	}
 }
 
-void draw_player(mlx_image_t *minimap)
+void	draw_player(mlx_image_t *minimap)
 {
-	t_vec2i px_pos;
-	int y;
-	int x;
+	t_vec2i	px_pos;
+	int		y;
+	int		x;
 
 	y = -2;
 	while (y <= 2)
@@ -81,12 +84,12 @@ void draw_player(mlx_image_t *minimap)
 	}
 }
 
-void draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
+void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
 {
-	t_vec2d end;
-	int i;
-	t_vec2i line;
-	double direction_length;
+	t_vec2d	end;
+	int		i;
+	t_vec2i	line;
+	double	direction_length;
 
 	i = 0;
 	direction_length = 15;

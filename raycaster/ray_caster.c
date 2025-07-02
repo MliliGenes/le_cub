@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/01 23:07:40 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/02 14:52:54 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_angles(t_ray *rays, double fov_rad, double pov_angle)
 	}
 }
 
-static void	cast_single_ray(t_game *game, t_ray *ray)
+void	cast_single_ray(t_game *game, t_ray *ray, bool door)
 {
 	if (ray->dir.x < 0)
 	{
@@ -58,7 +58,7 @@ static void	cast_single_ray(t_game *game, t_ray *ray)
 		ray->side_dist.y = (ray->map_grid_pos.y + 1 - ray->map_pixel_pos.y)
 			* ray->delta_dist.y;
 	}
-	dda_loop(game, ray);
+	dda_loop(game, ray, door);
 }
 
 void	cast_rays(t_game *game)
@@ -76,7 +76,7 @@ void	cast_rays(t_game *game)
 			/ (double)TILE_SIZE};
 		r[i].map_grid_pos = (t_vec2i){(int)r[i].map_pixel_pos.x,
 			(int)r[i].map_pixel_pos.y};
-		cast_single_ray(game, &r[i]);
+		cast_single_ray(game, &r[i], false);
 		r[i].hit_point = (t_vec2d){game->player_data->pos.x + r[i].dir.x
 			* r[i].distance, game->player_data->pos.y + r[i].dir.y
 			* r[i].distance};

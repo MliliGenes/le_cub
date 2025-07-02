@@ -2,6 +2,11 @@
 
 void	set_texture_id(t_ray *ray, t_wall_hit *wall)
 {
+	if (ray->collision_type == 'D')
+	{
+		wall->texture_id = 4;
+		return ;
+	}
 	if (ray->side_hit == 0)
 	{
 		if (ray->steps.x < 0)
