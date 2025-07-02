@@ -82,7 +82,7 @@ bool	init_textures(t_game *game)
 	south = mlx_load_png(map->south_texture_path);
 	west = mlx_load_png(map->west_texture_path);
 	east = mlx_load_png(map->east_texture_path);
-	door = mlx_load_png("door_2.png");
+	door = mlx_load_png("alo.png");
 	if (!north || !south || !west || !east || !door)
 		return (false);
 	mlx_text_to_arr(north, &game->walls_textures[0]);
