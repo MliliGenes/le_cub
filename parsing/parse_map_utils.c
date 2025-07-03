@@ -40,6 +40,13 @@ int	norminette_help_close(char **map, int i, int j, int size)
 	return (1);
 }
 
+int	ft_skip_space(char **map, int i, int size)
+{
+	while (map[i][size] == 32 || (map[i][size] >= 9 && map[i][size] <= 13))
+		(size)--;
+	return (size);
+}
+
 int	ft_closing(char **map)
 {
 	int	i;
@@ -57,9 +64,7 @@ int	ft_closing(char **map)
 			if (map[i][j] != '1')
 				return (-1);
 			size = ft_strlen(map[i]) - 1;
-			while (map[i][size] == 32 || (map[i][size] >= 9
-					&& map[i][size] <= 13))
-				size--;
+			size = ft_skip_space(map, i, size);
 			if (map[i][size] != '1')
 				return (-1);
 			if (norminette_help_close(map, i, j, size) == -1)

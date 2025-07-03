@@ -109,11 +109,10 @@ t_utils	*ft_checking_the_four(char **arr)
 	int		flag;
 	int		j;
 	int		k;
-	t_utils	*utils;
 	int		size;
+	t_utils	*utils;
 
 	utils = utils_ret(coor);
-	printf("%s\n", coor[0]);
 	flag = 0;
 	size = 0;
 	i = 0;

@@ -20,6 +20,23 @@ int	ft_cheking_nsew(char **arr, int i)
 	return (1);
 }
 
+void	fttt_while_help(char **arr, int *size, int *i, int *k)
+{
+	*size = 0;
+	while (arr[*size])
+		(*size)++;
+	*i = 0;
+	while (*i < *size)
+	{
+		*k = 0;
+		while (arr[*i][*k] == 32 || (arr[*i][*k] >= 9 && arr[*i][*k] <= 13))
+			(*k)++;
+		if (arr[*i][*k] == '1')
+			break ;
+		(*i)++;
+	}
+}
+
 char	**ft_checking_nwl(char *ptr, char **arr)
 {
 	char	**ret;
@@ -27,20 +44,8 @@ char	**ft_checking_nwl(char *ptr, char **arr)
 	int		i;
 	int		k;
 
-	size = 0;
 	(void)ptr;
-	while (arr[size])
-		size++;
-	i = 0;
-	while (i < size)
-	{
-		k = 0;
-		while (arr[i][k] == 32 || (arr[i][k] >= 9 && arr[i][k] <= 13))
-			k++;
-		if (arr[i][k] == '1')
-			break ;
-		i++;
-	}
+	fttt_while_help(arr, &size, &i, &k);
 	size = i;
 	while (arr[size])
 		size++;
