@@ -143,6 +143,22 @@ void	ft_paths_break(char **arr, t_norm *norm, t_utils *utils)
 	norm->j = 4;
 }
 
+void	*final_breack(t_norm *norm, char **arr, t_utils *utils, char **coor)
+{
+	while (norm->j < 4)
+	{
+		if (!ft_strncmp(&arr[norm->i][norm->k], coor[norm->j], 2))
+		{
+			if (ft_cheking_nsew(arr, norm->i) == -1)
+				return (NULL);
+			else
+				ft_paths_break(arr, norm, utils);
+		}
+		norm->j++;
+	}
+	return ("ff");
+}
+
 t_utils	*ft_checking_the_four(char **arr)
 {
 	char	*coor[4];
@@ -161,17 +177,8 @@ t_utils	*ft_checking_the_four(char **arr)
 		}
 		else
 		{
-			while (norm.j < 4)
-			{
-				if (!ft_strncmp(&arr[norm.i][norm.k], coor[norm.j], 2))
-				{
-					if (ft_cheking_nsew(arr, norm.i) == -1)
-						return (ft_void_free(utils));
-					else
-						ft_paths_break(arr, &norm, utils);
-				}
-				norm.j++;
-			}
+			if (!final_breack(&norm, arr, utils, coor))
+				return (ft_void_free(utils));
 		}
 		norm.i++;
 	}
