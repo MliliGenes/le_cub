@@ -38,20 +38,19 @@ int	index_map_p(char *map)
 	return (-1);
 }
 
-int is_valid_char(char c) 
+int	is_valid_char(char c)
 {
-    const char *valid;
+	const char	*valid;
 
 	valid = "01ENWSD ";
-	if(!ft_strchr(valid, c))
-		return 0;
-	return 1;
+	if (!ft_strchr(valid, c))
+		return (0);
+	return (1);
 }
 
-
-int ft_why(char **arr)
+int	ft_why(char **arr)
 {
-	int	i;
+	int		i;
 	size_t	j;
 
 	i = 0;
@@ -61,50 +60,29 @@ int ft_why(char **arr)
 		while (arr[i][j])
 		{
 			if (!is_valid_char(arr[i][j]))
-				return -1;
-			if(arr[i][j] == 'E' || arr[i][j] == 'N' ||arr[i][j] == 'W' || arr[i][j] == 'S' || arr[i][j] == 'D')
+				return (-1);
+			if (arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'W'
+				|| arr[i][j] == 'S' || arr[i][j] == 'D')
 			{
-				if(!arr[i][j + 1] || arr[i][j + 1] == ' ' || arr[i][j - 1] == ' ' || j > ft_strlen(arr[i + 1]) || j > ft_strlen(arr[i - 1]) || arr[i + 1][j] == ' ' || arr[i - 1][j] == ' ')
-					return -1;
+				if (!arr[i][j + 1] || arr[i][j + 1] == ' ' || arr[i][j
+					- 1] == ' ' || j > ft_strlen(arr[i + 1])
+					|| j > ft_strlen(arr[i - 1]) || arr[i + 1][j] == ' '
+					|| arr[i - 1][j] == ' ')
+					return (-1);
 			}
 			j++;
 		}
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
-int ft_door_cl(char **map)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if(map[i][j] == 'D')
-			{
-				if( !((map[i][j + 1] != '1' && map[i][j - 1] != '1') || (map[i - 1][j] != '1' && map[i + 1][j] != '1')))
-					return -1;
-			}
-			j++;
-		}
-		i++;
-	}
-	return 1;
-}
-
-int	ft_invalid_map(char *map,char **arr)
+int	ft_invalid_map(char *map, char **arr)
 {
 	int	i;
-	
-	if(ft_why(arr) == -1)
-		return -1;
-	if(ft_door_cl(arr) == -1)
-		return -1;
+
+	if (ft_why(arr) == -1)
+		return (-1);
 	i = index_map_p(map);
 	if (ft_nsea(&map[i]) == -1)
 		return (-1);
