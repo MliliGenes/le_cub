@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:27:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 16:28:36 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/03 10:27:25 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	init_textures(t_game *game)
 	south = mlx_load_png(map->south_texture_path);
 	west = mlx_load_png(map->west_texture_path);
 	east = mlx_load_png(map->east_texture_path);
-	door = mlx_load_png("alo.png");
+	door = mlx_load_png("metal_door.png");
 	if (!north || !south || !west || !east || !door)
 		return (false);
 	mlx_text_to_arr(north, &game->walls_textures[0]);

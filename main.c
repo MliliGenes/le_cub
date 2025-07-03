@@ -1,4 +1,3 @@
-#include "include/MLX42.h"
 #include "include/cub3d.h"
 
 static void set_dimensions(t_map *map)
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
 	t_game game;
 	t_map *parse;
 
-	// atexit(ll);
+	atexit(ll);
 	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))
@@ -64,7 +63,16 @@ int main(int argc, char *argv[])
 		free(game.rays);
 		free(game.walls);
 		mlx_terminate(game.mlx);
+		mlx_delete_image(game.mlx, game.img_scene);
 		parse_free(parse);
+		for (int i = 0; i <= 4;i++)
+		{
+			t_texture text = game.walls_textures[i];
+			int j = 0;
+			while (j < (int)text.height)
+				free(text.arr[j++]);
+			free(text.arr);
+		}
 		return (EXIT_SUCCESS);
 	}
 }

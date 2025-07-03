@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:30:39 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 16:33:43 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/03 10:18:40 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,22 @@ static void	world_pixel(t_game *game, t_vec2i w, t_vec2i i, t_vec2i map)
 
 	grid = game->map_data->map;
 	img = game->img_minimap;
-	color = 0x000000FF;
+	color = 0x1A1A1AFF;
 	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
 	{
-		if (grid[w.y][w.x] == '1' || grid[w.y][w.x] == ' ')
-			color = 0x000000FF;
+		if (grid[w.y][w.x] == '1')
+			color = 0x4A4A4AFF;
+		else if (grid[w.y][w.x] == ' ')
+			color = 0x1A1A1AFF;
 		else if (grid[w.y][w.x] == 'D')
-			color = 0xFF0000FF;
-		else if (grid[w.y][w.x] == '0' || grid[w.y][w.x] == 'O')
-			color = 0xFFFFFFFF;
+			color = 0xFF6B6BFF;
+		else if (grid[w.y][w.x] == 'O')
+			color = 0x4ECDC4FF;
+		else if (grid[w.y][w.x] == '0')
+			color = 0xEEEEEEFF;
 		else if (grid[w.y][w.x] == 'N' || grid[w.y][w.x] == 'E'
 			|| grid[w.y][w.x] == 'S' || grid[w.y][w.x] == 'W')
-			color = 0x00ff00FF;
+			color = 0x45B7D1FF;
 	}
 	mlx_put_pixel(img, i.x, i.y, color);
 }

@@ -11,8 +11,8 @@ MLX42_LIB_DIR = .
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
 
 MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
-		libmlx42.a \
-		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
+		mlx/libmlx42.a \
+		-framework Cocoa OpenGL IOKit -lm -ldl
 
 # MLX_LIBRARIES = libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
 
@@ -29,7 +29,7 @@ INCLUDE_SRC = include/cub3d.h \
 	    include/parsing.h \
 	    include/structs.h \
 	    include/game.h \
-	    include/MLX42.h
+	    mlx/MLX42.h
 
 MAIN_SRC = main.c
 

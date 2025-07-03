@@ -5,7 +5,7 @@
 #  define BUFFER_SIZE 100
 # endif
 
-# include "MLX42.h"
+# include "../mlx/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
