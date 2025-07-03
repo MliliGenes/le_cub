@@ -129,7 +129,7 @@ char	*break_lines(char **arr, t_norm *norm, t_utils *utils)
 	return (*ret);
 }
 
-void	ft_paths_break(char **arr,t_norm *norm,t_utils *utils)
+void	ft_paths_break(char **arr, t_norm *norm, t_utils *utils)
 {
 	if (norm->j == 0)
 		utils->no = ft_split(&arr[norm->i][norm->k], ' ');
@@ -168,7 +168,7 @@ t_utils	*ft_checking_the_four(char **arr)
 					if (ft_cheking_nsew(arr, norm.i) == -1)
 						return (ft_void_free(utils));
 					else
-						ft_paths_break(arr,&norm,utils);
+						ft_paths_break(arr, &norm, utils);
 				}
 				norm.j++;
 			}
