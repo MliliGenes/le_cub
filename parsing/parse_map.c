@@ -2,13 +2,13 @@
 
 void	ft_map_parse_free(t_map *parse)
 {
-	if(parse->east_texture_path)
+	if (parse->east_texture_path)
 		free(parse->east_texture_path);
-	if(parse->north_texture_path)
+	if (parse->north_texture_path)
 		free(parse->north_texture_path);
-	if(parse->south_texture_path)
+	if (parse->south_texture_path)
 		free(parse->south_texture_path);
-	if(parse->west_texture_path)
+	if (parse->west_texture_path)
 		free(parse->west_texture_path);
 	free(parse);
 }
@@ -71,6 +71,17 @@ t_map	*find_player(char **arr, t_map *parse)
 	return (NULL);
 }
 
+void	ft_utils_free(t_utils *utils)
+{
+	ft_freeing(utils->c);
+	ft_freeing(utils->f);
+	ft_freeing(utils->ea);
+	ft_freeing(utils->we);
+	ft_freeing(utils->so);
+	ft_freeing(utils->no);
+	free(utils);
+}
+
 t_map	*go_parse_lines(char **arr, char *ptr)
 {
 	t_map	*parse;
@@ -83,13 +94,7 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 	map = ft_checking_nwl(ptr, arr);
 	if (ft_checking_close_map(map) == -1)
 	{
-		ft_freeing(utils->c);
-		ft_freeing(utils->f);
-		ft_freeing(utils->ea);
-		ft_freeing(utils->we);
-		ft_freeing(utils->so);
-		ft_freeing(utils->no);
-		free(utils);
+		ft_utils_free(utils);
 		return (ret_help(map));
 	}
 	parse = full_members(map, utils);
@@ -104,6 +109,12 @@ t_map	*go_parse_lines(char **arr, char *ptr)
 	return (parse);
 }
 
+void	*ft_hh(void)
+{
+	printf("invalid file\n");
+	return (NULL);
+}
+
 t_map	*parse_map_file(char *path)
 {
 	char	**arr;
@@ -113,10 +124,7 @@ t_map	*parse_map_file(char *path)
 
 	fd = open(path, O_RDONLY, 0444);
 	if (fd < 0)
-	{
-		printf("invalid file\n");
-		return (NULL);
-	}
+		ft_hh();
 	ptr = read_line_hh(fd);
 	if (!ptr)
 		return (NULL);
@@ -124,7 +132,7 @@ t_map	*parse_map_file(char *path)
 	parse = go_parse_lines(arr, ptr);
 	if (!parse)
 		return (ret_first_help(ptr, arr));
-	if (ft_invalid_map(ptr,parse->map) == -1)
+	if (ft_invalid_map(ptr, parse->map) == -1)
 	{
 		parse_free(parse);
 		return (ret_first_help(ptr, arr));

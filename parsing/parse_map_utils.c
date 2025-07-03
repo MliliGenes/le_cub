@@ -27,10 +27,12 @@ int	norminette_help_close(char **map, int i, int j, int size)
 {
 	while (j < size)
 	{
-		if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'D')
+		if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'N'
+			|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'D')
 		{
-			if ((size_t)j > ft_strlen(map[i + 1]) || map[i][j + 1] == ' ' || map[i][j - 1] == ' ' || map[i
-				+ 1][j] == ' ' || map[i - 1][j] == ' ')
+			if ((size_t)j > ft_strlen(map[i + 1]) || map[i][j + 1] == ' '
+				|| map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i
+				- 1][j] == ' ')
 				return (-1);
 		}
 		j++;

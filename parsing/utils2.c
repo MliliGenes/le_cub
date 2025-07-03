@@ -65,6 +65,42 @@ char	**ft_cheking_fc(char **arr, int i, int k)
 	return (vv);
 }
 
+void	*ft_void_free(t_utils *utils)
+{
+	if (utils->no)
+		ft_freeing(utils->no);
+	if (utils->so)
+		ft_freeing(utils->so);
+	if (utils->we)
+		ft_freeing(utils->we);
+	if (utils->ea)
+		ft_freeing(utils->ea);
+	if (utils->c)
+		ft_freeing(utils->c);
+	if (utils->f)
+		ft_freeing(utils->f);
+	free(utils);
+	return (NULL);
+}
+
+t_utils *utils_ret(char *coor[4])
+{
+	t_utils *utils;
+
+	coor[0] = "NO";
+	coor[1] = "SO";
+	coor[2] = "WE";
+	coor[3] = "EA";
+	utils = malloc(sizeof(t_utils));
+	utils->no = NULL;
+	utils->so = NULL;
+	utils->ea = NULL;
+	utils->we = NULL;
+	utils->f = NULL;
+	utils->c = NULL;
+	return utils;
+}
+
 t_utils	*ft_checking_the_four(char **arr)
 {
 	char	*coor[4];
@@ -76,20 +112,11 @@ t_utils	*ft_checking_the_four(char **arr)
 	t_utils	*utils;
 	int		size;
 
-	coor[0] = "NO";
-	coor[1] = "SO";
-	coor[2] = "WE";
-	coor[3] = "EA";
-	i = 0;
-	utils = malloc(sizeof(t_utils));
-	utils->no = NULL;
-	utils->so = NULL;
-	utils->ea = NULL;
-	utils->we = NULL;
-	utils->f = NULL;
-	utils->c = NULL;
+	utils = utils_ret(coor);
+	printf("%s\n", coor[0]);
 	flag = 0;
 	size = 0;
+	i = 0;
 	while (arr[size])
 		size++;
 	while (i < size)
@@ -102,10 +129,7 @@ t_utils	*ft_checking_the_four(char **arr)
 		{
 			ret = ft_cheking_fc(arr, i, k + 1);
 			if (!ret)
-			{
-				free(utils);
-				return (NULL);
-			}
+				return (ft_void_free(utils));
 			if (arr[i][k] == 'F')
 				utils->f = ret;
 			else if (arr[i][k] == 'C')
@@ -119,7 +143,7 @@ t_utils	*ft_checking_the_four(char **arr)
 				if (!ft_strncmp(&arr[i][k], coor[j], 2))
 				{
 					if (ft_cheking_nsew(arr, i) == -1)
-						return (NULL);
+						return (ft_void_free(utils));
 					else
 					{
 						if (j == 0)
@@ -140,21 +164,6 @@ t_utils	*ft_checking_the_four(char **arr)
 		i++;
 	}
 	if (flag != 6)
-	{
-		if (utils->no)
-			ft_freeing(utils->no);
-		if (utils->so)
-			ft_freeing(utils->so);
-		if (utils->we)
-			ft_freeing(utils->we);
-		if (utils->ea)
-			ft_freeing(utils->ea);
-		if (utils->c)
-			ft_freeing(utils->c);
-		if (utils->f)
-			ft_freeing(utils->f);
-		free(utils);
-		return (NULL);
-	}
+		return (ft_void_free(utils));
 	return (utils);
 }
