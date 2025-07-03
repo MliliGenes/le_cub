@@ -141,17 +141,17 @@ t_utils	*ft_checking_the_four(char **arr)
 	}
 	if (flag != 6)
 	{
-		if(utils->no)
+		if (utils->no)
 			ft_freeing(utils->no);
-		if(utils->so)
+		if (utils->so)
 			ft_freeing(utils->so);
-		if(utils->we)
+		if (utils->we)
 			ft_freeing(utils->we);
-		if(utils->ea)
+		if (utils->ea)
 			ft_freeing(utils->ea);
-		if(utils->c)
+		if (utils->c)
 			ft_freeing(utils->c);
-		if(utils->f)
+		if (utils->f)
 			ft_freeing(utils->f);
 		free(utils);
 		return (NULL);
