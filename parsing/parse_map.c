@@ -1,41 +1,5 @@
 #include "../include/parsing.h"
 
-void	ft_map_parse_free(t_map *parse)
-{
-	if (parse->east_texture_path)
-		free(parse->east_texture_path);
-	if (parse->north_texture_path)
-		free(parse->north_texture_path);
-	if (parse->south_texture_path)
-		free(parse->south_texture_path);
-	if (parse->west_texture_path)
-		free(parse->west_texture_path);
-	free(parse);
-}
-
-t_map	*full_members(char **map, t_utils *utils)
-{
-	t_map	*parse;
-
-	parse = malloc(sizeof(t_map));
-	if (!parse)
-		return (NULL);
-	parse->north_texture_path = ft_strdup(utils->no[1]);
-	parse->south_texture_path = ft_strdup(utils->so[1]);
-	parse->west_texture_path = ft_strdup(utils->we[1]);
-	parse->east_texture_path = ft_strdup(utils->ea[1]);
-	if (ft_check_valid_path(parse->north_texture_path,
-			parse->south_texture_path, parse->west_texture_path,
-			parse->east_texture_path) == -1)
-	{
-		ft_map_parse_free(parse);
-		free_help(utils);
-		return (NULL);
-	}
-	parse->map = map;
-	return (parse);
-}
-
 t_map	*parse_colors(t_utils *utils, t_map *parse)
 {
 	parse = parse_colors_utils_norm(parse, utils);
@@ -69,17 +33,6 @@ t_map	*find_player(char **arr, t_map *parse)
 		i++;
 	}
 	return (NULL);
-}
-
-void	ft_utils_free(t_utils *utils)
-{
-	ft_freeing(utils->c);
-	ft_freeing(utils->f);
-	ft_freeing(utils->ea);
-	ft_freeing(utils->we);
-	ft_freeing(utils->so);
-	ft_freeing(utils->no);
-	free(utils);
 }
 
 t_map	*go_parse_lines(char **arr, char *ptr)

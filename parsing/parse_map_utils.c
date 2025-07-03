@@ -75,15 +75,6 @@ int	ft_closing(char **map)
 	return (1);
 }
 
-int	ft_checking_close_map(char **map)
-{
-	if (first_line(map[0]) == -1)
-		return (-1);
-	if (ft_closing(map) == -1)
-		return (-1);
-	return (1);
-}
-
 int	ft_check_valid_path(char *ptr, char *str, char *clr, char *codex)
 {
 	int	fd;

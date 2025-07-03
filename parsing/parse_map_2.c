@@ -13,13 +13,6 @@ int	find_map(char *ptr, int i)
 	return (j + 1);
 }
 
-int	ft_cheking_nsew(char **arr, int i)
-{
-	if (ft_count(arr[i], ' ') != 2)
-		return (-1);
-	return (1);
-}
-
 void	fttt_while_help(char **arr, int *size, int *i, int *k)
 {
 	*size = 0;

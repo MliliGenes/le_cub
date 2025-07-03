@@ -63,9 +63,13 @@ PARSING_SRC = parsing/file_check.c \
 	parsing/split.c \
 	parsing/utils.c \
 	parsing/parse_map_2.c \
+	parsing/parse_map_utils_3.c \
 	parsing/utils2.c \
 	parsing/utils3.c  \
+	parsing/utils4.c \
+	parsing/utils5.c \
 	parsing/parse_map_utils.c \
+	parsing/ft_freeing_free.c\
 	parsing/parse_map_utils_2.c
 
 MINIMAP_SRC = map/minimap_utils.c \

@@ -4,6 +4,23 @@
 # include "structs.h"
 
 size_t			ft_strlen(const char *s);
+void	ft_freeing(char **arr);
+t_map	*full_members(char **map, t_utils *utils);
+int	ft_nsea(char *map);
+int	index_map_p(char *map);
+void	free_help(t_utils *utils);
+void	ft_map_parse_free(t_map *parse);
+void	ft_utils_free(t_utils *utils);
+int	sil_count(char **arr, int k, int i);
+void	parsiixx_freex(t_map *parse);
+void	skiiipox(char **arr, t_help *help, int i);
+int	ft_checking_close_map(char **map);
+int	ft_cheking_nsew(char **arr, int i);
+void	lenght_sk(t_help *help, char **arr, int i);
+char	*cpy_help_norm(char **arr, t_help *help, int i, char *ptr);
+char	**ft_cheking_fc(char **arr, int i, int k);
+void	*ft_void_free(t_utils *utils);
+t_utils	*utils_ret(char *coor[4], t_norm *norm, char **arr);
 char			*ft_strnstr(const char *hay, const char *need, size_t len);
 void	parse_free(t_map *parse);
 void			*ft_memcpy(void *dst, const void *src, size_t n);

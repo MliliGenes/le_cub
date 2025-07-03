@@ -1,14 +1,5 @@
 #include "../include/parsing.h"
 
-void	parsiixx_freex(t_map *parse)
-{
-	free(parse->north_texture_path);
-	free(parse->south_texture_path);
-	free(parse->east_texture_path);
-	free(parse->west_texture_path);
-	free(parse);
-}
-
 t_map	*parse_colors_utils_norm(t_map *parse, t_utils *utils)
 {
 	int			i;
