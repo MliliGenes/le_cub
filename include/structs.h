@@ -34,6 +34,15 @@ typedef struct s_vec2i
 	int			y;
 }				t_vec2i;
 
+typedef struct s_norm
+{
+	int		i;
+	int		flag;
+	int		j;
+	int		k;
+	int		size;
+}				t_norm;
+
 typedef struct s_map
 {
 	char		**map;

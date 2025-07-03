@@ -83,7 +83,7 @@ void	*ft_void_free(t_utils *utils)
 	return (NULL);
 }
 
-t_utils *utils_ret(char *coor[4])
+t_utils *utils_ret(char *coor[4],t_norm *norm,char **arr)
 {
 	t_utils *utils;
 
@@ -98,71 +98,72 @@ t_utils *utils_ret(char *coor[4])
 	utils->we = NULL;
 	utils->f = NULL;
 	utils->c = NULL;
+	norm->flag = 0;
+	norm->size = 0;
+	norm->i = 0;
+	while (arr[norm->size])
+		norm->size++;
 	return utils;
+}  
+
+void	ft_line_break(char **arr,int *i, int *k,int *j)
+{
+	*k = 0;
+	*j = 0;
+	while (arr[*i][*k] == 32 || (arr[*i][*k] >= 9 && arr[*i][*k] <= 13))
+		(*k)++;
 }
 
 t_utils	*ft_checking_the_four(char **arr)
 {
 	char	*coor[4];
 	char	**ret;
-	int		i;
-	int		flag;
-	int		j;
-	int		k;
-	int		size;
+	t_norm	norm;
 	t_utils	*utils;
 
-	utils = utils_ret(coor);
-	flag = 0;
-	size = 0;
-	i = 0;
-	while (arr[size])
-		size++;
-	while (i < size)
+	utils = utils_ret(coor,&norm,arr);
+	while (norm.i < norm.size)
 	{
-		k = 0;
-		j = 0;
-		while (arr[i][k] == 32 || (arr[i][k] >= 9 && arr[i][k] <= 13))
-			k++;
-		if ((arr[i][k] == 'F' || arr[i][k] == 'C') && (arr[i][k + 1] == ' '))
+		ft_line_break(arr,&norm.i,&norm.k,&norm.j);
+		if ((arr[norm.i][norm.k] == 'F' || arr[norm.i][norm.k] == 'C') && (arr[norm.i][norm.k + 1] == ' '))
 		{
-			ret = ft_cheking_fc(arr, i, k + 1);
+			ret = ft_cheking_fc(arr, norm.i,norm.k + 1);
 			if (!ret)
 				return (ft_void_free(utils));
-			if (arr[i][k] == 'F')
+			if (arr[norm.i][norm.k] == 'F')
 				utils->f = ret;
-			else if (arr[i][k] == 'C')
+			else if (arr[norm.i][norm.k] == 'C')
 				utils->c = ret;
-			flag++;
+			norm.flag++;
 		}
 		else
 		{
-			while (j < 4)
+			while (norm.j < 4)
 			{
-				if (!ft_strncmp(&arr[i][k], coor[j], 2))
+				if (!ft_strncmp(&arr[norm.i][norm.k], coor[norm.j], 2))
 				{
-					if (ft_cheking_nsew(arr, i) == -1)
+					if (ft_cheking_nsew(arr, norm.i) == -1)
 						return (ft_void_free(utils));
 					else
 					{
-						if (j == 0)
-							utils->no = ft_split(&arr[i][k], ' ');
-						else if (j == 1)
-							utils->so = ft_split(&arr[i][k], ' ');
-						else if (j == 2)
-							utils->we = ft_split(&arr[i][k], ' ');
-						else if (j == 3)
-							utils->ea = ft_split(&arr[i][k], ' ');
-						flag++;
-						j = 4;
+						if (norm.j == 0)
+							utils->no = ft_split(&arr[norm.i][norm.k], ' ');
+						else if (norm.j == 1)
+							utils->so = ft_split(&arr[norm.i][norm.k], ' ');
+						else if (norm.j == 2)
+							utils->we = ft_split(&arr[norm.i][norm.k], ' ');
+						else if (norm.j == 3)
+							utils->ea = ft_split(&arr[norm.i][norm.k], ' ');
+						norm.flag++;
+						norm.j = 4;
 					}
 				}
-				j++;
+				norm.j++;
 			}
 		}
-		i++;
+		norm.i++;
 	}
-	if (flag != 6)
+	if (norm.flag != 6)
 		return (ft_void_free(utils));
 	return (utils);
 }
