@@ -13,19 +13,11 @@ void	ft_freeing(char **arr)
 	free(arr);
 }
 
-char	**ft_cheking_fc(char **arr, int i, int k)
+int sil_count(char **arr,int k,int i)
 {
-	char	**vv;
-	int		sil;
-	int		save;
-	int		len;
-	char	*ptr;
-	int		gg;
-	int		to_malc;
+	int sil;
 
 	sil = 0;
-	save = k;
-	len = k;
 	while (arr[i][k])
 	{
 		if (arr[i][k] == ',')
@@ -33,33 +25,64 @@ char	**ft_cheking_fc(char **arr, int i, int k)
 		k++;
 	}
 	if (sil != 2)
-		return (NULL);
-	while (arr[i][save] && (arr[i][save] == 32 || (arr[i][save] >= 9
-				&& arr[i][save] <= 13)))
-		save++;
-	to_malc = 0;
-	gg = save;
-	while (arr[i][save])
+		return (-1);
+	return 1;
+}
+
+void	skiiipox(char **arr, t_help *help,int i)
+{
+	while (arr[i][help->save] && (arr[i][help->save] == 32 || (arr[i][help->save] >= 9
+				&& arr[i][help->save] <= 13)))
+		(help->save)++;
+}
+
+void	lenght_sk(t_help *help, char **arr,int i)
+{
+	help->to_malc = 0;
+	while (arr[i][help->save])
 	{
-		if (arr[i][save] != ' ' && (arr[i][save] < 9 || arr[i][save] > 13))
-			to_malc++;
-		save++;
+		if (arr[i][help->save] != ' ' && (arr[i][help->save] < 9 || arr[i][help->save] > 13))
+			help->to_malc++;
+		help->save++;
 	}
-	ptr = malloc((to_malc) + 1);
+}
+
+char	*cpy_help_norm(char **arr,t_help *help,int i,char *ptr)
+{
+	int	k;
+
 	k = 0;
-	len = gg;
-	while (k < to_malc)
+	while (k < help->to_malc)
 	{
-		if (arr[i][k + len] != ' ' && (arr[i][len + k] < 9 || arr[i][len
+		if (arr[i][k + help->len] != ' ' && (arr[i][help->len + k] < 9 || arr[i][help->len
 				+ k] > 13))
 		{
-			ptr[k] = arr[i][len + k];
+			ptr[k] = arr[i][help->len + k];
 			k++;
 		}
 		else
-			len++;
+			help->len++;
 	}
 	ptr[k] = '\0';
+	return ptr;
+}
+
+char	**ft_cheking_fc(char **arr, int i, int k)
+{
+	char	**vv;
+	t_help	help;
+	char	*ptr;
+
+	help.save = k;
+	help.len = k;
+	if(sil_count(arr,k,i) == -1)
+		return NULL;
+	skiiipox(arr,&help,i);
+	help.gg = help.save;
+	lenght_sk(&help,arr,i);
+	ptr = malloc((help.to_malc) + 1);
+	help.len = help.gg;
+	ptr = cpy_help_norm(arr,&help,i,ptr);
 	vv = ft_split(ptr, ',');
 	free(ptr);
 	return (vv);

@@ -1,5 +1,14 @@
 #include "../include/parsing.h"
 
+void	parsiixx_freex(t_map *parse)
+{
+	free(parse->north_texture_path);
+	free(parse->south_texture_path);
+	free(parse->east_texture_path);
+	free(parse->west_texture_path);
+	free(parse);
+}
+
 t_map	*parse_colors_utils_norm(t_map *parse, t_utils *utils)
 {
 	int			i;
@@ -13,7 +22,7 @@ t_map	*parse_colors_utils_norm(t_map *parse, t_utils *utils)
 		codexo = ft_atoi(utils->c[i]);
 		if (codexo == -1 || codex == -1 || codex > 255 || codexo > 255)
 		{
-			parse_free(parse);
+			parsiixx_freex(parse);
 			return (NULL);
 		}
 		parse->floor_color[i] = (unsigned int)codex;

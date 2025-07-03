@@ -43,6 +43,14 @@ typedef struct s_norm
 	int		size;
 }				t_norm;
 
+typedef struct s_help
+{
+	int		save;
+	int		len;
+	int		gg;
+	int		to_malc;
+}				t_help;
+
 typedef struct s_map
 {
 	char		**map;
