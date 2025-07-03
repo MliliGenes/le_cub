@@ -83,9 +83,9 @@ void	*ft_void_free(t_utils *utils)
 	return (NULL);
 }
 
-t_utils *utils_ret(char *coor[4],t_norm *norm,char **arr)
+t_utils	*utils_ret(char *coor[4], t_norm *norm, char **arr)
 {
-	t_utils *utils;
+	t_utils	*utils;
 
 	coor[0] = "NO";
 	coor[1] = "SO";
@@ -103,10 +103,10 @@ t_utils *utils_ret(char *coor[4],t_norm *norm,char **arr)
 	norm->i = 0;
 	while (arr[norm->size])
 		norm->size++;
-	return utils;
-}  
+	return (utils);
+}
 
-void	ft_line_break(char **arr,int *i, int *k,int *j)
+void	ft_line_break(char **arr, int *i, int *k, int *j)
 {
 	*k = 0;
 	*j = 0;
@@ -114,27 +114,50 @@ void	ft_line_break(char **arr,int *i, int *k,int *j)
 		(*k)++;
 }
 
+char	*break_lines(char **arr, t_norm *norm, t_utils *utils)
+{
+	char	**ret;
+
+	ret = ft_cheking_fc(arr, norm->i, norm->k + 1);
+	if (!ret)
+		return (NULL);
+	if (arr[norm->i][norm->k] == 'F')
+		utils->f = ret;
+	else if (arr[norm->i][norm->k] == 'C')
+		utils->c = ret;
+	norm->flag++;
+	return (*ret);
+}
+
+void	ft_paths_break(char **arr,t_norm *norm,t_utils *utils)
+{
+	if (norm->j == 0)
+		utils->no = ft_split(&arr[norm->i][norm->k], ' ');
+	else if (norm->j == 1)
+		utils->so = ft_split(&arr[norm->i][norm->k], ' ');
+	else if (norm->j == 2)
+		utils->we = ft_split(&arr[norm->i][norm->k], ' ');
+	else if (norm->j == 3)
+		utils->ea = ft_split(&arr[norm->i][norm->k], ' ');
+	norm->flag++;
+	norm->j = 4;
+}
+
 t_utils	*ft_checking_the_four(char **arr)
 {
 	char	*coor[4];
-	char	**ret;
 	t_norm	norm;
 	t_utils	*utils;
 
-	utils = utils_ret(coor,&norm,arr);
+	utils = utils_ret(coor, &norm, arr);
 	while (norm.i < norm.size)
 	{
-		ft_line_break(arr,&norm.i,&norm.k,&norm.j);
-		if ((arr[norm.i][norm.k] == 'F' || arr[norm.i][norm.k] == 'C') && (arr[norm.i][norm.k + 1] == ' '))
+		ft_line_break(arr, &norm.i, &norm.k, &norm.j);
+		if ((arr[norm.i][norm.k] == 'F' || arr[norm.i][norm.k] == 'C')
+			&& (arr[norm.i][norm.k + 1] == ' '))
 		{
-			ret = ft_cheking_fc(arr, norm.i,norm.k + 1);
-			if (!ret)
+			if (!break_lines(arr, &norm, utils))
 				return (ft_void_free(utils));
-			if (arr[norm.i][norm.k] == 'F')
-				utils->f = ret;
-			else if (arr[norm.i][norm.k] == 'C')
-				utils->c = ret;
-			norm.flag++;
 		}
 		else
 		{
@@ -145,18 +168,7 @@ t_utils	*ft_checking_the_four(char **arr)
 					if (ft_cheking_nsew(arr, norm.i) == -1)
 						return (ft_void_free(utils));
 					else
-					{
-						if (norm.j == 0)
-							utils->no = ft_split(&arr[norm.i][norm.k], ' ');
-						else if (norm.j == 1)
-							utils->so = ft_split(&arr[norm.i][norm.k], ' ');
-						else if (norm.j == 2)
-							utils->we = ft_split(&arr[norm.i][norm.k], ' ');
-						else if (norm.j == 3)
-							utils->ea = ft_split(&arr[norm.i][norm.k], ' ');
-						norm.flag++;
-						norm.j = 4;
-					}
+						ft_paths_break(arr,&norm,utils);
 				}
 				norm.j++;
 			}
