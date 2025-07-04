@@ -24,17 +24,6 @@ void ll()
 	system ("leaks cub3d");
 }
 
-void	parse_free(t_map *parse)
-{
-	ft_freeing(parse->map);
-	free(parse->north_texture_path);
-	free(parse->south_texture_path);
-	free(parse->east_texture_path);
-	free(parse->west_texture_path);
-	free(parse);
-}
-
-
 int main(int argc, char *argv[])
 {
 	t_game game;
@@ -59,20 +48,7 @@ int main(int argc, char *argv[])
 		if (!init_textures(&game))
 			return false;
 		game_loop(&game);
-		// TODO clean_up(&game);
-		free(game.rays);
-		free(game.walls);
-		mlx_terminate(game.mlx);
-		mlx_delete_image(game.mlx, game.img_scene);
-		parse_free(parse);
-		for (int i = 0; i <= 4;i++)
-		{
-			t_texture text = game.walls_textures[i];
-			int j = 0;
-			while (j < (int)text.height)
-				free(text.arr[j++]);
-			free(text.arr);
-		}
+		clean(&game);
 		return (EXIT_SUCCESS);
 	}
 }
