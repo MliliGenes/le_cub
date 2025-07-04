@@ -10,9 +10,9 @@ MLX42_LIB_DIR = .
 # ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
 
-MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
+MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
 		mlx/libmlx42.a \
-		#-framework Cocoa OpenGL IOKit -lm -ldl
+		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
 # MLX_LIBRARIES = libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
 
@@ -31,7 +31,8 @@ INCLUDE_SRC = include/cub3d.h \
 	    include/game.h \
 	    mlx/MLX42.h
 
-MAIN_SRC = main.c
+MAIN_SRC = main.c \
+		cleanup.c
 
 EVENT_SRC = event_listner/event_listner.c \
 	   event_listner/game_loop.c

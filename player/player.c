@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 23:15:27 by le-saad           #+#    #+#             */
-/*   Updated: 2025/07/03 10:15:06 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:29:06 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static bool	is_wall(t_map *map, int x, int y)
 {
-	return (map->map[y / TILE_SIZE][x / TILE_SIZE] == '1' || map->map[y / TILE_SIZE][x / TILE_SIZE] == 'D');
+	return (map->map[y / TILE_SIZE][x / TILE_SIZE] == '1' || map->map[y
+		/ TILE_SIZE][x / TILE_SIZE] == 'D');
 }
 
 static bool	check_collision(t_map *map, t_vec2i pos)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
+/*   Updated: 2025/07/04 16:23:41 by sel-mlil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
@@ -36,19 +48,19 @@ typedef struct s_vec2i
 
 typedef struct s_norm
 {
-	int		i;
-	int		flag;
-	int		j;
-	int		k;
-	int		size;
+	int			i;
+	int			flag;
+	int			j;
+	int			k;
+	int			size;
 }				t_norm;
 
 typedef struct s_help
 {
-	int		save;
-	int		len;
-	int		gg;
-	int		to_malc;
+	int			save;
+	int			len;
+	int			gg;
+	int			to_malc;
 }				t_help;
 
 typedef struct s_map
