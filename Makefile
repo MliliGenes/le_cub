@@ -55,6 +55,7 @@ PLAYER_SRC = player/player.c \
 RAYCAST_SRC = raycaster/build_walls.c \
 	     raycaster/ray_caster.c \
 	     raycaster/dda_utils.c \
+	     raycaster/floor_cell.c \
 	     raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \
