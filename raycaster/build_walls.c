@@ -6,30 +6,51 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 13:34:24 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/06 15:56:31 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-void render_floor_cell(t_game *game)
+t_wall_render calculate_wall_height(t_game *game, double distance)
 {
-    int y;
-    int x;
-	uint32_t colors[2];
-
-    colors[0] = ft_pixel(game->map_data->ceiling_color[0],game->map_data->ceiling_color[1],game->map_data->ceiling_color[2],255);
-    colors[1] = ft_pixel(game->map_data->floor_color[0],game->map_data->floor_color[1],game->map_data->floor_color[2],255);
-    for (y = 0; y < SCREEN_HEIGHT_DEFAULT / 2; y++)
-    {
-        for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
-        	mlx_put_pixel(game->img_scene, x, y, colors[0]);
-    }
+    t_wall_render render;
     
-    for (y = SCREEN_HEIGHT_DEFAULT / 2; y < SCREEN_HEIGHT_DEFAULT; y++)
+    render.line_h = 1400 / distance;
+    render.start_y = (game->screen_height - (int)render.line_h) / 2;
+    render.end_y = render.start_y + (int)render.line_h;
+    
+    render.start_y = render.start_y < 0 ? 0 : render.start_y;
+    render.end_y = render.end_y >= game->screen_height ? game->screen_height - 1 : render.end_y;
+    
+    return render;
+}
+
+int calculate_texture_x(double texture_x_coord, int tex_width)
+{
+    int tex_x = (int)(texture_x_coord * (double)tex_width);
+    tex_x = tex_x < 0 ? 0 : tex_x;
+    tex_x = tex_x >= tex_width ? tex_width - 1 : tex_x;
+    return tex_x;
+}
+
+void calculate_texture_stepping(t_wall_render *render, t_game *game, int tex_height)
+{
+    render->step = (double)tex_height / render->line_h;
+    render->tex_pos = (render->start_y - game->screen_height / 2.0 + render->line_h / 2.0) * render->step;
+}
+
+void draw_wall_column(t_game *game, t_wall_render *render, t_texture *tex, int column_x)
+{
+    for (int y = render->start_y; y <= render->end_y; y++)
     {
-        for (x = 0; x < SCREEN_WIDTH_DEFAULT; x++)
-            mlx_put_pixel(game->img_scene, x, y, colors[1]);
+        int tex_y = (int)render->tex_pos;
+        tex_y = tex_y < 0 ? 0 : tex_y;
+        tex_y = tex_y >= (int)tex->height ? tex->height - 1 : tex_y;
+
+        uint32_t color = tex->arr[tex_y][render->tex_x];
+        mlx_put_pixel(game->img_scene, column_x, y, color);
+        render->tex_pos += render->step;
     }
 }
 
@@ -47,42 +68,19 @@ void render_walls(t_game *game)
             continue;
         }
 
-        double dist = hit.distance;
-        double line_h = 1100 / dist;
-
-        int start_y = (game->screen_height - (int)line_h) / 2;
-        int end_y = start_y + (int)line_h;
-        start_y = start_y < 0 ? 0 : start_y;
-        end_y = end_y >= game->screen_height ? game->screen_height - 1 : end_y;
-
         t_texture *tex = &game->walls_textures[hit.texture_id];
         if (!tex || !tex->arr) {
             i++;
             continue;
         }
 
-        int tex_width = tex->width;
-        int tex_height = tex->height;
-
-        // Calculate texture x coordinate with bounds checking
-        int tex_x = (int)(hit.texture_x_coord * (double)tex_width);
-        tex_x = tex_x < 0 ? 0 : tex_x;
-        tex_x = tex_x >= tex_width ? tex_width - 1 : tex_x;
-
-        // Calculate texture stepping
-        double step = (double)tex_height / line_h;
-        double tex_pos = (start_y - game->screen_height / 2.0 + line_h / 2.0) * step;
+        t_wall_render render = calculate_wall_height(game, hit.distance);
         
-        for (int y = start_y; y <= end_y; y++)
-        {
-            int tex_y = (int)tex_pos;
-            tex_y = tex_y < 0 ? 0 : tex_y;
-            tex_y = tex_y >= tex_height ? tex_height - 1 : tex_y;
-
-            uint32_t color = tex->arr[tex_y][tex_x];
-            mlx_put_pixel(game->img_scene, i, y, color);
-            tex_pos += step;
-        }
+        render.tex_x = calculate_texture_x(hit.texture_x_coord, tex->width);
+        
+        calculate_texture_stepping(&render, game, tex->height);
+        
+        draw_wall_column(game, &render, tex, i);
 
         i++;
     }

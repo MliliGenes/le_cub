@@ -28,6 +28,7 @@ void	rays_to_walls(t_game *game);
 
 void	render_floor_cell(t_game *game);
 void	render_walls(t_game *game);
+void render_floor_cell(t_game *game);
 
 void	render_minimap(t_game *game);
 void	reset_minimap(t_game *game);

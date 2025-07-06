@@ -6,27 +6,27 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:27:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/06 10:13:52 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/06 10:24:36 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/init.h"
 
 // TODO: free old items
-void	free_texture_array(uint32_t **arr, size_t height)
+void	*free_texture_array(uint32_t **arr, size_t height)
 {
 	size_t	k;
 
 	if (!arr)
-		return ;
+		return (NULL);
 	k = 0;
 	while (k < height)
 		free(arr[k++]);
 	free(arr);
+	return (NULL);
 }
 
-// Function 1: Allocates the 2D array structure (array of row pointers and each row)
-uint32_t	**init_texture(mlx_texture_t *texture, t_texture *texture_data)
+uint32_t	**alloc_textures(mlx_texture_t *texture, t_texture *texture_data)
 {
 	size_t		h;
 	size_t		w;
@@ -48,17 +48,13 @@ uint32_t	**init_texture(mlx_texture_t *texture, t_texture *texture_data)
 	{
 		arr[j] = malloc(w * sizeof(uint32_t));
 		if (!arr[j])
-		{
-			free_texture_array(arr, j);
-			return (NULL);
-		}
+			return (free_texture_array(arr, j));
 		j++;
 	}
 	return (arr);
 }
 
-// Function 2: Extracts RGBA components for a single pixel at a given offset
-t_pixel	get_pixel(const uint8_t *texture_pixels, size_t base_offset)
+uint32_t	get_pixel(const uint8_t *texture_pixels, size_t base_offset)
 {
 	t_pixel	pixel;
 
@@ -66,52 +62,40 @@ t_pixel	get_pixel(const uint8_t *texture_pixels, size_t base_offset)
 	pixel.g = texture_pixels[base_offset + 1];
 	pixel.b = texture_pixels[base_offset + 2];
 	pixel.a = texture_pixels[base_offset + 3];
-	return (pixel);
+	return (ft_pixel(pixel.r, pixel.g, pixel.b, pixel.a));
 }
 
-// Function 3: Fills a single row of the 2D array with pixel data
 void	fill_single_row_pixels(uint32_t *row_arr, mlx_texture_t *texture,
 		size_t row_idx)
 {
 	size_t	x;
 	size_t	base;
-	t_pixel	components;
 
 	x = 0;
 	while (x < texture->width)
 	{
-		base = (row_idx * texture->width * texture->bytes_per_pixel) + (x
-				* texture->bytes_per_pixel);
-		components = get_pixel(texture->pixels, base);
-		row_arr[x] = ft_pixel(components.r, components.g, components.b,
-				components.a);
+		base = (row_idx * texture->width * 4) + (x * 4);
+		row_arr[x] = get_pixel(texture->pixels, base);
 		x++;
 	}
 }
 
-void	fill_all_rows(uint32_t **arr, mlx_texture_t *texture)
+void	mlx_text_to_arr(mlx_texture_t *texture, t_texture *texture_data)
 {
-	size_t	j;
+	uint32_t	**arr;
+	size_t		j;
 
+	if (!texture || !texture_data)
+		return ;
+	arr = alloc_textures(texture, texture_data);
+	if (!arr)
+		return ;
 	j = 0;
 	while (j < texture->height)
 	{
 		fill_single_row_pixels(arr[j], texture, j);
 		j++;
 	}
-}
-
-// Original function, now acting as the main orchestrator
-void	mlx_text_to_arr(mlx_texture_t *texture, t_texture *texture_data)
-{
-	uint32_t	**arr;
-
-	if (!texture || !texture_data)
-		return ;
-	arr = init_texture(texture, texture_data);
-	if (!arr)
-		return ;
-	fill_all_rows(arr, texture);
 	texture_data->arr = arr;
 	mlx_delete_texture(texture);
 }
@@ -130,7 +114,7 @@ bool	init_textures(t_game *game)
 	south = mlx_load_png(map->south_texture_path);
 	west = mlx_load_png(map->west_texture_path);
 	east = mlx_load_png(map->east_texture_path);
-	door = mlx_load_png("metal_door.png");
+	door = mlx_load_png("imgs/metal_door.png");
 	if (!north || !south || !west || !east || !door)
 		return (false);
 	mlx_text_to_arr(north, &game->walls_textures[0]);

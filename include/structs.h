@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/04 16:23:41 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/06 10:14:37 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,24 @@ typedef struct s_wall_hit
 	double		texture_x_coord;
 	int			texture_id;
 }				t_wall_hit;
+
+
+typedef struct s_wall_render {
+    int start_y;
+    int end_y;
+    double line_h;
+    int tex_x;
+    double step;
+    double tex_pos;
+} t_wall_render;
+
+typedef struct s_pixel
+{
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
+	uint8_t		a;
+}				t_pixel;
 
 typedef struct s_texture
 {
