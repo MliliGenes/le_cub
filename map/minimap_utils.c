@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:30:39 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/03 10:18:40 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/06 07:36:53 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,12 @@ void	draw_player(mlx_image_t *minimap)
 
 void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
 {
-	t_vec2d	end;
 	int		i;
 	t_vec2i	line;
 	double	direction_length;
 
 	i = 0;
 	direction_length = 15;
-	end.x = pos.x + cos(p->angle) * direction_length;
-	end.y = pos.y - sin(p->angle) * direction_length;
 	while (i < 10)
 	{
 		line.x = pos.x + (cos(p->angle) * direction_length * i) / 10;

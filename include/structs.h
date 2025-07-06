@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/04 16:23:41 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/06 07:33:28 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ typedef struct s_utils
 	char		**f;
 	char		**c;
 }				t_utils;
+
+typedef struct s_pixel
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+} t_pixel;
 
 typedef struct s_player
 {
