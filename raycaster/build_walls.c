@@ -20,8 +20,10 @@ t_wall_render calculate_wall_height(t_game *game, double distance)
     render.start_y = (game->screen_height - (int)render.line_h) / 2;
     render.end_y = render.start_y + (int)render.line_h;
     
-    render.start_y = render.start_y < 0 ? 0 : render.start_y;
-    render.end_y = render.end_y >= game->screen_height ? game->screen_height - 1 : render.end_y;
+    if (render.start_y < 0)
+        render.start_y = 0;
+    if (render.end_y >= game->screen_height)
+        render.end_y =  game->screen_height - 1;
     
     return render;
 }
