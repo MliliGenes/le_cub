@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 12:12:31 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 16:20:13 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:18:12 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ void	load_frames(t_game *game, t_main_menu *param)
 	param->img = NULL;
 }
 
-void free_frames(t_main_menu *frames)
+void	free_frames(t_main_menu *frames)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < 5)
 	{
 		mlx_delete_texture(frames->frames[i]);
 		frames->frames[i] = NULL;
 		i++;
-	}	
+	}
 }
 
 void	game_loop(t_game *game)

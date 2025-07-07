@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:29 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 13:36:11 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 17:18:24 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rays_to_walls(t_game *game);
 
 void	render_floor_cell(t_game *game);
 void	render_walls(t_game *game);
-void render_floor_cell(t_game *game);
+void	render_floor_cell(t_game *game);
 
 void	render_minimap(t_game *game);
 void	reset_minimap(t_game *game);

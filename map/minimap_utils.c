@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:30:39 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 12:58:41 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 17:04:37 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	draw_player(mlx_image_t *minimap)
 		while (x <= 2)
 		{
 			px_pos = (t_vec2i){MINIMAP_WIDTH / 2 + x, MINIMAP_HEIGHT / 2 + y};
-			mlx_put_pixel(minimap, px_pos.x, px_pos.y, 0xFF0000FF);
+			mlx_put_pixel(minimap, px_pos.x, px_pos.y, 0xE9CD92FF);
 			x++;
 		}
 		y++;
@@ -115,7 +115,7 @@ void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
 	{
 		line.x = pos.x + (cos(p->angle) * direction_length * i) / 10;
 		line.y = pos.y + (sin(p->angle) * direction_length * i) / 10;
-		mlx_put_pixel(minimap, line.x, line.y, 0xFF0000FF);
+		mlx_put_pixel(minimap, line.x, line.y, 0xE9CD92FF);
 		i++;
 	}
 }

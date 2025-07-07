@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 21:28:35 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 14:52:54 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:02:09 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	cast_rays(t_game *game)
 			* r[i].distance, game->player_data->pos.y + r[i].dir.y
 			* r[i].distance};
 		if (r[i].side_hit == 0)
-			r[i].wallX = r[i].map_pixel_pos.y + r[i].distance * r[i].dir.y;
+			r[i].wall_x = r[i].map_pixel_pos.y + r[i].distance * r[i].dir.y;
 		else
-			r[i].wallX = r[i].map_pixel_pos.x + r[i].distance * r[i].dir.x;
-		r[i].wallX -= floor(r[i].wallX);
+			r[i].wall_x = r[i].map_pixel_pos.x + r[i].distance * r[i].dir.x;
+		r[i].wall_x -= floor(r[i].wall_x);
 		i++;
 	}
 }

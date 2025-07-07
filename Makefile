@@ -1,20 +1,18 @@
 NAME = cub3d
 
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3
 LDFLAGS =
 INCLUDES = -I./include
-
-MLX42_LIB_DIR = .
 
 # ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
 
 MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
-		mlx/libmlx42.a \
+		../mlx/libmlx42.a \
 		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
-# MLX_LIBRARIES = mlx/libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
+# MLX_LIBRARIES = ../mlx/libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
 
 EVENT_DIR = event_listner
 INIT_DIR = init
@@ -29,7 +27,7 @@ INCLUDE_SRC = include/cub3d.h \
 	    include/parsing.h \
 	    include/structs.h \
 	    include/game.h \
-	    mlx/MLX42.h
+	    ../mlx/MLX42.h
 
 MAIN_SRC = main.c \
 		cleanup.c
@@ -41,6 +39,7 @@ INIT_SRC = init/init_game.c \
 	  init/init_player.c \
 	  init/init_rays.c \
 	  init/init_textures.c \
+	  init/init_textures_utils.c \
 	  init/init_walls.c
 
 LIB_SRC = lib/deg_to_rad.c \

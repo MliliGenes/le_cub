@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:44:11 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 16:44:12 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:01:58 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	rays_to_walls(t_game *game)
 		walls[i].side = rays[i].side_hit;
 		walls[i].hit_point = rays[i].hit_point;
 		set_texture_id(&rays[i], &walls[i]);
-		walls[i].texture_x_coord = rays[i].wallX;
+		walls[i].texture_x_coord = rays[i].wall_x;
 		if ((rays[i].side_hit == 0 && rays[i].dir.x < 0)
 			|| (rays[i].side_hit == 1 && rays[i].dir.y > 0))
 			walls[i].texture_x_coord = 1.0 - walls[i].texture_x_coord;

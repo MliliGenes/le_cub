@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:26 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/04 16:23:27 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:06:11 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 100
 # endif
 
-# include "../mlx/MLX42.h"
+# include "../../mlx/MLX42.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
