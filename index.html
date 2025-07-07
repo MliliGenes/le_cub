@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raycasting Texturing Documentation</title>
+    <style>
+        /* --- Dark Theme Palette --- */
+        :root {
+            --bg-deep-dark: #1a1b26;      /* Deepest background */
+            --bg-dark: #24283b;          /* Main content background */
+            --bg-light-dark: #414868;    /* Borders, UI elements */
+            --text-main: #c0caf5;        /* Main text color */
+            --text-bright: #e0e0e0;       /* Brighter text for emphasis */
+            --accent-green: #9ece6a;     /* Headings, sliders */
+            --accent-blue: #7aa2f7;      /* Links, special text */
+            --accent-orange: #ff9e64;    /* Output values */
+            --accent-red: #f7768e;       /* Code keywords/errors */
+            --accent-yellow: #e0af68;    /* Highlight border */
+            --code-bg: #1e2029;          /* Code block background */
+        }
+
+        /* --- Basic Styling --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
+            background-color: var(--bg-deep-dark);
+            margin: 0;
+            padding: 20px;
+        }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-dark);
+            padding: 2em 3em;
+            border-radius: 12px;
+            border: 1px solid var(--bg-light-dark);
+        }
+        section {
+            margin-bottom: 3em;
+        }
+        h1, h2, h3 {
+            color: var(--accent-green);
+            border-bottom: 2px solid var(--bg-light-dark);
+            padding-bottom: 10px;
+            margin-top: 1em;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            border-bottom-width: 3px;
+            margin-top: 0;
+            margin-bottom: 1.5em;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        code {
+            background-color: var(--code-bg);
+            color: var(--accent-red);
+            padding: 0.2em 0.5em;
+            border-radius: 5px;
+            font-family: "Fira Code", "Courier New", Courier, monospace;
+            font-size: 0.95em;
+        }
+        pre {
+            background-color: var(--code-bg);
+            color: var(--text-main);
+            padding: 1.5em;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Fira Code", "Courier New", Courier, monospace;
+            border: 1px solid var(--bg-light-dark);
+        }
+        .section-highlight {
+            background: rgba(0,0,0,0.2);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+        .visualization {
+            border: 1px solid var(--bg-light-dark);
+            padding: 2em;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.1);
+            margin-top: 2em;
+        }
+        .controls {
+            margin-bottom: 1.5em;
+        }
+        .controls label {
+             display: block;
+            margin-bottom: 0.8em;
+            color: var(--text-bright);
+        }
+        .outputs h3 {
+            margin-bottom: 1em;
+        }
+        .output-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8em;
+            flex-wrap: wrap;
+        }
+        .output-line span:first-child {
+            color: var(--text-bright);
+            margin-right: 1em;
+        }
+        .output-value {
+            font-weight: bold;
+            color: var(--accent-orange);
+            background: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: "Fira Code", monospace;
+            text-align: right;
+        }
+        .output-value small {
+            font-weight: normal;
+            color: var(--text-main);
+            margin-left: 10px;
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+        .graphics {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 2em;
+            gap: 20px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        #texture-view {
+            width: 256px;
+            height: 256px;
+            position: relative;
+            background-image: url('https://i.pinimg.com/736x/d3/90/d0/d390d0353319cf93e6cb0344dc38abfb.jpg');
+            background-size: cover;
+            border-radius: 4px;
+            border: 2px solid var(--bg-light-dark);
+            image-rendering: pixelated;
+        }
+        #tex-x-indicator {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: rgba(247, 118, 142, 0.8);
+            box-shadow: 0 0 8px var(--accent-red);
+        }
+        #screen-view {
+            width: 150px;
+            height: 480px;
+            position: relative;
+            background-color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+            border: 2px solid var(--bg-light-dark);
+            overflow: hidden;
+        }
+        #floor-area {
+            background-color: #4a4a52;
+            flex-grow: 1;
+        }
+        #wall-slice {
+            position: absolute;
+            width: 100%;
+            background-image: url('https://i.pinimg.com/736x/d3/90/d0/d390d0353319cf93e6cb0344dc38abfb.jpg');
+            image-rendering: pixelated;
+        }
+        .arrow {
+            font-size: 3em;
+            color: var(--accent-green);
+            align-self: center;
+            margin: 1em;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: var(--bg-light-dark);
+            border-radius: 5px;
+            outline: none;
+            margin-top: 0.5em;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-green);
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--accent-green);
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid var(--bg-dark);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Documentation: Wall Texturing in a Raycaster</h1>
+        <p>This document explains the C code responsible for applying textures to walls in a raycasting game. Each function is broken down step-by-step. At the end of the page, an interactive visualizer is available to help solidify these concepts.</p>
+        
+        <!-- Documentation Sections -->
+        <section id="doc-render_walls">
+            <h2>The Main Loop: <code>render_walls()</code></h2>
+            <p>This is the main function that orchestrates the wall rendering process. Its job is to iterate through every vertical column of the screen, and for each column, perform all the necessary calculations to draw a single, textured vertical slice of a wall.</p>
+            <pre><code>void render_walls(t_game *game)
+{
+    // ... loop through screen columns ...
+    // Step 1: Calculate the visual height of the wall slice
+    t_wall_render render = calculate_wall_height(game, hit.distance);
+    // Step 2: Determine which vertical column of the texture to use
+    render.tex_x = calculate_texture_x(hit.texture_x_coord, tex->width);
+    // Step 3: Calculate values needed for texture scaling
+    calculate_texture_stepping(&render, game, tex->height);
+    // Step 4: Draw the final pixels onto the screen image
+    draw_wall_column(game, &render, tex, i);
+    // ...
+}</code></pre>
+        </section>
+
+        <section id="doc-calculate_wall_height">
+            <h2>Step 1: Calculating Wall Height - <code>calculate_wall_height()</code></h2>
+            <p>The first task is to determine how tall the wall slice should appear on the screen. This relies on the fundamental principle of perspective: objects farther away appear smaller.</p>
+            <div class="section-highlight">
+                <strong>Key Idea:</strong> <code>Projected Wall Height = (Constant) / (Distance to Wall)</code>
+            </div>
+            <p>This function calculates the height and then finds the top (<code>start_y</code>) and bottom (<code>end_y</code>) screen coordinates to draw between, ensuring the wall is centered vertically and clamped to the screen's boundaries.</p>
+            <pre><code>t_wall_render calculate_wall_height(t_game *game, double distance)
+{
+    render.line_h = (SCREEN_HEIGHT_DEFAULT * 1.2) / distance;
+    render.start_y = (game->screen_height - (int)render.line_h) / 2;
+    render.end_y = render.start_y + (int)render.line_h;
+    if (render.start_y < 0) render.start_y = 0;
+    if (render.end_y >= game->screen_height) render.end_y = game->screen_height - 1;
+    return render;
+}</code></pre>
+        </section>
+        
+        <section id="doc-calculate_texture_x">
+            <h2>Step 2: Finding the Texture Column - <code>calculate_texture_x()</code></h2>
+            <p>The raycaster provides a fractional value (0.0 to 1.0) indicating the horizontal hit position on the wall. We use this to pick the correct vertical column of pixels from our texture image.</p>
+            <div class="section-highlight">
+                <strong>Key Idea:</strong> Map the fractional hit position (0.0 to 1.0) to a discrete pixel column on the texture (e.g., 0 to 63).
+            </div>
+            <pre><code>int calculate_texture_x(double texture_x_coord, int tex_width)
+{
+    int tex_x = (int)(texture_x_coord * (double)tex_width);
+    // ... safety clamping ...
+    return tex_x;
+}</code></pre>
+        </section>
+        
+        <section id="doc-calculate_texture_stepping">
+            <h2>Step 3: Preparing for Texture Scaling - <code>calculate_texture_stepping()</code></h2>
+            <p>This is the most abstract part. We map a texture of fixed height (e.g., 64 pixels) onto a screen slice of variable height (<code>line_h</code>) by calculating a <code>step</code> value and an initial texture position <code>tex_pos</code>.</p>
+            <div class="section-highlight">
+                <strong>Key Idea:</strong> <code>step</code> is how many texture pixels to advance for each screen pixel. <code>tex_pos</code> is the starting vertical coordinate on the texture, which is crucial for correctly texturing walls that are taller than the screen.
+            </div>
+            <pre><code>void calculate_texture_stepping(t_wall_render *render, ..., int tex_height)
+{
+    render->step = (double)tex_height / render->line_h;
+    render->tex_pos = (render->start_y - ... + render->line_h / 2.0) * render->step;
+}</code></pre>
+        </section>
+
+        <section id="doc-draw_wall_column">
+            <h2>Step 4: Drawing the Column - <code>draw_wall_column()</code></h2>
+            <p>Finally, we loop vertically from the wall's top (<code>start_y</code>) to its bottom (<code>end_y</code>). In each step, we find the color from the texture and draw it to the screen, then advance our texture position by <code>step</code>.</p>
+            <pre><code>void draw_wall_column(t_game *game, ..., int column_x)
+{
+    int y = render->start_y;
+    while (y <= render->end_y)
+    {
+        int tex_y = (int)render->tex_pos;
+        uint32_t color = tex->arr[tex_y][render->tex_x];
+        mlx_put_pixel(..., column_x, y, color);
+        render->tex_pos += render->step;
+        y++;
+    }
+}</code></pre>
+        </section>
+        
+        <hr style="border: 1px solid var(--bg-light-dark); margin: 4em 0;">
+
+        <!-- The Interactive Visualizer Section -->
+        <section id="visualizer-section">
+            <h2>Try It Yourself: Interactive Demo</h2>
+            <p>Use the sliders below to see how the values from the raycaster affect the final rendered wall slice. The calculated values and visual output will update in real-time.</p>
+            <div class="visualization">
+                <div class="controls">
+                    <label for="distance-slider">Distance to Wall: <span id="distance-val">5.0</span></label>
+                    <input type="range" id="distance-slider" min="0.5" max="20" step="0.1" value="5">
+
+                    <label for="hit-coord-slider">Wall Hit Coordinate (texture_x_coord): <span id="hit-coord-val">0.50</span></label>
+                    <input type="range" id="hit-coord-slider" min="0" max="1" step="0.01" value="0.5">
+                </div>
+
+                <div class="outputs">
+                    <h3>Calculated Values</h3>
+                    <div class="output-line">
+                        <span>render.line_h:</span>
+                        <span class="output-value" id="out-line_h"></span>
+                    </div>
+                    <div class="output-line">
+                        <span>render.start_y (clamped):</span>
+                        <span class="output-value" id="out-start_y"></span>
+                    </div>
+                    <div class="output-line">
+                        <span>render.end_y (clamped):</span>
+                        <span class="output-value" id="out-end_y"></span>
+                    </div>
+                     <div class="output-line">
+                        <span>render.tex_x:</span>
+                        <span class="output-value" id="out-tex_x"></span>
+                    </div>
+                    <div class="output-line">
+                        <span>render.step:</span>
+                        <span class="output-value" id="out-step"></span>
+                    </div>
+                    <div class="output-line">
+                        <span>render.tex_pos (initial):</span>
+                        <span class="output-value" id="out-tex_pos"></span>
+                    </div>
+                </div>
+
+                <div class="graphics">
+                    <div>
+                        <p><strong>Texture (assumed 64x64)</strong></p>
+                        <div id="texture-view">
+                            <div id="tex-x-indicator"></div>
+                        </div>
+                    </div>
+                    <div class="arrow">→</div>
+                    <div>
+                        <p><strong>Final Result on Screen</strong></p>
+                        <div id="screen-view">
+                             <div id="wall-slice"></div>
+                             <div id="floor-area"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    // --- Constants from the C code ---
+    const SCREEN_HEIGHT = 480;
+    const TEX_WIDTH = 64;     // Common texture size
+    const TEX_HEIGHT = 64;    // Common texture size
+    const PROJECTION_SCALE = 1.2;
+
+    // --- DOM Elements ---
+    const distanceSlider = document.getElementById('distance-slider');
+    const hitCoordSlider = document.getElementById('hit-coord-slider');
+    const distanceVal = document.getElementById('distance-val');
+    const hitCoordVal = document.getElementById('hit-coord-val');
+
+    const outLineH = document.getElementById('out-line_h');
+    const outStartY = document.getElementById('out-start_y');
+    const outEndY = document.getElementById('out-end_y');
+    const outTexX = document.getElementById('out-tex_x');
+    const outStep = document.getElementById('out-step');
+    const outTexPos = document.getElementById('out-tex_pos');
+    
+    const texXIndicator = document.getElementById('tex-x-indicator');
+    const wallSlice = document.getElementById('wall-slice');
+    
+    function updateVisualizer() {
+        // --- Get inputs from sliders ---
+        const distance = parseFloat(distanceSlider.value);
+        const texture_x_coord = parseFloat(hitCoordSlider.value);
+        
+        distanceVal.textContent = distance.toFixed(1);
+        hitCoordVal.textContent = texture_x_coord.toFixed(2);
+
+        // --- 1. calculate_wall_height ---
+        const line_h = (SCREEN_HEIGHT * PROJECTION_SCALE) / distance;
+        const start_y = (SCREEN_HEIGHT - line_h) / 2;
+        const end_y = start_y + line_h;
+        
+        const clamped_start_y = Math.max(0, Math.floor(start_y));
+        const clamped_end_y = Math.min(SCREEN_HEIGHT - 1, Math.floor(end_y));
+        const clamped_line_h = clamped_end_y - clamped_start_y + 1;
+        
+        // --- 2. calculate_texture_x ---
+        let tex_x = Math.floor(texture_x_coord * TEX_WIDTH);
+        tex_x = Math.max(0, Math.min(tex_x, TEX_WIDTH - 1));
+
+        // --- 3. calculate_texture_stepping (THE FIX IS HERE) ---
+        // This logic now correctly mirrors the C code for off-screen walls.
+        const step = TEX_HEIGHT / line_h;
+        // Use the UNCLAMPED start_y for this calculation!
+        const tex_pos = (start_y - SCREEN_HEIGHT / 2.0 + line_h / 2.0) * step;
+        
+        // --- Update the output values display with calculation logic ---
+        outLineH.innerHTML = `${Math.floor(line_h)} <small>(( ${SCREEN_HEIGHT} × ${PROJECTION_SCALE} ) / ${distance.toFixed(1)})</small>`;
+        outStartY.innerHTML = `${clamped_start_y} <small>(clamp( ( ${SCREEN_HEIGHT} - ${Math.floor(line_h)} ) / 2 ))</small>`;
+        outEndY.innerHTML = `${clamped_end_y} <small>(clamp( ${Math.floor(start_y)} + ${Math.floor(line_h)} ))</small>`;
+        outTexX.innerHTML = `${tex_x} <small>(${texture_x_coord.toFixed(2)} × ${TEX_WIDTH})</small>`;
+        outStep.innerHTML = `${step.toFixed(4)} <small>(${TEX_HEIGHT} / ${line_h.toFixed(2)})</small>`;
+        outTexPos.innerHTML = `${tex_pos.toFixed(2)} <small>((${Math.floor(start_y)} - ${SCREEN_HEIGHT / 2} + ${Math.floor(line_h/2)}) * ${step.toFixed(2)})</small>`;
+
+        // --- Update the visual graphics ---
+        const indicatorX = (tex_x / TEX_WIDTH) * 100;
+        texXIndicator.style.left = `${indicatorX}%`;
+        
+        wallSlice.style.top = `${clamped_start_y}px`;
+        wallSlice.style.height = `${clamped_line_h}px`;
+        
+        const bg_x_offset_px = -tex_x;
+        // We need to offset the background image based on where the
+        // visible part of the wall starts on the texture.
+        const y_offset_from_clamping = (clamped_start_y - start_y) * step;
+        const bg_y_offset_px = -(tex_pos + y_offset_from_clamping);
+        
+        wallSlice.style.backgroundPosition = `${bg_x_offset_px}px ${bg_y_offset_px}px`;
+        wallSlice.style.backgroundSize = `${TEX_WIDTH}px ${line_h}px`;
+    }
+
+    // --- Event Listeners ---
+    distanceSlider.addEventListener('input', updateVisualizer);
+    hitCoordSlider.addEventListener('input', updateVisualizer);
+
+    // --- Initial call ---
+    document.addEventListener('DOMContentLoaded', updateVisualizer);
+    </script>
+</body>
+</html>

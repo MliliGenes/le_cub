@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 12:12:31 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 14:05:01 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:45:32 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void load_frames(t_game *game, t_main_menu *param)
 {
 	mlx_texture_t  *tmp = mlx_load_png("imgs/stats.png");
+	mlx_texture_t  *tmp2 = mlx_load_png("imgs/borders.png");
 	game->img_stats = mlx_texture_to_image(game->mlx, tmp);
+	game->img_borders = mlx_texture_to_image(game->mlx, tmp2);
 	mlx_delete_texture(tmp);
+	mlx_delete_texture(tmp2);
 	param->frames[0] = mlx_load_png("imgs/main_menu/frame_1.png");
     param->frames[1] = mlx_load_png("imgs/main_menu/frame_2.png");
 	param->frames[2] = mlx_load_png("imgs/main_menu/frame_3.png");
@@ -36,9 +39,10 @@ void	game_loop(t_game *game)
 		MINIMAP_PADDING, SCREEN_HEIGHT_DEFAULT - game->img_stats->height - MINIMAP_PADDING
 	};
 	mlx_image_to_window(game->mlx, game->img_scene, 0, 0);
-	mlx_image_to_window(game->mlx, game->img_minimap, MINIMAP_PADDING,
-	MINIMAP_PADDING);
+	mlx_image_to_window(game->mlx, game->img_minimap, MINIMAP_PADDING + 10,
+	MINIMAP_PADDING + 10);
 	mlx_image_to_window(game->mlx, game->img_stats,pos.x,pos.y);
+	mlx_image_to_window(game->mlx, game->img_borders,MINIMAP_PADDING,MINIMAP_PADDING);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(game->mlx, SCREEN_WIDTH_DEFAULT / 2, SCREEN_HEIGHT_DEFAULT
 		/ 2);

@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 13:50:31 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:45:00 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 16
 
-# define MINIMAP_WIDTH 250
-# define MINIMAP_HEIGHT 250
+# define MINIMAP_WIDTH 230
+# define MINIMAP_HEIGHT 230
 
 # define SCALE 0.02
 # define MINIMAP_PADDING 20
@@ -175,6 +175,7 @@ typedef struct s_game
 	mlx_image_t	*img_scene;
 	mlx_image_t	*img_stats;
 	mlx_image_t	*img_minimap;
+	mlx_image_t	*img_borders;
 	t_map		*map_data;
 	t_minimap	*minimap_data;
 	t_player	*player_data;
