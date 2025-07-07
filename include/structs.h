@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sahamzao <sahamzao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 17:02:45 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:18:43 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ typedef struct s_vec2d
 	double			x;
 	double			y;
 }					t_vec2d;
+
+typedef struct s_waah
+{
+	int				row;
+	int				len;
+	char			*line;
+	int				col;
+	int				k;
+}					t_waah;
 
 typedef struct s_vec2i
 {

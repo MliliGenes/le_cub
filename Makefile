@@ -8,7 +8,7 @@ INCLUDES = -I./include
 # ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
 
-MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
+MLX_LIBRARIES = -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw \
 		../mlx/libmlx42.a \
 		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
 
@@ -58,6 +58,8 @@ RAYCAST_SRC = raycaster/build_walls.c \
 	     raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \
+	parsing/checkinox.c\
+	parsing/check_2.c\
 	parsing/gnl.c \
 	parsing/gnl_utils.c \
 	parsing/parse_map.c \

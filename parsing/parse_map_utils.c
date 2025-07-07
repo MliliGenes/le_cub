@@ -6,7 +6,7 @@
 /*   By: sahamzao <sahamzao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:54:16 by sahamzao          #+#    #+#             */
-/*   Updated: 2025/07/07 17:54:17 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:25:10 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,25 @@ int	first_line(char *map)
 	return (1);
 }
 
-int	norminette_help_close(char **map, int i, int j, int size)
+int	ft_closed_door(char **map)
 {
-	while (j < size)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
 	{
-		if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'N'
-			|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'D')
+		j = 0;
+		while (map[i][j])
 		{
-			if ((size_t)j > ft_strlen(map[i + 1]) || map[i][j + 1] == ' '
-				|| map[i][j - 1] == ' ' || map[i + 1][j] == ' ' || map[i
-				- 1][j] == ' ')
-				return (-1);
+			if (map[i][j] == 'D')
+			{
+				if (ft_if_lot(map, i, j) == -1 || ft_if_lot_2(map, i, j) == -1)
+					return (-1);
+			}
+			j++;
 		}
-		j++;
+		i++;
 	}
 	return (1);
 }
@@ -78,8 +84,6 @@ int	ft_closing(char **map)
 			size = ft_strlen(map[i]) - 1;
 			size = ft_skip_space(map, i, size);
 			if (map[i][size] != '1')
-				return (-1);
-			if (norminette_help_close(map, i, j, size) == -1)
 				return (-1);
 		}
 		i++;

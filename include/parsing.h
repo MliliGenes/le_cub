@@ -6,7 +6,7 @@
 /*   By: sahamzao <sahamzao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:54:55 by sahamzao          #+#    #+#             */
-/*   Updated: 2025/07/07 17:54:56 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:26:59 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "structs.h"
 
 size_t		ft_strlen(const char *s);
+int			ft_up_down(char *ptr, int i);
 void		ft_freeing(char **arr);
 t_map		*full_members(char **map, t_utils *utils);
 int			ft_nsea(char *map);
@@ -54,7 +55,7 @@ int			ft_check_dot(char *path);
 void		allocation_manager(int fd, char **save);
 int			ft_newline_check(char *string);
 void		*ft_cpy(char *string, char *string1, int n);
-int			ft_invalid_map(char *map, char **arr);
+int			ft_invalid_map(char *map);
 void		ft_freeing(char **arr);
 char		*ft_copy_st(char *start, int len, int j, char *ptr);
 char		*ft_strcat(char *string1, char *string2);
@@ -67,6 +68,13 @@ char		**ft_cheking_fc(char **arr, int i, int k);
 char		*ft_strdup(const char *s1);
 void		free_help(t_utils *utils);
 int			first_line(char *map);
+int			ft_closed_door(char **map);
+int			ft_if_lot(char **map, int i, int j);
+int			ft_the_big_size(char *ptr, int i);
+int			extract_line(char *ptr, int i);
+int			ft_countix(char *ptr, int start);
+int			ft_if_lot_2(char **map, int i, int j);
+char		**ft_fill_space(char **map, int size);
 int			norminette_help_close(char **map, int i, int j, int size);
 int			ft_closing(char **map);
 int			ft_checking_close_map(char **map);
