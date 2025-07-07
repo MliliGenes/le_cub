@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 11:02:59 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:06:55 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void calculate_texture_stepping(t_wall_render *render, t_game *game, int tex_hei
 
 void draw_wall_column(t_game *game, t_wall_render *render, t_texture *tex, int column_x)
 {
-    for (int y = render->start_y; y <= render->end_y; y++)
+    int y;
+
+    y = render->start_y;
+    while (y <= render->end_y)
     {
         int tex_y = (int)render->tex_pos;
         tex_y = tex_y < 0 ? 0 : tex_y;
@@ -51,6 +54,7 @@ void draw_wall_column(t_game *game, t_wall_render *render, t_texture *tex, int c
         uint32_t color = tex->arr[tex_y][render->tex_x];
         mlx_put_pixel(game->img_scene, column_x, y, color);
         render->tex_pos += render->step;
+        y++;
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 13:15:40 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 13:50:31 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img_scene;
+	mlx_image_t	*img_stats;
 	mlx_image_t	*img_minimap;
 	t_map		*map_data;
 	t_minimap	*minimap_data;

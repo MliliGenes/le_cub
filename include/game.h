@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:29 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 11:35:44 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 13:36:11 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void	draw_player(mlx_image_t *minimap);
 void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos);
 
 void	handle_door_interaction(t_game *game);
-void    main_menu(t_game *game);
 
 #endif

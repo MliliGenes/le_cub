@@ -35,7 +35,6 @@ MAIN_SRC = main.c \
 		cleanup.c
 
 EVENT_SRC = event_listner/event_listner.c \
-	   event_listner/main_menu.c \
 	   event_listner/game_loop.c
 
 INIT_SRC = init/init_game.c \

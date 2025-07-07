@@ -6,7 +6,7 @@
 /*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:23:23 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 13:33:38 by le-saad          ###   ########.fr       */
+/*   Updated: 2025/07/07 14:07:29 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void next_frame(t_game *game)
 	static int count = 0;
 	static int step = 1;
 
-	if (count >= 8)
+	if (count >= 5)
 	{
 		if (index == 4)
 			step = -1;
