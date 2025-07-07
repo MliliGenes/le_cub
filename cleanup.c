@@ -30,7 +30,6 @@ void	clean(t_game *game)
 		while (j < (int)text.height)
 			free(text.arr[j++]);
 		free(text.arr);
-		// mlx_delete_texture(game->frames->frames[i]);
 		i++;
 	}
 }
