@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 23:15:27 by le-saad           #+#    #+#             */
-/*   Updated: 2025/07/04 16:29:06 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 10:55:43 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	update_player_data(mlx_t *mlx, t_player *player)
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		player->angle += player->rot_speed;
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT_SHIFT))
-		player->move_speed = 42;
+		player->move_speed = 52;
 	else
 		player->move_speed = 32;
 	player->angle = normalize_angle(player->angle);

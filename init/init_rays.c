@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:27:38 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 16:27:39 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 09:02:01 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 t_ray	*init_rays(void)
 {
 	t_ray	*rays;
-	int		i;
 
-	i = 0;
 	rays = malloc(sizeof(t_ray) * SCREEN_WIDTH_DEFAULT);
 	if (!rays)
 		return (NULL);

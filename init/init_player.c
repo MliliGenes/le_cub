@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:29:21 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/02 16:29:22 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 10:55:25 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_player	*init_player(t_map *map_data)
 	if (!player)
 		return (NULL);
 	ft_memset(player, 0, sizeof(t_player));
-	player->move_speed = 20;
-	player->rot_speed = 0.03;
+	player->move_speed = 16;
+	player->rot_speed = 0.05;
 	player->pos = (t_vec2i){
 		map_data->x_player * TILE_SIZE + TILE_SIZE / 2,
 		map_data->y_player * TILE_SIZE + TILE_SIZE / 2,

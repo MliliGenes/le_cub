@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:30:39 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/03 10:18:40 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 12:58:41 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ static void	world_pixel(t_game *game, t_vec2i w, t_vec2i i, t_vec2i map)
 
 	grid = game->map_data->map;
 	img = game->img_minimap;
-	color = 0x1A1A1AFF;
+	color = 0x1A140FFF;
 	if (w.x >= 0 && w.x < map.x && w.y >= 0 && w.y < map.y)
 	{
 		if (grid[w.y][w.x] == '1')
-			color = 0x4A4A4AFF;
+			color = 0x6A4F3FFF;
 		else if (grid[w.y][w.x] == ' ')
-			color = 0x1A1A1AFF;
+			color = 0x1A140FFF;
 		else if (grid[w.y][w.x] == 'D')
-			color = 0xFF6B6BFF;
+			color = 0x6B3E2FFF;
 		else if (grid[w.y][w.x] == 'O')
-			color = 0x4ECDC4FF;
+			color = 0x8E6E4FFF;
 		else if (grid[w.y][w.x] == '0')
-			color = 0xEEEEEEFF;
+			color = 0x2F1F17FF;
 		else if (grid[w.y][w.x] == 'N' || grid[w.y][w.x] == 'E'
 			|| grid[w.y][w.x] == 'S' || grid[w.y][w.x] == 'W')
-			color = 0x45B7D1FF;
+			color = 0xAA885FFF;
 	}
 	mlx_put_pixel(img, i.x, i.y, color);
 }
@@ -105,15 +105,12 @@ void	draw_player(mlx_image_t *minimap)
 
 void	draw_dir(mlx_image_t *minimap, t_player *p, t_vec2i pos)
 {
-	t_vec2d	end;
 	int		i;
 	t_vec2i	line;
 	double	direction_length;
 
 	i = 0;
 	direction_length = 15;
-	end.x = pos.x + cos(p->angle) * direction_length;
-	end.y = pos.y - sin(p->angle) * direction_length;
 	while (i < 10)
 	{
 		line.x = pos.x + (cos(p->angle) * direction_length * i) / 10;

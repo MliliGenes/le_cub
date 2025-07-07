@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/06 10:14:37 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 13:15:40 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "dependencies.h"
 
-# define GAME_TITLE "GAME D ZAB"
+# define GAME_TITLE "LAZARETTO"
 
-# define FOV 60
+# define FOV 70
 
-# define SCREEN_WIDTH_DEFAULT 1921
-# define SCREEN_HEIGHT_DEFAULT 1080
+# define SCREEN_WIDTH_DEFAULT 1920 
+# define SCREEN_HEIGHT_DEFAULT 1080  
 
 # define TILE_SIZE 640
 # define TEXTURE_SIZE 64
@@ -28,8 +28,8 @@
 # define MINIMAP_TILE_SIZE 32
 # define PLAYER_SIZE 16
 
-# define MINIMAP_WIDTH 200
-# define MINIMAP_HEIGHT 200
+# define MINIMAP_WIDTH 250
+# define MINIMAP_HEIGHT 250
 
 # define SCALE 0.02
 # define MINIMAP_PADDING 20
@@ -162,6 +162,13 @@ typedef struct s_texture
 	uint32_t	**arr;
 }				t_texture;
 
+
+typedef struct s_main_menu
+{
+	mlx_texture_t *frames[5];
+    mlx_image_t *img;
+} 	t_main_menu;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
@@ -172,11 +179,13 @@ typedef struct s_game
 	t_player	*player_data;
 	t_ray		*rays;
 	t_wall_hit	*walls;
+	t_main_menu	*frames;
 	int			screen_width;
 	int			screen_height;
 	double		fov_rad;
 	t_texture	walls_textures[5];
 	bool		e_key_was_up;
-}				t_game;
+	bool		start_game;
+}					t_game;
 
 #endif

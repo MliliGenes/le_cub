@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 02:39:42 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/06 15:56:31 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:02:59 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_wall_render calculate_wall_height(t_game *game, double distance)
 {
     t_wall_render render;
     
-    render.line_h = 1400 / distance;
+    render.line_h = (SCREEN_HEIGHT_DEFAULT * 1.2) / distance;
     render.start_y = (game->screen_height - (int)render.line_h) / 2;
     render.end_y = render.start_y + (int)render.line_h;
     if (render.start_y < 0)
@@ -73,15 +73,10 @@ void render_walls(t_game *game)
             i++;
             continue;
         }
-
         t_wall_render render = calculate_wall_height(game, hit.distance);
-        
         render.tex_x = calculate_texture_x(hit.texture_x_coord, tex->width);
-        
         calculate_texture_stepping(&render, game, tex->height);
-        
         draw_wall_column(game, &render, tex, i);
-
         i++;
     }
 }

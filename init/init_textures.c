@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: le-saad <le-saad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 16:27:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/06 10:24:36 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/07 10:38:07 by le-saad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ bool	init_textures(t_game *game)
 	south = mlx_load_png(map->south_texture_path);
 	west = mlx_load_png(map->west_texture_path);
 	east = mlx_load_png(map->east_texture_path);
-	door = mlx_load_png("imgs/metal_door.png");
+	door = mlx_load_png("imgs/door.png");
 	if (!north || !south || !west || !east || !door)
 		return (false);
 	mlx_text_to_arr(north, &game->walls_textures[0]);

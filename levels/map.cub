@@ -1,11 +1,10 @@
-NO imgs/abyss.png 
-SO imgs/abyss.png 
-EA imgs/abyss.png
-WE imgs/abyss.png 
+NO imgs/wall.png 
+SO imgs/wall.png 
+EA imgs/wall.png
+WE imgs/wall.png 
 
-C 42                       , 42        , 42 
-F 20         , 20        , 25
-
+C 38, 28, 18
+F 45, 30, 20
 1111111111111111111
         100000100000001
         100001111111111111111 111
