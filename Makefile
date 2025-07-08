@@ -33,6 +33,15 @@ MANDATORY_INCLUDE_SRC = mandatory/include/cub3d.h \
 	    mandatory/include/game.h \
 	    ../mlx/MLX42.h
 
+BONUS_INCLUDE_SRC = bonus/include/cub3d.h \
+	    bonus/include/dependencies.h \
+	    bonus/include/init.h \
+	    bonus/include/lib.h \
+	    bonus/include/parsing.h \
+	    bonus/include/structs.h \
+	    bonus/include/game.h \
+	    ../mlx/MLX42.h
+
 MAIN_SRC = main.c \
 		cleanup.c
 
@@ -85,12 +94,10 @@ MINIMAP_SRC = map/minimap_utils.c \
 SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC) $(MINIMAP_SRC)
 
 SRC_MANDATORY = $(addprefix mandatory/, $(SRC))
-
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
-SRC_BONUS = $(addprefix bonus/, $(SRC))
-
-OBJ_BONUS = $(SRC_BONUS :.c=.o)
+SRC_BONUS = $(patsubst %.c, %_bonus.c, $(addprefix bonus/, $(SRC)))
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 RED = \033[0;31m
 GREEN = \033[0;32m
@@ -119,17 +126,53 @@ mandatory/%.o: mandatory/%.c $(MANDATORY_INCLUDE_SRC)
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+bonus/%_bonus.o: bonus/%_bonus.c $(BONUS_INCLUDE_SRC)
+	@echo "$(YELLOW)Compiling $<...$(RESET)"
+	@$(CC) $(CFLAGS) $(BONUS_INCLUDES) -c $< -o $@
+
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
 	@rm -f $(OBJ_MANDATORY)
 	@echo "$(GREEN)✓ Object files cleaned!$(RESET)"
 
-fclean: clean
+clean_bonus:
+	@echo "$(RED)Cleaning object files...$(RESET)"
+	@rm -f $(OBJ_BONUS)
+	@echo "$(GREEN)✓ Object files cleaned!$(RESET)"
+
+fclean: clean clean_bonus
 	@echo "$(RED)Cleaning executable...$(RESET)"
 	@rm -f $(NAME)
 	@echo "$(GREEN)✓ Everything cleaned!$(RESET)"
 
 re: fclean all
+
+re_bonus: fclean bonus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 run: $(NAME)
 	@echo "$(MAGENTA)Running $(NAME)...$(RESET)"
@@ -156,4 +199,4 @@ show:
 	@echo "$(YELLOW)Object files:$(RESET)"
 	@for file in $(OBJ); do echo "  - $$file"; done
 
-.PHONY: all clean fclean re run debug help show
+.PHONY: all bonus clean clean_bonus fclean re_bonus run debug help show

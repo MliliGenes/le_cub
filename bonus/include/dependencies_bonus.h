@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:26 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/08 17:52:39 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/08 17:59:04 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <stdlib_bonus.h>
+# include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 
