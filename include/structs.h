@@ -6,7 +6,7 @@
 /*   By: sahamzao <sahamzao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:23:40 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 22:18:43 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:55:02 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_norm
 	int				j;
 	int				k;
 	int				size;
+	int				flags[6];
 }					t_norm;
 
 typedef struct s_help

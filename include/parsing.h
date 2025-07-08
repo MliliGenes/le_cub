@@ -6,7 +6,7 @@
 /*   By: sahamzao <sahamzao@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:54:55 by sahamzao          #+#    #+#             */
-/*   Updated: 2025/07/07 22:26:59 by sahamzao         ###   ########.fr       */
+/*   Updated: 2025/07/08 12:07:06 by sahamzao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int			find_map(char *ptr, int i);
 int			ft_cheking_nsew(char **arr, int i);
 char		**ft_checking_nwl(char *ptr, char **arr);
 int			ft_check_emptyline(char *ptr, int *i);
+void		ft_initialse_flags(t_norm *norm);
+int			ft_norm_gg_codex(t_utils *utils, char **arr, t_norm *norm);
+char		*break_lines(char **arr, t_norm *norm, t_utils *utils);
 int			ft_valide_lines(char *ptr);
 int			ft_count(char const *str, char c);
 long long	ft_atoi(const char *str);
