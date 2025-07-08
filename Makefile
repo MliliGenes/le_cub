@@ -1,9 +1,3 @@
-NAME = cub3d
-
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3
-LDFLAGS =
-INCLUDES = -Imandatory/include
 
 # ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
@@ -11,6 +5,16 @@ INCLUDES = -Imandatory/include
 MLX_LIBRARIES = -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw \
 		../mlx/libmlx42.a \
 		-framework Cocoa -framework OpenGL -framework IOKit -lm -ldl
+
+
+NAME = cub3d
+BONUS = cub3d_bonus
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -O3
+LDFLAGS =
+INCLUDES = -Imandatory/include
+BONUS_INCLUDES = -Ibonus/include
 
 # MLX_LIBRARIES = ../mlx/libmlx42_linux.a -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -lm -ldl
 
@@ -84,6 +88,10 @@ SRC_MANDATORY = $(addprefix mandatory/, $(SRC))
 
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
+SRC_BONUS = $(addprefix bonus/, $(SRC))
+
+OBJ_BONUS = $(SRC_BONUS :.c=.o)
+
 RED = \033[0;31m
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
@@ -95,12 +103,19 @@ RESET = \033[0m
 
 all: $(NAME)
 
+bonus: $(BONUS)
+
 $(NAME): $(OBJ_MANDATORY)
 	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
 	@$(CC) $(LDFLAGS) $(OBJ_MANDATORY) $(MLX_LIBRARIES) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
 
-%.o: %.c $(MANDATORY_INCLUDE_SRC)
+$(BONUS): $(OBJ_BONUS)
+	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
+	@$(CC) $(LDFLAGS) $(OBJ_BONUS) $(MLX_LIBRARIES) -o $(BONUS)
+	@echo "$(GREEN)✓ $(OBJ_BONUS) created successfully!$(RESET)"
+
+mandatory/%.o: mandatory/%.c $(MANDATORY_INCLUDE_SRC)
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
