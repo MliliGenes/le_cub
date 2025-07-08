@@ -3,7 +3,7 @@ NAME = cub3d
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
 LDFLAGS =
-INCLUDES = -I./include
+INCLUDES = -Imandatory/include
 
 # ! -L"/Users/sahamzao/.brew/opt/glfw/lib/" -lglfw
 # * -L"/Users/sel-mlil/goinfre/homebrew/opt/glfw/lib" -lglfw
@@ -20,13 +20,13 @@ LIB_DIR = lib
 PLAYER_DIR = player
 RAYCAST_DIR = raycaster
 
-INCLUDE_SRC = include/cub3d.h \
-	    include/dependencies.h \
-	    include/init.h \
-	    include/lib.h \
-	    include/parsing.h \
-	    include/structs.h \
-	    include/game.h \
+MANDATORY_INCLUDE_SRC = mandatory/include/cub3d.h \
+	    mandatory/include/dependencies.h \
+	    mandatory/include/init.h \
+	    mandatory/include/lib.h \
+	    mandatory/include/parsing.h \
+	    mandatory/include/structs.h \
+	    mandatory/include/game.h \
 	    ../mlx/MLX42.h
 
 MAIN_SRC = main.c \
@@ -80,7 +80,9 @@ MINIMAP_SRC = map/minimap_utils.c \
 
 SRC = $(MAIN_SRC) $(EVENT_SRC) $(INIT_SRC) $(LIB_SRC) $(PLAYER_SRC) $(RAYCAST_SRC) $(PARSING_SRC) $(MINIMAP_SRC)
 
-OBJ = $(SRC:.c=.o)
+SRC_MANDATORY = $(addprefix mandatory/, $(SRC))
+
+OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 RED = \033[0;31m
 GREEN = \033[0;32m
@@ -93,18 +95,18 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ_MANDATORY)
 	@echo "$(CYAN)Linking $(NAME)...$(RESET)"
-	@$(CC) $(LDFLAGS) $(OBJ) $(MLX_LIBRARIES) -o $(NAME)
+	@$(CC) $(LDFLAGS) $(OBJ_MANDATORY) $(MLX_LIBRARIES) -o $(NAME)
 	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
 
-%.o: %.c $(INCLUDE_SRC)
+%.o: %.c $(MANDATORY_INCLUDE_SRC)
 	@echo "$(YELLOW)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@echo "$(RED)Cleaning object files...$(RESET)"
-	@rm -f $(OBJ)
+	@rm -f $(OBJ_MANDATORY)
 	@echo "$(GREEN)✓ Object files cleaned!$(RESET)"
 
 fclean: clean
@@ -138,8 +140,5 @@ show:
 	@for file in $(SRC); do echo "  - $$file"; done
 	@echo "$(YELLOW)Object files:$(RESET)"
 	@for file in $(OBJ); do echo "  - $$file"; done
-
-push:
-	git quick "lol"
 
 .PHONY: all clean fclean re run debug help show
