@@ -6,7 +6,7 @@
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:17:58 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/08 17:50:52 by sel-mlil         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:47:37 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@ static void	set_dimensions(t_map *map)
 	map->height = i;
 }
 
-void	ll(void)
-{
-	system("leaks cub3d");
-}
+// void	ll(void)
+// {
+// 	system("leaks cub3d");
+// }
 
 int	main(int argc, char *argv[])
 {
 	t_game	game;
 	t_map	*parse;
 
-	atexit(ll);
 	if (argc == 2)
 	{
 		if (!ft_check_dot(argv[1]))
