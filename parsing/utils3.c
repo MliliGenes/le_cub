@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 17:34:10 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 17:34:11 by sel-mlil         ###   ########.fr       */
+/*   Created: 2025/07/07 17:54:35 by sahamzao          #+#    #+#             */
+/*   Updated: 2025/07/08 17:20:42 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,13 @@ int	is_valid_char(char c)
 	return (1);
 }
 
-int	ft_why(char **arr)
-{
-	int		i;
-	size_t	j;
-
-	i = 0;
-	while (arr[i])
-	{
-		j = 0;
-		while (arr[i][j])
-		{
-			if (!is_valid_char(arr[i][j]))
-				return (-1);
-			if (arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'W'
-				|| arr[i][j] == 'S' || arr[i][j] == 'D')
-			{
-				if (!arr[i][j + 1] || arr[i][j + 1] == ' ' || arr[i][j
-					- 1] == ' ' || j > ft_strlen(arr[i + 1])
-					|| j > ft_strlen(arr[i - 1]) || arr[i + 1][j] == ' '
-					|| arr[i - 1][j] == ' ')
-					return (-1);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (1);
-}
-
-int	ft_invalid_map(char *map, char **arr)
+int	ft_invalid_map(char *map)
 {
 	int	i;
 
-	if (ft_why(arr) == -1)
-		return (-1);
 	i = index_map_p(map);
+	if (ft_up_down(map, i) == -1)
+		return (-1);
 	if (ft_nsea(&map[i]) == -1)
 		return (-1);
 	return (1);

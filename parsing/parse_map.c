@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 17:34:01 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 17:34:02 by sel-mlil         ###   ########.fr       */
+/*   Created: 2025/07/07 17:54:19 by sahamzao          #+#    #+#             */
+/*   Updated: 2025/07/08 17:20:16 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_map	*parse_map_file(char *path)
 	parse = go_parse_lines(arr, ptr);
 	if (!parse)
 		return (ret_first_help(ptr, arr));
-	if (ft_invalid_map(ptr, parse->map) == -1)
+	if (ft_invalid_map(ptr) == -1)
 	{
 		parse_free(parse);
 		return (ret_first_help(ptr, arr));

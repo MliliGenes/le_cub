@@ -5,12 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sel-mlil <sel-mlil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 17:33:37 by sel-mlil          #+#    #+#             */
-/*   Updated: 2025/07/07 17:33:38 by sel-mlil         ###   ########.fr       */
+/*   Created: 2025/07/07 17:53:50 by sahamzao          #+#    #+#             */
+/*   Updated: 2025/07/08 17:18:45 by sel-mlil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
+
+void	ft_initialse_flags(t_norm *norm)
+{
+	norm->flags[0] = 0;
+	norm->flags[1] = 0;
+	norm->flags[2] = 0;
+	norm->flags[3] = 0;
+	norm->flags[4] = 0;
+	norm->flags[5] = 0;
+}
+
+int	ft_norm_gg_codex(t_utils *utils, char **arr, t_norm *norm)
+{
+	if (arr[norm->i][norm->k] == 'F' && !norm->flags[4])
+	{
+		if (!break_lines(arr, norm, utils))
+			return (-1);
+		norm->flags[4] = 1;
+	}
+	else if (arr[norm->i][norm->k] == 'C' && !norm->flags[5])
+	{
+		if (!break_lines(arr, norm, utils))
+			return (-1);
+		norm->flags[5] = 1;
+	}
+	else
+		return (-1);
+	return (1);
+}
 
 size_t	ft_strlen(const char *s)
 {

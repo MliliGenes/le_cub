@@ -58,6 +58,8 @@ RAYCAST_SRC = raycaster/build_walls.c \
 	     raycaster/rays_to_walls.c
 
 PARSING_SRC = parsing/file_check.c \
+	parsing/checkinox.c\
+	parsing/check_2.c\
 	parsing/gnl.c \
 	parsing/gnl_utils.c \
 	parsing/parse_map.c \
